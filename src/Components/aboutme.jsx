@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
-import Typewriter from "typewriter-effect";
+import { useTypewriter } from "react-typewriter-hook";
 
 const photos = [
   "https://res.cloudinary.com/dncosrakg/image/upload/v1739947951/ekjtczfjhz92tffcuq4m.jpg",
@@ -11,17 +11,35 @@ const photos = [
 
 const AboutMe = () => {
   const [currentPhoto, setCurrentPhoto] = useState(0);
+  const [index, setIndex] = useState(0);
+
+  // Typewriter effect text options
+  const typewriterTexts = [
+    "A Passionate Full Stack Developer",
+    "A UI/UX Designer with Creative Vision",
+    "A Photographer Who Captures Life's Beauty"
+  ];
+
+  const typewriterText = useTypewriter(typewriterTexts[index]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPhoto((prev) => (prev + 1) % photos.length);
     }, 3000);
-    return () => clearInterval(interval);
+
+    // Change typewriter text every 3 seconds
+    const textInterval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % typewriterTexts.length);
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(textInterval);
+    };
   }, []);
 
   return (
     <section id="about" className="min-h-screen flex flex-col items-center justify-center px-8 bg-black text-white pt-20">
-
       <div className="container mx-auto flex flex-col lg:flex-row items-center space-y-12 lg:space-y-0 lg:space-x-16">
         {/* Left Side - Text Content */}
         <motion.div
@@ -31,27 +49,14 @@ const AboutMe = () => {
           transition={{ duration: 1 }}
         >
           <h1 className="text-6xl font-extrabold text-yellow-500">I'm Arjun Divraniya</h1>
-          <p className="mt-6 text-2xl">
-            <Typewriter
-              options={{
-                strings: [
-                  "A Passionate Full Stack Developer",
-                  "A UI/UX Designer with Creative Vision",
-                  "A Photographer Who Captures Life's Beauty"
-                ],
-                autoStart: true,
-                loop: true,
-                delay: 50
-              }}
-            />
-          </p>
+          <p className="mt-6 text-2xl text-yellow-400">{typewriterText}</p>
 
           {/* About Me Paragraph */}
           <p className="mt-6 text-lg leading-relaxed text-gray-300">
-            I am from Junagadh, Gujarat, currently pursuing my B.Tech in Computer Science and Engineering at Rai University. 
-            My journey in coding started with HTML and JavaScript, and now I build **full-stack web applications** using 
-            **React, Node.js, Express, and MongoDB**.  
-            Apart from coding, photography is my creative escape where I capture the beauty of nature and life through my lens. 
+            I am from Junagadh, Gujarat, currently pursuing my B.Tech in Computer Science and Engineering at Rai University.
+            My journey in coding started with HTML and JavaScript, and now I build <strong>full-stack web applications</strong> using
+            <strong> React, Node.js, Express, and MongoDB</strong>.
+            Apart from coding, photography is my creative escape where I capture the beauty of nature and life through my lens.
           </p>
 
           {/* Social Media Links */}
