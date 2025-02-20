@@ -3,8 +3,7 @@
 Welcome to my **Personal Portfolio Website**! 🎨💻  
 This portfolio showcases my **skills, projects, and photography**, designed with an interactive **UI/UX** using **HTML, CSS, and JavaScript**.
 
-![Portfolio Screenshot](https://via.placeholder.com/800x400?text=Portfolio+Screenshot)  
-*(Replace with your actual website screenshot!)*
+![Portfolio Screenshot](https://res.cloudinary.com/dncosrakg/image/upload/v1740043528/jxwbolx3fi8e74zhny5p.png)  
 
 ---
 
