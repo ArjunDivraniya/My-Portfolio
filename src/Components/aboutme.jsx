@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
-import { useTypewriter } from "react-typewriter-hook";
+import { useTypewriter } from "react-simple-typewriter"; // Corrected import
 
 const photos = [
   "https://res.cloudinary.com/dncosrakg/image/upload/v1739947951/ekjtczfjhz92tffcuq4m.jpg",
@@ -11,31 +11,26 @@ const photos = [
 
 const AboutMe = () => {
   const [currentPhoto, setCurrentPhoto] = useState(0);
-  const [index, setIndex] = useState(0);
 
-  // Typewriter effect text options
-  const typewriterTexts = [
-    "A Passionate Full Stack Developer",
-    "A UI/UX Designer with Creative Vision",
-    "A Photographer Who Captures Life's Beauty"
-  ];
-
-  const typewriterText = useTypewriter(typewriterTexts[index]);
+  // Fixed: Correct useTypewriter Hook Implementation
+  const [typewriterText] = useTypewriter({
+    words: [
+      "A Passionate Full Stack Developer",
+      "A UI/UX Designer with Creative Vision",
+      "A Photographer Who Captures Life's Beauty"
+    ],
+    loop: 0, // Infinite loop
+    typeSpeed: 50,
+    deleteSpeed: 30,
+    delaySpeed: 2000,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPhoto((prev) => (prev + 1) % photos.length);
     }, 3000);
 
-    // Change typewriter text every 3 seconds
-    const textInterval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % typewriterTexts.length);
-    }, 3000);
-
-    return () => {
-      clearInterval(interval);
-      clearInterval(textInterval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   return (
