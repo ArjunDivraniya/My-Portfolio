@@ -69,7 +69,7 @@ const Preloader = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
           >
-            Loading Your Creative Space...
+            Loading My Creative Space...
           </motion.p>
         </motion.div>
       )}

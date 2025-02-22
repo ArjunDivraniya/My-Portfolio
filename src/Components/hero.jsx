@@ -15,16 +15,16 @@ const Hero = () => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 1.5 }}
-    className="h-screen flex justify-center items-center relative overflow-hidden"
+    className="h-screen flex justify-center items-center relative overflow-hidden pt-20"
   >
     {/* Background Image Slideshow */}
-    <div className="absolute w-full h-full overflow-hidden">
-      <div className="absolute w-full h-full bg-black opacity-50"></div>
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div className="absolute inset-0 bg-black opacity-50"></div>
       {images.map((photo, index) => (
         <motion.img
           key={index}
           src={photo}
-          className="absolute w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0 }}
           animate={{ opacity: index === 0 ? 1 : 0 }}
           transition={{

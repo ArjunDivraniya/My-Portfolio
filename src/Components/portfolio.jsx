@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { SiFigma } from "react-icons/si"; 
 
 const projects = {
   frontend: [
@@ -8,7 +9,7 @@ const projects = {
       title: "YouTube Clone",
       description: "A fully responsive YouTube UI clone using HTML, CSS, and JavaScript.",
       tech: ["HTML", "CSS", "JavaScript"],
-      github: "https://github.com/yourgithub/youtube-clone",
+      github: "https://github.com/ArjunDivraniya/Youtube-Clone",
       demo: "https://your-demo-link.com",
       details: "Created a responsive YouTube-like UI with a home page, video player, and sidebar navigation.",
       image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/vpeznpus6sl7cohgyfzg.png",
@@ -26,7 +27,7 @@ const projects = {
       title: "Spotify Clone",
       description: "Music streaming app UI using React & API integration.",
       tech: ["React", "Tailwind CSS", "Spotify API"],
-      github: "https://github.com/yourgithub/spotify-clone",
+      github: "https://github.com/ArjunDivraniya/Spotify-Clone",
       demo: "https://github.com/ArjunDivraniya/Spotify_",
       details: "Designed a Spotify clone with user authentication and API-based song streaming.",
       image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025409/jwhf9vrlz7vwhv1p7yed.png",
@@ -36,7 +37,7 @@ const projects = {
       description: "A Netflix UI clone with dynamic movie listing and trailers.",
       tech: ["React", "Tailwind CSS", "TMDb API"],
       github: "https://github.com/ArjunDivraniya/Netflix-Clone",
-      demo: "https://your-demo-link.com",
+      demo: "https://beamish-frangollo-ea0007.netlify.app/",
       details: "Built a Netflix-like UI that fetches movie data from an API and displays trending content.",
       image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/u1kxztkc7x0uc2gbkuhw.png",
     },
@@ -45,7 +46,7 @@ const projects = {
       description: "A bus ticket booking platform UI similar to RedBus.",
       tech: ["HTML", "CSS", "JavaScript"],
       github: "https://github.com/ArjunDivraniya/RedBus",
-      demo: "https://your-demo-link.com",
+      demo: "https://nimble-alfajores-aa7527.netlify.app/",
       details: "Developed a RedBus-like ticket booking interface with an interactive seat selection feature.",
       image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/fypwfmuyckz8piby1oe8.png",
     }
@@ -136,7 +137,7 @@ const Projects = () => {
                     )}
                     {project.figma && (
                       <a href={project.figma} target="_blank" className="text-gray-300 hover:text-white">
-                        <FaExternalLinkAlt size={22} />
+                      <SiFigma className="text-purple-500 w-8 h-8" />
                       </a>
                     )}
                   </div>
@@ -190,7 +191,7 @@ const Projects = () => {
                 )}
                 {selectedProject.figma && (
                   <a href={selectedProject.figma} target="_blank" className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600">
-                    <FaExternalLinkAlt className="inline mr-2" /> View Figma
+                    <Figma className="text-purple-500 w-10 h-10" /> View Figma
                   </a>
                 )}
               </div>

@@ -59,9 +59,9 @@ const AboutMe = () => {
           <div className="flex space-x-8 mt-4 justify-center lg:justify-start">
             {[
               { icon: FaLinkedin, link: "https://linkedin.com/in/arjun" },
-              { icon: FaGithub, link: "https://github.com/arjun" },
-              { icon: FaInstagram, link: "https://instagram.com/arjun" },
-              { icon: FaTwitter, link: "https://twitter.com/arjun" }
+              { icon: FaGithub, link: "https://github.com/ArjunDivraniya" },
+              { icon: FaInstagram, link: "https://www.instagram.com/arjun__divraniya__/" },
+              { icon: FaTwitter, link: "https://x.com/DivraniyaArjun" }
             ].map(({ icon: Icon, link }, index) => (
               <motion.a
                 key={index}

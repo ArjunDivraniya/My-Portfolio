@@ -11,6 +11,7 @@ import Bg from "./Components/bg";
 import Pre from "./Components/preloader";
 import AboutMe from "./Components/aboutme";
 import ContactMe from "./Components/contact";
+import Ebg from "./Components/editingbg"
 import "./index.css"; 
 
 function App() {
@@ -18,21 +19,23 @@ function App() {
     <>
       <Pre />
       
-      <Bg />
+     
       <Routes>
         <Route path="/" element={
           <>
+           <Bg />
           <Header />
             <Hero />
             <Portfolio />
             <Skills />
             <Tools />
-            <Photography />
+            
             <Footer />
           </>
         } />
-        <Route path="/about" element={<><Header /><AboutMe /></>} />
-        <Route path="/contact" element={<><Header /><ContactMe /></>} />
+        <Route path="/about" element={<> <Bg /><Header /><AboutMe /></>} />
+        <Route path="/photogtaphy" element={<><Ebg/><Header /><Photography /></>} />
+        <Route path="/contact" element={<> <Bg /><Header /><ContactMe /></>} />
         <Route path="*" element={<Navigate to="/" />} /> {/* ✅ Redirects unknown routes */}
       </Routes>
     </>
