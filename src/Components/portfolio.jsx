@@ -58,10 +58,13 @@ const projects = {
       tech: ["React", "Node.js", "MongoDB", "Express"],
       github: "https://github.com/ArjunDivraniya/shutter_sphere",
       demo: "https://your-demo-link.com",
+      video: "https://www.youtube.com/embed/esvS8qtjuo0", // Added YouTube embedded link
       details: "Users can search for photographers based on location & specialization, book them, and chat through an integrated chat board.",
       image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025409/kkwwhosyginpfwvsux6v.png",
+     date: "march"
     }
-  ],
+  ]
+  ,
   uiux: [
     {
       title: "Shutter Sphere (In Progress)",
@@ -154,50 +157,54 @@ const Projects = () => {
           </div>
         ))}
 
-        {selectedProject && (
-          <motion.div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex justify-center items-center p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md w-full relative">
-              <button
-                className="absolute top-2 right-2 text-gray-400 hover:text-white"
-                onClick={() => setSelectedProject(null)}
-              >
-                <FaTimes size={24} />
-              </button>
-              
-              {/* Large Project Image */}
-              <img 
-                src={selectedProject.image} 
-                alt={selectedProject.title} 
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
+{selectedProject && (
+  <motion.div
+    className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center p-6 overflow-y-auto"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+  >
+    <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-lg w-full relative overflow-y-auto max-h-[90vh]">
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-white bg-gray-700 p-2 rounded-full hover:bg-gray-600 z-50"
+        onClick={() => setSelectedProject(null)}
+      >
+        <FaTimes size={20} />
+      </button>
 
-              <h3 className="text-2xl font-semibold">{selectedProject.title}</h3>
-              <p className="text-gray-400 mt-2">{selectedProject.details}</p>
-              
-              <div className="flex flex-wrap justify-center mt-4 space-x-4">
-                {selectedProject.github && (
-                  <a href={selectedProject.github} target="_blank" className="bg-gray-700 px-4 py-2 rounded text-white hover:bg-gray-600">
-                    <FaGithub className="inline mr-2" /> GitHub Repo
-                  </a>
-                )}
-                {selectedProject.demo && (
-                  <a href={selectedProject.demo} target="_blank" className="bg-purple-500 px-4 py-2 rounded text-white hover:bg-purple-600">
-                    <FaExternalLinkAlt className="inline mr-2" /> Live Demo
-                  </a>
-                )}
-                {selectedProject.figma && (
-                  <a href={selectedProject.figma} target="_blank" className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600">
-                    <Figma className="text-purple-500 w-10 h-10" /> View Figma
-                  </a>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        )}
+      {/* Image */}
+      <img 
+        src={selectedProject.image} 
+        alt={selectedProject.title} 
+        className="w-full h-48 object-cover rounded-lg mb-4"
+      />
+
+      {/* Title & Details */}
+      <h3 className="text-2xl font-semibold text-white">{selectedProject.title}</h3>
+      <p className="text-gray-400 mt-2">{selectedProject.details}</p>
+
+      {/* Problem Statement */}
+      {selectedProject.problemStatement && (
+        <p className="text-gray-400 mt-2 font-semibold">Problem Statement: {selectedProject.problemStatement}</p>
+      )}
+
+      {/* Video Section */}
+      {selectedProject.video && (
+        <div className="mt-4">
+          <iframe
+            className="w-full h-64 rounded-lg"
+            src={selectedProject.video + "?autoplay=1&mute=1"}
+            title="Demo Video"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
+
+      {/* Date */}
+      <p className="text-gray-400 mt-2">Date: {selectedProject.date}</p>
+    </div>
+  </motion.div>
+)}
       </div>
     </section>
   );
