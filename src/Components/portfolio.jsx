@@ -4,6 +4,48 @@ import { motion } from "framer-motion";
 import { SiFigma } from "react-icons/si"; 
 
 const projects = {
+
+ 
+  uiux: [
+    {
+      title: "Shutter Sphere (In Progress)",
+      description: "A creative UI design for a full-stack web application.",
+      tech: ["Figma", "Adobe XD"],
+      figma: "https://www.figma.com/design/rGMySFjXI7AcEytfM11DgC/Full-Stack-Project?node-id=0-1&t=OF3Nfe8wfcNbKYun-1",
+      details: "Designed an interactive UI for a full-stack web app focusing on user experience and modern aesthetics.",
+      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/sbct3wxsp5qrqrosfudi.png",
+    },
+    {
+      title: "Personal Photography Website",
+      description: "A portfolio UI for showcasing my photography work.",
+      tech: ["Figma", "Adobe XD"],
+      figma: "https://www.figma.com/design/caL2xnuuFymXGs4p3GUs1T/MY-WEBSITE?node-id=0-1&t=0xSuZPL1zDkVpCyQ-1",
+      details: "Designed a personal photography website to highlight my work, portfolio, and contact details.",
+      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/ggac3wjqbgpei1ajwhuu.png",
+    },
+    {
+      title: "Netflix Clone UI",
+      description: "A UI design concept for a Netflix-like platform.",
+      tech: ["Figma", "Adobe XD"],
+      figma: "https://www.figma.com/design/MI3i3nAe7FgSqLD6TgYSUK/netflix?node-id=0-1&t=FNCDtB4dWHD6TBoq-1",
+      details: "Designed a modern, sleek UI for a movie streaming platform inspired by Netflix.",
+      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025409/kedo5u8yhwwvaupbfpur.png",
+    }
+  ],
+  fullstack: [
+    {
+      title: "Shutter Sphere (In Progress)",
+      description: "A full-stack photographer search and booking platform.",
+      tech: ["React", "Node.js", "MongoDB", "Express"],
+      github: "https://github.com/ArjunDivraniya/shutter_sphere",
+      demo: "https://your-demo-link.com",
+      video: "https://www.youtube.com/embed/esvS8qtjuo0", // Added YouTube embedded link
+      details: "Users can search for photographers based on location & specialization, book them, and chat through an integrated chat board.",
+      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025409/kkwwhosyginpfwvsux6v.png",
+     date: "march"
+    }
+  ],
+  
   frontend: [
     {
       title: "YouTube Clone",
@@ -50,47 +92,8 @@ const projects = {
       details: "Developed a RedBus-like ticket booking interface with an interactive seat selection feature.",
       image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/fypwfmuyckz8piby1oe8.png",
     }
-  ],
-  fullstack: [
-    {
-      title: "Shutter Sphere (In Progress)",
-      description: "A full-stack photographer search and booking platform.",
-      tech: ["React", "Node.js", "MongoDB", "Express"],
-      github: "https://github.com/ArjunDivraniya/shutter_sphere",
-      demo: "https://your-demo-link.com",
-      video: "https://www.youtube.com/embed/esvS8qtjuo0", // Added YouTube embedded link
-      details: "Users can search for photographers based on location & specialization, book them, and chat through an integrated chat board.",
-      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025409/kkwwhosyginpfwvsux6v.png",
-     date: "march"
-    }
   ]
-  ,
-  uiux: [
-    {
-      title: "Shutter Sphere (In Progress)",
-      description: "A creative UI design for a full-stack web application.",
-      tech: ["Figma", "Adobe XD"],
-      figma: "https://www.figma.com/design/rGMySFjXI7AcEytfM11DgC/Full-Stack-Project?node-id=0-1&t=OF3Nfe8wfcNbKYun-1",
-      details: "Designed an interactive UI for a full-stack web app focusing on user experience and modern aesthetics.",
-      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/sbct3wxsp5qrqrosfudi.png",
-    },
-    {
-      title: "Personal Photography Website",
-      description: "A portfolio UI for showcasing my photography work.",
-      tech: ["Figma", "Adobe XD"],
-      figma: "https://www.figma.com/design/caL2xnuuFymXGs4p3GUs1T/MY-WEBSITE?node-id=0-1&t=0xSuZPL1zDkVpCyQ-1",
-      details: "Designed a personal photography website to highlight my work, portfolio, and contact details.",
-      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/ggac3wjqbgpei1ajwhuu.png",
-    },
-    {
-      title: "Netflix Clone UI",
-      description: "A UI design concept for a Netflix-like platform.",
-      tech: ["Figma", "Adobe XD"],
-      figma: "https://www.figma.com/design/MI3i3nAe7FgSqLD6TgYSUK/netflix?node-id=0-1&t=FNCDtB4dWHD6TBoq-1",
-      details: "Designed a modern, sleek UI for a movie streaming platform inspired by Netflix.",
-      image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025409/kedo5u8yhwwvaupbfpur.png",
-    }
-  ]
+ 
 };
 
 

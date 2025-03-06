@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaUser, FaCommentDots } from "react-icons/fa";
+import { FaEnvelope, FaUser, FaCommentDots, FaWhatsapp } from "react-icons/fa";
 
 const ContactMe = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [score, setScore] = useState(0);
+  const phoneNumber = "6351565043"; // Replace with your actual WhatsApp number
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +22,7 @@ const ContactMe = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-8 relative">
       <h1 className="text-4xl font-bold text-yellow-500 mb-6">Contact Me</h1>
       
       <motion.form
@@ -91,6 +92,17 @@ const ContactMe = () => {
         ></motion.div>
         <p className="mt-2 text-lg">Score: {score}</p>
       </div>
+
+      {/* Floating WhatsApp Chat Icon */}
+      <motion.div
+        className="fixed bottom-8 right-8 z-50 bg-green-500 p-4 rounded-full shadow-lg cursor-pointer"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        animate={{ y: [0, -10, 0], transition: { duration: 1.5, repeat: Infinity } }}
+        onClick={() => window.open(`https://wa.me/${phoneNumber}`, "_blank")}
+      >
+        <FaWhatsapp className="text-white text-4xl" />
+      </motion.div>
     </div>
   );
 };
