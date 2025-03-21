@@ -1,8 +1,7 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaGithub, FaPython, FaJava, FaBootstrap, FaFigma } from "react-icons/fa";
-import { SiTailwindcss, SiNextdotjs, SiTypescript, SiExpress, SiMongodb, SiMysql, SiAdobephotoshop, SiAdobexd, SiCplusplus, SiCanva } from "react-icons/si";
+import { SiTailwindcss, SiNextdotjs, SiTypescript, SiExpress, SiMongodb, SiMysql, SiAdobephotoshop, SiAdobexd, SiCplusplus, SiCanva, SiPostman } from "react-icons/si";
 
 const skills = [
   {
@@ -11,11 +10,11 @@ const skills = [
       { name: "HTML", icon: FaHtml5, color: "#E34F26" },
       { name: "CSS", icon: FaCss3Alt, color: "#1572B6" },
       { name: "JavaScript", icon: FaJs, color: "#F7DF1E" },
-     
+      
       { name: "React", icon: FaReact, color: "#61DAFB" },
-     
+      
       { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-     
+      
     ]
   },
   {
@@ -41,8 +40,8 @@ const skills = [
     skills: [
       { name: "Git", icon: FaGitAlt, color: "#F05032" },
       { name: "GitHub", icon: FaGithub, color: "#181717" },
-      { name: "C++", icon: SiCplusplus, color: "#00599C" }
-      
+      { name: "C++", icon: SiCplusplus, color: "#00599C" },
+      { name: "Postman", icon: SiPostman, color: "#FF6C37" }
     ]
   }
 ];

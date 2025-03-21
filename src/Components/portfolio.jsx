@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { SiFigma } from "react-icons/si"; 
 
 const projects = {
-
- 
+  
   uiux: [
     {
       title: "Shutter Sphere (In Progress)",
@@ -93,16 +92,14 @@ const projects = {
       image: "https://res.cloudinary.com/dncosrakg/image/upload/v1740025410/fypwfmuyckz8piby1oe8.png",
     }
   ]
- 
 };
-
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="py-16 text-center text-white ">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-16 text-center text-white">
+      <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-4xl font-bold mb-8">My Projects</h2>
 
         {Object.entries(projects).map(([category, projectList]) => (
@@ -111,25 +108,22 @@ const Projects = () => {
               {category === "frontend" ? "Frontend Projects" : category === "fullstack" ? "Full-Stack Projects" : "UI/UX Design"}
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {projectList.map((project, index) => (
                 <motion.div
                   key={index}
-                  className=" p-6 rounded-lg shadow-lg hover:scale-105 transition-transform relative"
+                  className="p-4 rounded-lg shadow-lg hover:scale-105 transition-transform relative"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}
                 >
-                  {/* Project Image */}
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-40 object-cover rounded-lg mb-4"
+                    className="w-full h-60 object-cover rounded-lg mb-4"
                   />
-
                   <h4 className="text-xl font-semibold mb-2">{project.title}</h4>
                   <p className="text-gray-400 text-sm">{project.description}</p>
-                  
                   <div className="flex justify-center mt-4 space-x-3">
                     {project.github && (
                       <a href={project.github} target="_blank" className="text-gray-300 hover:text-white">
@@ -147,7 +141,6 @@ const Projects = () => {
                       </a>
                     )}
                   </div>
-
                   <button
                     className="mt-4 bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded text-sm"
                     onClick={() => setSelectedProject(project)}
@@ -159,55 +152,6 @@ const Projects = () => {
             </div>
           </div>
         ))}
-
-{selectedProject && (
-  <motion.div
-    className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center p-6 overflow-y-auto"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-  >
-    <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-lg w-full relative overflow-y-auto max-h-[90vh]">
-      {/* Close Button */}
-      <button
-        className="absolute top-4 right-4 text-white bg-gray-700 p-2 rounded-full hover:bg-gray-600 z-50"
-        onClick={() => setSelectedProject(null)}
-      >
-        <FaTimes size={20} />
-      </button>
-
-      {/* Image */}
-      <img 
-        src={selectedProject.image} 
-        alt={selectedProject.title} 
-        className="w-full h-48 object-cover rounded-lg mb-4"
-      />
-
-      {/* Title & Details */}
-      <h3 className="text-2xl font-semibold text-white">{selectedProject.title}</h3>
-      <p className="text-gray-400 mt-2">{selectedProject.details}</p>
-
-      {/* Problem Statement */}
-      {selectedProject.problemStatement && (
-        <p className="text-gray-400 mt-2 font-semibold">Problem Statement: {selectedProject.problemStatement}</p>
-      )}
-
-      {/* Video Section */}
-      {selectedProject.video && (
-        <div className="mt-4">
-          <iframe
-            className="w-full h-64 rounded-lg"
-            src={selectedProject.video + "?autoplay=1&mute=1"}
-            title="Demo Video"
-            allowFullScreen
-          ></iframe>
-        </div>
-      )}
-
-      {/* Date */}
-      <p className="text-gray-400 mt-2">Date: {selectedProject.date}</p>
-    </div>
-  </motion.div>
-)}
       </div>
     </section>
   );
