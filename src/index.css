@@ -159,4 +159,16 @@
     opacity: 0.5;
   }
   
+  @media (max-width: 640px) {
+    .p-8 {
+      padding: 0; /* Removes side padding */
+    }
+    .px-6 {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .max-w-3xl {
+      max-width: 100%; /* Full width for smaller screens */
+    }
+  }
   

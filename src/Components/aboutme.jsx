@@ -61,30 +61,27 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <section id="about" className="min-h-screen flex flex-col items-center justify-center px-8 bg-black text-white pt-20">
+    <section id="about" className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 bg-black text-white pt-20">
       <div className="container mx-auto flex flex-col lg:flex-row items-center space-y-12 lg:space-y-0 lg:space-x-16">
-        
-        {/* Left Side - Text Content */}
+
         <motion.div
           className="lg:w-2/3 text-center lg:text-left"
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-6xl font-extrabold text-yellow-500">I'm Arjun Divraniya</h1>
-          <p className="mt-6 text-2xl text-yellow-400">{typewriterText}</p>
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-yellow-500">I'm Arjun Divraniya</h1>
+          <p className="mt-6 text-lg sm:text-2xl text-yellow-400">{typewriterText}</p>
 
-          <p className="mt-6 text-lg leading-relaxed text-gray-300">
+          <p className="mt-6 text-base sm:text-lg leading-relaxed text-gray-300">
             I am from Junagadh, Gujarat, currently pursuing my B.Tech in Computer Science and Engineering at Rai University.
             My journey in coding started with HTML and JavaScript, and now I build <strong>full-stack web applications</strong> using
             <strong> React, Node.js, Express, and MongoDB</strong>.
-            Apart from coding, photography is my creative escape where I capture the beauty of nature and life through my lens.
           </p>
 
-          {/* Social Media Links */}
           <div className="mt-10">
-            <h2 className="text-3xl font-semibold text-yellow-400">Find Me On</h2>
-            <div className="flex space-x-8 mt-4 justify-center lg:justify-start">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-yellow-400">Find Me On</h2>
+            <div className="flex space-x-6 sm:space-x-8 mt-4 justify-center lg:justify-start">
               {socialLinks.map(({ icon: Icon, link }, index) => (
                 <motion.a
                   key={index}
@@ -97,15 +94,7 @@ const AboutMe = () => {
                     boxShadow: "0 0 20px rgba(255, 215, 0, 0.8)",
                   }}
                   whileTap={{ scale: 0.9 }}
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 10,
-                    duration: 0.5,
-                  }}
-                  className="text-4xl text-white hover:text-yellow-500"
+                  className="text-3xl sm:text-4xl text-white hover:text-yellow-500"
                 >
                   <Icon />
                 </motion.a>
@@ -114,14 +103,13 @@ const AboutMe = () => {
           </div>
         </motion.div>
 
-        {/* Right Side - Auto Changing Photo Frame */}
         <motion.div
           className="lg:w-1/3 flex justify-center"
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          <div className="w-96 h-96 border-4 border-yellow-500 rounded-lg overflow-hidden shadow-2xl">
+          <div className="w-72 sm:w-96 h-72 sm:h-96 border-4 border-yellow-500 rounded-lg overflow-hidden shadow-2xl">
             <motion.img
               key={currentPhoto}
               src={photos[currentPhoto]}
@@ -135,20 +123,18 @@ const AboutMe = () => {
         </motion.div>
       </div>
 
-      {/* Education Roadmap Section */}
       <motion.div
         className="mt-16 w-full text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h2 className="text-4xl font-bold text-yellow-400 mb-10">Education Journey</h2>
-
+        <h2 className="text-3xl sm:text-4xl font-bold text-yellow-400 mb-10">Education Journey</h2>
         <div className="flex flex-col items-center w-full">
           {educationData.map((edu, index) => (
             <motion.div
               key={index}
-              className={`flex items-center mb-16 w-3/4 ${
+              className={`flex items-center mb-10 sm:mb-16 w-full px-4 sm:px-0 ${
                 index % 2 === 0 ? "flex-row" : "flex-row-reverse"
               }`}
               initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
@@ -157,32 +143,16 @@ const AboutMe = () => {
               viewport={{ once: true }}
             >
               <div className="w-10 h-10 bg-yellow-400 rounded-full"></div>
-              <div className="ml-6 bg-gray-800 p-6 rounded-lg shadow-lg w-full">
-                <h3 className="text-xl font-bold text-yellow-400">{edu.year}</h3>
-                <h4 className="text-lg font-semibold text-white">{edu.title}</h4>
+              <div className="ml-6 bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg w-full">
+                <h3 className="text-lg sm:text-xl font-bold text-yellow-400">{edu.year}</h3>
+                <h4 className="text-base sm:text-lg font-semibold text-white">{edu.title}</h4>
                 <p className="text-gray-300">{edu.institute}</p>
-                <p className="text-gray-400 text-sm mt-2">{edu.description}</p>
+                <p className="text-gray-400 text-xs sm:text-sm mt-2">{edu.description}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </motion.div>
-
-            {/* Google Map for Location */}
-            <motion.div
-        className="w-full flex justify-center mt-16"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.564524601101!2d72.47077331548754!3d22.81698417934685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e92d7452e8655%3A0x8b3fd7e0e7f3d3bb!2sRai%20University!5e0!3m2!1sen!2sin!4v1645100000000!5m2!1sen!2sin"
-          className="w-full max-w-4xl h-80 rounded-lg shadow-lg"
-          allowFullScreen=""
-          loading="lazy"
-        ></iframe>
-      </motion.div>
-
     </section>
   );
 };

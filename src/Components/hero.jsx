@@ -15,7 +15,7 @@ const Hero = () => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 1.5 }}
-    className="h-screen flex justify-center items-center relative overflow-hidden pt-20"
+    className="h-screen flex justify-center items-center relative overflow-hidden pt-20 px-4 sm:px-8 lg:px-16"
   >
     {/* Background Image Slideshow */}
     <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -38,12 +38,12 @@ const Hero = () => (
     </div>
 
     {/* Hero Content */}
-    <div className="relative text-center z-10 text-white">
+    <div className="relative text-center z-10 text-white max-w-2xl">
       <motion.h1
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="text-5xl font-bold"
+        className="text-4xl sm:text-5xl md:text-6xl font-bold"
       >
         Hi, I'm <span className="text-yellow-500">Arjun Divraniya</span>
       </motion.h1>
@@ -53,7 +53,7 @@ const Hero = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.5 }}
-        className="text-xl mt-4"
+        className="text-lg sm:text-xl mt-4"
       >
         <TypeAnimation
           sequence={[
@@ -72,7 +72,7 @@ const Hero = () => (
       {/* Call to Action */}
       <motion.a
         href="#contact"
-        className="mt-6 inline-block px-6 py-3 bg-yellow-500 text-black font-semibold rounded-md text-lg transition duration-300 hover:bg-yellow-600 hover:scale-105"
+        className="mt-6 inline-block px-5 sm:px-6 py-3 sm:py-4 bg-yellow-500 text-black font-semibold rounded-md text-lg sm:text-xl transition duration-300 hover:bg-yellow-600 hover:scale-105"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >

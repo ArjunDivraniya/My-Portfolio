@@ -34,7 +34,7 @@ function App() {
           </>
         } />
         <Route path="/about" element={<> <Bg /><Header /><AboutMe /></>} />
-        <Route path="/photogtaphy" element={<><Ebg/><Header /><Photography /></>} />
+        <Route path="/photography" element={<><Ebg/><Header /><Photography /></>} />
         <Route path="/contact" element={<> <Bg /><Header /><ContactMe /></>} />
         <Route path="*" element={<Navigate to="/" />} /> {/* ✅ Redirects unknown routes */}
       </Routes>

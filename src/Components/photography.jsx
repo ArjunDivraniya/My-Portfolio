@@ -1,5 +1,3 @@
-
-
 import "../index.css";
 import React from "react";
 import { motion } from "framer-motion";
@@ -66,7 +64,7 @@ const Photography = () => {
       </div>
 
       {/* 🔹 Photography Section */}
-      <div id="photography" className="py-16 text-center relative">
+      <div id="photography" className="py-16 text-center relative bg-transparent">
         <motion.h2
           className="text-4xl font-bold text-white mb-8"
           initial={{ y: -50, opacity: 0 }}
@@ -95,7 +93,7 @@ const Photography = () => {
           {photos.map((photo, index) => (
             <motion.div
               key={index}
-              className="overflow-hidden cursor-pointer rounded-lg shadow-lg"
+              className="overflow-hidden cursor-pointer rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3"
               whileHover={{ scale: 1.1 }}
               animate={{
                 opacity: [0.8, 1, 0.8],
@@ -105,13 +103,12 @@ const Photography = () => {
               <img
                 src={photo}
                 alt={`Photography ${index + 1}`}
-                className="w-full h-96 object-cover rounded-lg"
+                className="w-full h-60 object-cover rounded-lg"
               />
             </motion.div>
           ))}
         </div>
       </div>
-    </div>
 
       <motion.button
         className="fixed right-6 bottom-16 bg-white text-gray-900 p-4 rounded-full shadow-md hover:bg-gray-300 transition"
@@ -123,8 +120,7 @@ const Photography = () => {
 
       <section
         id="editing"
-        className="py-16 text-center relative overflow-hidden  text-white"
-        
+        className="py-16 text-center relative overflow-hidden text-white"
       >
         <motion.h2
           className="text-4xl font-bold mb-8 backdrop-blur-md bg-black/50 p-4 inline-block rounded-lg"
@@ -143,29 +139,8 @@ const Photography = () => {
           I focus on **maintaining natural colors while enhancing sharpness and details**. For video editing, I use  
           **smooth transitions, dynamic effects, and precise audio syncing** to create **visually compelling** stories.
         </p>
-
-        <div className="flex justify-center gap-12 text-6xl">
-          <motion.div whileHover={{ rotate: 360, scale: 1.2 }} transition={{ duration: 0.8 }} className="flex flex-col items-center cursor-pointer">
-            <TbBrandSnapseed className="text-red-500 drop-shadow-lg" />
-            <span className="text-sm mt-2">Snapseed</span>
-          </motion.div>
-
-          <motion.div whileHover={{ rotate: 360, scale: 1.2 }} transition={{ duration: 0.8 }} className="flex flex-col items-center cursor-pointer">
-            <SiAdobelightroom className="text-blue-400 drop-shadow-lg" />
-            <span className="text-sm mt-2">Lightroom</span>
-          </motion.div>
-
-          <motion.div whileHover={{ rotate: 360, scale: 1.2 }} transition={{ duration: 0.8 }} className="flex flex-col items-center cursor-pointer">
-            <SiAdobephotoshop className="text-blue-600 drop-shadow-lg" />
-            <span className="text-sm mt-2">Photoshop</span>
-          </motion.div>
-          
-          <motion.div whileHover={{ rotate: 360, scale: 1.2 }} transition={{ duration: 0.8 }} className="flex flex-col items-center cursor-pointer">
-            <SiAdobepremierepro className="text-blue-600 drop-shadow-lg" />
-            <span className="text-sm mt-2">Premiere Pro</span>
-          </motion.div>
-        </div>
       </section>
+    </div>
     </div>
   );
 };
