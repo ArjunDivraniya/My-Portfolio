@@ -14,19 +14,27 @@ const educationData = [
     year: "2021 - 2022",
     title: "10th Standard",
     institute: "Alpha Vidhya Sankul, Junagadh",
-    description: "Completed SSC with a strong foundation in Science & Mathematics."
+    description: "Completed SSC with a strong foundation in Science & Mathematics.",
+    score: "92%",
+    location: "Junagadh, Gujarat",
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3708.025453812144!2d70.38399797481036!3d21.52187617181638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395803725248ec05%3A0x82062556b4718a9d!2sAlpha%20Vidhya%20Sankul!5e0!3m2!1sen!2sin!4v1711872456650"
   },
   {
     year: "2023 - 2024",
-    title: "12th Standard",
+    title: "12th Standard (PCM)",
     institute: "Alpha Vidhya Sankul, Junagadh",
-    description: "Completed HSC with a focus on PCM (Physics, Chemistry, Mathematics)."
+    description: "Completed HSC with focus on Physics, Chemistry & Maths.",
+    score: "89%",
+    location: "Junagadh, Gujarat"
   },
   {
-    year: "2024 - 2024",
+    year: "2024 - Present",
     title: "B.Tech in Computer Science & Engineering",
-    institute: "Rai University, Gujarat",
-    description: "Currently pursuing CSE with a specialization in Full-Stack Development & UI."
+    institute: "Rai University, Ahmedabad",
+    description: "Pursuing specialization in Full Stack Development & UI.",
+    score: "Currently Studying",
+    location: "Ahmedabad, Gujarat",
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3715.6958781954346!2d72.54815527480456!3d23.120454913498333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9bff517e08b1%3A0xdcefd750456b213b!2sRai%20University!5e0!3m2!1sen!2sin!4v1711872674624"
   }
 ];
 
@@ -56,14 +64,12 @@ const AboutMe = () => {
     const interval = setInterval(() => {
       setCurrentPhoto((prev) => (prev + 1) % photos.length);
     }, 3000);
-
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section id="about" className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 bg-black text-white pt-20">
       <div className="container mx-auto flex flex-col lg:flex-row items-center space-y-12 lg:space-y-0 lg:space-x-16">
-
         <motion.div
           className="lg:w-2/3 text-center lg:text-left"
           initial={{ opacity: 0, x: -100 }}
@@ -134,9 +140,7 @@ const AboutMe = () => {
           {educationData.map((edu, index) => (
             <motion.div
               key={index}
-              className={`flex items-center mb-10 sm:mb-16 w-full px-4 sm:px-0 ${
-                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-              }`}
+              className={`flex items-start mb-10 sm:mb-16 w-full px-4 sm:px-0 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
               initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: index * 0.3 }}
@@ -147,11 +151,39 @@ const AboutMe = () => {
                 <h3 className="text-lg sm:text-xl font-bold text-yellow-400">{edu.year}</h3>
                 <h4 className="text-base sm:text-lg font-semibold text-white">{edu.title}</h4>
                 <p className="text-gray-300">{edu.institute}</p>
-                <p className="text-gray-400 text-xs sm:text-sm mt-2">{edu.description}</p>
+                <p className="text-gray-400 text-xs sm:text-sm mt-1">Score: {edu.score}</p>
+                <p className="text-gray-400 text-xs sm:text-sm mt-1">Location: {edu.location}</p>
+                {edu.mapUrl && (
+                  <div className="mt-4">
+                    <iframe
+                      src={edu.mapUrl}
+                      width="100%"
+                      height="200"
+                      className="rounded-lg border-2 border-yellow-400"
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title={`Location of ${edu.institute}`}
+                    ></iframe>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
         </div>
+      </motion.div>
+
+      <motion.div
+        className="mt-20 px-6 max-w-4xl text-center"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <h2 className="text-3xl font-bold text-yellow-400 mb-6">My Journey 🚀</h2>
+        <p className="text-gray-300 text-lg leading-relaxed">
+          From a curious school kid exploring HTML to a passionate full-stack developer and creative photographer,
+          my journey has been a blend of learning and building. Starting from Junagadh, I completed my school education with excellent grades and continued to pursue Computer Science at Rai University. Alongside academics, I crafted websites, explored UI/UX in Figma, and captured life through my camera lens. I'm committed to growing as a developer and making ideas come to life.
+        </p>
       </motion.div>
     </section>
   );

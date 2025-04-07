@@ -9,6 +9,13 @@ const images = [
   "https://res.cloudinary.com/dncosrakg/image/upload/v1740032195/x608ojr0yuf8j87wdnba.jpg",
 ];
 
+const images1 = [
+  "https://res.cloudinary.com/dncosrakg/image/upload/v1744034962/IMG_20250405_131817_djpgf7.jpg",
+  "https://res.cloudinary.com/dncosrakg/image/upload/v1744034962/IMG_20250405_131817_djpgf7.jpg",
+  "https://res.cloudinary.com/dncosrakg/image/upload/v1744034962/IMG_20250405_131817_djpgf7.jpg",
+  "https://res.cloudinary.com/dncosrakg/image/upload/v1744034962/IMG_20250405_131817_djpgf7.jpg"
+];
+
 const Hero = () => (
   <motion.section
     id="home"
@@ -17,10 +24,29 @@ const Hero = () => (
     transition={{ duration: 1.5 }}
     className="h-screen flex justify-center items-center relative overflow-hidden pt-20 px-4 sm:px-8 lg:px-16"
   >
-    {/* Background Image Slideshow */}
+    {/* Background Images (Responsive) */}
     <div className="absolute inset-0 w-full h-full overflow-hidden">
       <div className="absolute inset-0 bg-black opacity-50"></div>
+
+      {/* Desktop Image */}
       {images.map((photo, index) => (
+        <motion.img
+          key={index}
+          src={photo}
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: index === 0 ? 1 : 0 }}
+          transition={{
+            delay: index * 4,
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "mirror",
+          }}
+        />
+      ))}
+
+      {/* Mobile Image */}
+      {images1.map((photo, index) => (
         <motion.img
           key={index}
           src={photo}
@@ -43,7 +69,7 @@ const Hero = () => (
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="text-4xl sm:text-5xl md:text-6xl font-bold"
+        className="text-3xl sm:text-5xl md:text-6xl font-bold"
       >
         Hi, I'm <span className="text-yellow-500">Arjun Divraniya</span>
       </motion.h1>
@@ -53,7 +79,7 @@ const Hero = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.5 }}
-        className="text-lg sm:text-xl mt-4"
+        className="text-base sm:text-xl mt-4"
       >
         <TypeAnimation
           sequence={[
