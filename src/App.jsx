@@ -1,3 +1,5 @@
+// File: src/App.jsx (UPDATED)
+
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Portfolio from "./Components/portfolio";
@@ -12,6 +14,10 @@ import Pre from "./Components/preloader";
 import AboutMe from "./Components/aboutme";
 import ContactMe from "./Components/contact";
 import Ebg from "./Components/editingbg"
+// IMPORT NEW SECTIONS
+import CompetitiveCoding from "./Components/CompetitiveCoding";
+import Hackathons from "./Components/Hackathons";
+import Certifications from "./Components/Certifications";
 import "./index.css"; 
 
 function App() {
@@ -26,6 +32,11 @@ function App() {
            <Bg />
           <Header />
             <Hero />
+            {/* NEW SECTIONS ADDED HERE */}
+            <CompetitiveCoding /> 
+            <Hackathons /> 
+            <Certifications /> 
+            {/* EXISTING SECTIONS */}
             <Portfolio />
             <Skills />
             <Tools />

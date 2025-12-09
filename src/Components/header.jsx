@@ -46,7 +46,7 @@ const Header = () => {
             <NavLink to="/about">About</NavLink>
             <button onClick={() => handleScroll("skills")}>Skills</button>
             <button onClick={() => handleScroll("projects")}>Projects</button>
-            <NavLink to="/photography">Photography & Editing</NavLink>
+            <NavLink to="/certificates">Certificates</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </nav>
 
@@ -71,7 +71,7 @@ const Header = () => {
       <NavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</NavLink>
       <button onClick={() => handleScroll("skills")}>Skills</button>
       <button onClick={() => handleScroll("projects")}>Projects</button>
-      <NavLink to="/photography" onClick={() => setIsMenuOpen(false)}>Photography & Editing</NavLink>
+      <NavLink to="/certificates" onClick={() => setIsMenuOpen(false)}>Certificates</NavLink>
       <NavLink to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
 
       {/* Show Resume Button for Mobile Menu */}
