@@ -1,0 +1,193 @@
+/* ===================== ABOUT JOURNEY - ADVANCED STYLING ===================== */
+
+/* Enable 3D transforms for cards */
+.phase-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Timeline path animation */
+svg line {
+  will-change: stroke-dashoffset;
+}
+
+/* Phase node pulse effect */
+.phase-node {
+  will-change: transform, box-shadow;
+  transition: all 0.3s ease-out;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .phase-card {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Hide the SVG line on mobile for better UX */
+  svg {
+    opacity: 0.3;
+  }
+
+  /* Timeline node - smaller on mobile */
+  .phase-node {
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+  }
+
+  /* Reduce card height on mobile */
+  .relative.h-96 {
+    height: auto;
+    min-height: 300px;
+    margin-bottom: 2rem;
+  }
+
+  /* Ensure text is readable on mobile */
+  .phase-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .phase-card p {
+    font-size: 0.875rem;
+  }
+}
+
+/* Glassmorphism hover effect */
+.phase-card > div {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Gradient text animation */
+.bg-gradient-to-r.bg-clip-text {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glow effect enhancement */
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(234, 179, 8, 0.8));
+  }
+}
+
+.phase-node {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* 3D flip on scroll - enhance the effect */
+.phase-card {
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Top border animation on hover */
+.phase-card > div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(234, 179, 8, 0), rgba(234, 179, 8, 1), rgba(234, 179, 8, 0));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.phase-card > div:hover::before {
+  transform: scaleX(1);
+}
+
+/* Smooth scroll-trigger animations */
+.phase-card {
+  transform-style: preserve-3d;
+}
+
+/* Responsive container padding */
+@media (max-width: 640px) {
+  .max-w-6xl {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Ensure CGPA badge stands out */
+.from-yellow-500.to-yellow-400 {
+  background: linear-gradient(135deg, #eab308 0%, #fbbf24 100%);
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+}
+
+/* Performance optimization for animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Enhanced mobile card spacing */
+@media (max-width: 768px) {
+  .space-y-20 {
+    gap: 4rem;
+  }
+}
+
+/* Timeline responsiveness */
+@media (max-width: 1024px) {
+  .absolute.left-1/2 {
+    left: 1rem !important;
+  }
+
+  .phase-card {
+    width: calc(100% - 4rem) !important;
+    margin-left: 2rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-color-scheme: dark) {
+  .phase-card > div {
+    border-color: rgba(234, 179, 8, 0.3);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  .phase-node {
+    border-width: 3px;
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.8);
+  }
+
+  .phase-card > div {
+    border-width: 2px;
+  }
+}

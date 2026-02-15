@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.industrial-title {
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  letter-spacing: 0.04em;
+}
 
 @keyframes float {
     0% { transform: translateY(0px); }
@@ -11,6 +18,83 @@
   .animate-float {
     animation: float 5s ease-in-out infinite;
     opacity: 0.7;
+  }
+
+  /* ===== Timeline & Education Journey Animations ===== */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(199, 112, 240, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(199, 112, 240, 0.8);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 10px rgba(199, 112, 240, 0.6);
+    }
+    50% {
+      opacity: 0.7;
+      box-shadow: 0 0 20px rgba(199, 112, 240, 1);
+    }
+  }
+
+  @keyframes line-draw {
+    from {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+    }
+    to {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .glow-effect {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+
+  /* Card Hover Effects */
+  .timeline-card {
+    transition: all 0.3s ease-in-out;
+    position: relative;
+  }
+
+  .timeline-card:hover {
+    transform: translateY(-5px);
+    border-color: #c770f0 !important;
+    box-shadow: 0 10px 30px rgba(199, 112, 240, 0.3) !important;
+  }
+
+  /* Technology Badge Animation */
+  .tech-badge {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .tech-badge:hover {
+    transform: scale(1.15);
+    background-color: #c770f0;
+    color: #ffffff;
+  }
+
+  /* Milestone Node Styles */
+  .milestone-node {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .milestone-node.active {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
   }
   /* ===== Global Variables ===== */
 :root {

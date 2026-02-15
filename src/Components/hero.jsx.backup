@@ -1,0 +1,670 @@
+
+import React, { useState, useEffect } from "react";
+import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import { FaGithub, FaCodeBranch, FaTrophy, FaCode, FaFire, FaRadiation, FaMedal, FaStack, FaInstagram, FaCheckCircle } from "react-icons/fa";
+import { MdRadio } from "react-icons/md";
+
+// Floating Interactive Card Component
+const FloatingCard = ({ icon: Icon, title, subtitle, delay, color = "purple", x: initialX, y: initialY }) => {
+  const cardX = useMotionValue(initialX);
+  const cardY = useMotionValue(initialY);
+  
+  return (
+    <motion.div
+      className={`absolute bg-black/40 backdrop-blur-xl border-2 border-${color}-500/50 rounded-2xl p-4 cursor-grab active:cursor-grabbing shadow-2xl hover:shadow-${color}-500/50 transition-shadow`}
+      style={{
+        x: cardX,
+        y: cardY,
+        boxShadow: `0 25px 50px -12px rgba(${color === 'yellow' ? '234, 179, 8' : '168, 85, 247'}, 0.5)`,
+      }}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
+        opacity: 1, 
+        scale: 1,
+        y: [initialY, initialY - 15, initialY],
+      }}
+      transition={{ 
+        opacity: { duration: 0.8, delay, type: "spring" },
+        scale: { duration: 0.8, delay, type: "spring" },
+        y: {
+          duration: 3 + delay * 0.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        },
+      }}
+      drag
+      dragConstraints={{ left: -150, right: 150, top: -150, bottom: 150 }}
+      dragElastic={0.5}
+      whileHover={{ 
+        scale: 1.1, 
+        borderColor: color === 'yellow' ? "rgba(234, 179, 8, 1)" : "rgba(168, 85, 247, 1)",
+      }}
+    >
+      <div className="flex items-center gap-3 min-w-max">
+        <Icon className={`text-${color}-400 text-2xl drop-shadow-lg`} />
+        <div>
+          <p className={`text-${color}-400 font-bold text-lg drop-shadow-md`}>{title}</p>
+          <p className="text-gray-300 text-xs">{subtitle}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Particle Background Component
+const ParticleField = () => {
+  const particles = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 0.5,
+    duration: Math.random() * 10 + 15,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute bg-white rounded-full opacity-30"
+          style={{
+            width: particle.size,
+            height: particle.size,
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+          }}
+          animate={{
+            y: [0, -200, 0],
+            x: [0, Math.random() > 0.5 ? 50 : -50, 0],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const Hero = () => {
+  const [mounted, setMounted] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Smooth mouse tracking
+  const springConfig = { damping: 20, stiffness: 100 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
+  
+  // ENHANCED - More dramatic parallax depths for stronger 3D effect
+  const photoRotateX = useTransform(y, [-500, 500], [25, -25]);
+  const photoRotateY = useTransform(x, [-500, 500], [-25, 25]);
+  const photoZ = useTransform(x, [-500, 500], [-50, 50]);
+  
+  // Text 3D transforms
+  const textRotateX = useTransform(y, [-500, 500], [10, -10]);
+  const textRotateY = useTransform(x, [-500, 500], [-10, 10]);
+  const textZ = useTransform(x, [-500, 500], [0, 30]);
+  
+  // Badges with different Z-depth
+  const badge1X = useTransform(x, [-500, 500], [-60, 60]);
+  const badge1Y = useTransform(y, [-500, 500], [-60, 60]);
+  const badge1Z = useTransform(x, [-500, 500], [100, 0]);
+  
+  const badge2X = useTransform(x, [-500, 500], [60, -60]);
+  const badge2Y = useTransform(y, [-500, 500], [40, -40]);
+  const badge2Z = useTransform(x, [-500, 500], [80, -20]);
+  
+  const badge3X = useTransform(x, [-500, 500], [-40, 40]);
+  const badge3Y = useTransform(y, [-500, 500], [60, -60]);
+  const badge3Z = useTransform(x, [-500, 500], [60, -40]);
+  
+  // Interactive spotlight gradient
+  const spotlightX = useTransform(x, [-500, 500], ['20%', '80%']);
+  const spotlightY = useTransform(y, [-500, 500], ['20%', '80%']);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    const handleMouseMove = (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      mouseX.set(e.clientX - rect.width / 2);
+      mouseY.set(e.clientY - rect.height / 2);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  const desktopImage = "https://res.cloudinary.com/dncosrakg/image/upload/v1740032195/x608ojr0yuf8j87wdnba.jpg";
+
+  return (
+    <section 
+      id="home" 
+      className="relative h-screen w-full overflow-hidden flex items-center justify-center"
+      style={{ perspective: "2000px" }}
+    >
+      {/* Particle Background */}
+      <ParticleField />
+
+      {/* Background Layer - Interactive Spotlight */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{
+          background: `radial-gradient(circle at ${spotlightX} ${spotlightY}, rgba(168, 85, 247, 0.4) 0%, rgba(234, 179, 8, 0.2) 25%, rgba(0, 0, 0, 1) 60%)`
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      />
+      
+      {/* Animated Background Patterns */}
+      <div className="absolute inset-0 z-0">
+        <motion.div
+          className="absolute w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-20"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -100, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ top: '10%', left: '10%' }}
+        />
+        <motion.div
+          className="absolute w-96 h-96 bg-yellow-500 rounded-full blur-3xl opacity-20"
+          animate={{
+            x: [0, -100, 0],
+            y: [0, 100, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ bottom: '10%', right: '10%' }}
+        />
+      </div>
+
+      {/* 9 Interactive Draggable Floating Cards */}
+      <AnimatePresence>
+        {mounted && (
+          <>
+            {/* Card 1 - GitHub Repositories */}
+            <FloatingCard icon={FaGithub} title="68+" subtitle="Repositories" delay={1} color="purple" x={-200} y={-150} />
+            
+            {/* Card 2 - LeetCode Solved */}
+            <FloatingCard icon={FaTrophy} title="300+" subtitle="LeetCode Solved" delay={1.2} color="yellow" x={200} y={-180} />
+            
+            {/* Card 3 - Academic Excellence */}
+            <FloatingCard icon={FaMedal} title="9.74" subtitle="CGPA Elite" delay={1.4} color="purple" x={-280} y={50} />
+            
+            {/* Card 4 - Design Experience */}
+            <FloatingCard icon={FaCode} title="4+" subtitle="Years Design" delay={1.6} color="yellow" x={250} y={100} />
+            
+            {/* Card 5 - Certifications */}
+            <FloatingCard icon={FaCheckCircle} title="3+" subtitle="Global Certifications" delay={1.8} color="purple" x={-150} y={200} />
+            
+            {/* Card 6 - Real-Time Tech */}
+            <FloatingCard icon={MdRadio} title="Socket.io" subtitle="Real-Time Systems" delay={2} color="yellow" x={180} y={220} />
+            
+            {/* Card 7 - Productivity */}
+            <FloatingCard icon={FaFire} title="500+" subtitle="Commits 2025" delay={2.2} color="purple" x={-220} y={-50} />
+            
+            {/* Card 8 - Social Leadership */}
+            <FloatingCard icon={FaInstagram} title="Media" subtitle="College Manager" delay={2.4} color="yellow" x={220} y={-100} />
+            
+            {/* Card 9 - Full-Stack Projects */}
+            <FloatingCard icon={FaStack} title="5+" subtitle="Full-Stack Clones" delay={2.6} color="purple" x={-120} y={150} />
+          </>
+        )}
+      </AnimatePresence>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        
+        {/* Left Side - Photo with 3D Tilt & Floating Badges */}
+        <div className="relative flex justify-center items-center" style={{ perspective: "1500px" }}>
+          
+          {/* Main Photo with ENHANCED 3D Tilt */}
+          <motion.div
+            className="relative"
+            style={{
+              rotateX: photoRotateX,
+              rotateY: photoRotateY,
+              z: photoZ,
+              transformStyle: "preserve-3d",
+            }}
+            initial={{ opacity: 0, scale: 0.8, z: -200 }}
+            animate={{ opacity: 1, scale: 1, z: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            {/* Multiple Glow Layers for Depth */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-purple-500 to-yellow-500 rounded-3xl blur-3xl"
+              style={{ transform: "translateZ(-50px)" }}
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-yellow-500 via-purple-500 to-yellow-500 rounded-3xl blur-2xl"
+              style={{ transform: "translateZ(-30px)" }}
+              animate={{
+                scale: [1.1, 1.2, 1.1],
+                opacity: [0.3, 0.5, 0.3],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            <motion.img
+              src={desktopImage}
+              alt="Arjun Divraniya"
+              className="relative w-72 h-72 sm:w-96 sm:h-96 object-cover rounded-3xl border-4 border-yellow-500"
+              style={{
+                boxShadow: "0 50px 100px -20px rgba(0, 0, 0, 0.8), 0 30px 60px -30px rgba(168, 85, 247, 0.5)",
+                transform: "translateZ(50px)",
+              }}
+              whileHover={{ scale: 1.05, rotateZ: 2 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+
+          {/* ENHANCED Floating Badge 1 - Academic Elite */}
+          <motion.div
+            className="absolute top-0 left-0 bg-black/50 backdrop-blur-xl border-2 border-purple-500/70 rounded-2xl p-4 shadow-2xl"
+            style={{
+              x: badge1X,
+              y: badge1Y,
+              z: badge1Z,
+              transformStyle: "preserve-3d",
+              boxShadow: "0 25px 50px -12px rgba(168, 85, 247, 0.5)",
+            }}
+            initial={{ opacity: 0, scale: 0, rotateX: -90 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              rotateX: 0,
+            }}
+            transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
+            whileHover={{ 
+              scale: 1.15, 
+              borderColor: "rgba(234, 179, 8, 1)",
+              z: 150,
+              rotateZ: 5,
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <FaTrophy className="text-yellow-500 text-3xl drop-shadow-lg" />
+              <div>
+                <p className="text-yellow-400 font-bold text-2xl drop-shadow-md">9.74</p>
+                <p className="text-gray-300 text-xs">CGPA Elite</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ENHANCED Floating Badge 2 - Active Builder */}
+          <motion.div
+            className="absolute top-12 right-0 bg-black/50 backdrop-blur-xl border-2 border-purple-500/70 rounded-2xl p-4 shadow-2xl"
+            style={{
+              x: badge2X,
+              y: badge2Y,
+              z: badge2Z,
+              transformStyle: "preserve-3d",
+              boxShadow: "0 25px 50px -12px rgba(168, 85, 247, 0.5)",
+            }}
+            initial={{ opacity: 0, scale: 0, rotateY: 90 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              rotateY: 0,
+            }}
+            transition={{ duration: 0.8, delay: 1.4, type: "spring" }}
+            whileHover={{ 
+              scale: 1.15, 
+              borderColor: "rgba(234, 179, 8, 1)",
+              z: 150,
+              rotateZ: -5,
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <FaGithub className="text-purple-400 text-3xl drop-shadow-lg" />
+              <div>
+                <p className="text-purple-400 font-bold text-2xl drop-shadow-md">68+</p>
+                <p className="text-gray-300 text-xs">Repositories</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ENHANCED Floating Badge 3 - Consistency */}
+          <motion.div
+            className="absolute bottom-0 left-8 bg-black/50 backdrop-blur-xl border-2 border-purple-500/70 rounded-2xl p-4 shadow-2xl"
+            style={{
+              x: badge3X,
+              y: badge3Y,
+              z: badge3Z,
+              transformStyle: "preserve-3d",
+              boxShadow: "0 25px 50px -12px rgba(234, 179, 8, 0.5)",
+            }}
+            initial={{ opacity: 0, scale: 0, rotateX: 90 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              rotateX: 0,
+            }}
+            transition={{ duration: 0.8, delay: 1.6, type: "spring" }}
+            whileHover={{ 
+              scale: 1.15, 
+              borderColor: "rgba(234, 179, 8, 1)",
+              z: 150,
+              rotateZ: 5,
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <FaCode className="text-yellow-500 text-3xl drop-shadow-lg" />
+              <div>
+                <p className="text-yellow-400 font-bold text-2xl drop-shadow-md">500+</p>
+                <p className="text-gray-300 text-xs">Commits 2025</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right Side - ENHANCED 3D Text Content */}
+        <motion.div 
+          className="relative text-center lg:text-left space-y-6"
+          style={{
+            rotateX: textRotateX,
+            rotateY: textRotateY,
+            z: textZ,
+            transformStyle: "preserve-3d",
+          }}
+        >
+          
+          {/* Headline with Mask Reveal and 3D Effect */}
+          <motion.div
+            className="overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-purple-500"
+              initial={{ y: 100, rotateX: 90 }}
+              animate={{ y: 0, rotateX: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
+              style={{
+                textShadow: "0 10px 30px rgba(234, 179, 8, 0.5)",
+                transform: "translateZ(30px)",
+              }}
+            >
+              Architecting Digital Excellence
+            </motion.h1>
+          </motion.div>
+
+          {/* Name with Continuous Gradient Shimmer + Interactive Hover */}
+          <motion.div
+            className="overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <motion.h2
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-white relative"
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              style={{
+                textShadow: "0 10px 40px rgba(0, 0, 0, 0.8), 0 5px 20px rgba(168, 85, 247, 0.5)",
+                transform: "translateZ(40px)",
+              }}
+            >
+              {/* Gradient Shimmer Background */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-purple-500 to-yellow-400 opacity-0"
+                style={{
+                  backgroundSize: "200% 200%",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+              
+              {"ARJUN DIVRANIYA".split("").map((char, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, y: 50, rotateX: -90, z: -100 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0, z: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.8 + index * 0.05,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
+                  whileHover={{ 
+                    y: -20, 
+                    scale: 1.5, 
+                    color: "#facc15",
+                    rotateX: -25,
+                    rotateY: 20,
+                    rotateZ: 8,
+                    z: 80,
+                    textShadow: "0 0 40px rgba(234, 179, 8, 1), 0 0 80px rgba(168, 85, 247, 1), 0 30px 60px rgba(0, 0, 0, 0.6)",
+                    filter: "drop-shadow(0 0 20px rgba(234, 179, 8, 1)) brightness(1.5)",
+                  }}
+                  className="inline-block cursor-pointer transition-all duration-200 relative"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  {/* Character Glow on Hover */}
+                  <motion.span
+                    className="absolute inset-0 blur-md opacity-0 group-hover:opacity-100"
+                    whileHover={{ opacity: 0.8 }}
+                  />
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.h2>
+          </motion.div>
+
+          {/* Animated Roles with 3D */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className="text-xl sm:text-2xl md:text-3xl text-gray-300 font-semibold h-12"
+            style={{
+              transform: "translateZ(20px)",
+              textShadow: "0 5px 20px rgba(168, 85, 247, 0.5)",
+            }}
+          >
+            <TypeAnimation
+              sequence={[
+                "Full Stack Engineer (MERN)",
+                2000,
+                "UI/UX Visionary",
+                2000,
+                "Wildlife Photographer",
+                2000,
+                "Socket.io Specialist",
+                2000,
+                "4+ Years Design Experience",
+                2000,
+              ]}
+              speed={50}
+              repeat={Infinity}
+              className="text-purple-400"
+            />
+          </motion.div>
+
+          {/* Stats Bar */}
+          <motion.div
+            className="flex flex-wrap gap-4 justify-center lg:justify-start text-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.8 }}
+          >
+            <div className="bg-black/50 backdrop-blur-md border border-yellow-500/30 rounded-lg px-4 py-2">
+              <p className="text-yellow-400 font-bold">9.95 SGPA</p>
+              <p className="text-gray-400 text-xs">Semester 1</p>
+            </div>
+            <div className="bg-black/50 backdrop-blur-md border border-purple-500/30 rounded-lg px-4 py-2">
+              <p className="text-purple-400 font-bold">Socket.io Pro</p>
+              <p className="text-gray-400 text-xs">Real-time Systems</p>
+            </div>
+            <div className="bg-black/50 backdrop-blur-md border border-yellow-500/30 rounded-lg px-4 py-2">
+              <p className="text-yellow-400 font-bold">Active 2025</p>
+              <p className="text-gray-400 text-xs">Hireable Now</p>
+            </div>
+          </motion.div>
+
+          {/* Magnetic CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 2 }}
+          >
+            <MagneticButton />
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Smooth Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2.5 }}
+      >
+        <motion.div
+          className="w-8 h-12 border-2 border-yellow-500 rounded-full flex justify-center pt-2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <motion.div
+            className="w-2 h-2 bg-yellow-500 rounded-full"
+            animate={{ y: [0, 16, 0] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </motion.div>
+        <p className="text-gray-400 text-xs mt-2 text-center">Scroll</p>
+      </motion.div>
+    </section>
+  );
+};
+
+// Enhanced Magnetic Button Component with 3D Lift Effect
+const MagneticButton = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const buttonX = useTransform(mouseX, [-100, 100], [-20, 20]);
+  const buttonY = useTransform(mouseY, [-100, 100], [-20, 20]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set(e.clientX - centerX);
+    mouseY.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    setIsHovered(false);
+  };
+
+  return (
+    <motion.div
+      className="inline-block"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+    >
+      <motion.a
+        href="#contact"
+        className="relative inline-block px-10 py-5 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-bold text-lg rounded-2xl overflow-hidden group shadow-xl"
+        style={{ x: buttonX, y: buttonY }}
+        whileHover={{ 
+          y: -10,
+          rotateX: 15,
+          rotateY: 5,
+          scale: 1.05,
+          boxShadow: "0 30px 60px -15px rgba(234, 179, 8, 0.8), 0 0 40px rgba(234, 179, 8, 0.6)"
+        }}
+        whileTap={{ scale: 0.95, y: 0 }}
+        transition={{ duration: 0.3, type: "spring" }}
+      >
+        {/* Background Animation Layer */}
+        <motion.span
+          className="absolute inset-0 bg-gradient-to-r from-purple-600 to-yellow-500"
+          initial={{ x: "-100%" }}
+          animate={{ x: isHovered ? "0%" : "-100%" }}
+          transition={{ duration: 0.3 }}
+        />
+        
+        {/* 3D Lift Shadow */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, transparent 70%)",
+            transform: "translateZ(-20px)",
+          }}
+          animate={{
+            scaleY: isHovered ? 0.2 : 0.05,
+            opacity: isHovered ? 1 : 0.3,
+          }}
+          transition={{ duration: 0.3 }}
+        />
+        
+        <span className="relative z-10 flex items-center gap-2">
+          Get In Touch
+          <motion.span
+            animate={{ x: isHovered ? 8 : 0, rotate: isHovered ? 20 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            →
+          </motion.span>
+        </span>
+      </motion.a>
+    </motion.div>
+  );
+};
+
+export default Hero;

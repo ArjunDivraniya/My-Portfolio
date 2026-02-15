@@ -1,4 +1,4 @@
-// File: src/App.jsx (UPDATED)
+// File: src/App.jsx
 
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -6,48 +6,64 @@ import Portfolio from "./Components/portfolio";
 import Header from "./Components/header";
 import Hero from "./Components/hero";
 import Skills from "./Components/skills";
-import Photography from "./Components/photography";
 import Footer from "./Components/footer";
 import Tools from "./Components/tool";
 import Bg from "./Components/bg";
 import Pre from "./Components/preloader";
+import VideoLoader from "./Components/VideoLoader";
 import AboutMe from "./Components/aboutme";
 import ContactMe from "./Components/contact";
-import Ebg from "./Components/editingbg"
-// IMPORT NEW SECTIONS
-import CompetitiveCoding from "./Components/CompetitiveCoding";
-import Hackathons from "./Components/Hackathons";
-import Certifications from "./Components/Certifications";
+import Ebg from "./Components/editingbg";
+// New Imports
+import Achievements from "./Components/Achievements"; 
+import EducationRoadmap from "./Components/EducationRoadmap";
+import LeetCodeProfile from "./Components/LeetCodeProfile";
+import Experience from "./Components/Experience";
+import ScrollToTop from "./Components/ScrollToTop";
+import CreativePassions from "./Components/CreativePassions";
 import "./index.css"; 
 
 function App() {
   return (
     <>
-      <Pre />
-      
-     
+      <ScrollToTop />
+      <VideoLoader />
+      {/* <Pre /> */}
       <Routes>
+        {/* Home Page (Single Page Scroll Layout) */}
         <Route path="/" element={
           <>
-           <Bg />
-          <Header />
+            <Bg />
+            <Header />
             <Hero />
-            {/* NEW SECTIONS ADDED HERE */}
-            <CompetitiveCoding /> 
-            <Hackathons /> 
-            <Certifications /> 
-            {/* EXISTING SECTIONS */}
             <Portfolio />
             <Skills />
             <Tools />
+            <CreativePassions />
             
             <Footer />
           </>
         } />
+
+        {/* Dedicated Pages */}
         <Route path="/about" element={<> <Bg /><Header /><AboutMe /></>} />
-        <Route path="/photography" element={<><Ebg/><Header /><Photography /></>} />
+        
+        {/* NEW ROUTE: Achievements Page */}
+        <Route path="/achievements" element={<> <Bg /><Header /><Achievements /><Footer /></>} />
+        
+        {/* NEW ROUTE: Education Journey */}
+        <Route path="/education" element={<> <Bg /><Header /><EducationRoadmap /><Footer /></>} />
+        
+        {/* NEW ROUTE: Experience & Freelancing */}
+        <Route path="/experience" element={<> <Bg /><Header /><Experience /><Footer /></>} />
+        
+        {/* NEW ROUTE: LeetCode Profile */}
+        <Route path="/leetcode" element={<> <Bg /><Header /><LeetCodeProfile username="Arjun_divraniya" /><Footer /></>} />
+        
         <Route path="/contact" element={<> <Bg /><Header /><ContactMe /></>} />
-        <Route path="*" element={<Navigate to="/" />} /> {/* ✅ Redirects unknown routes */}
+        
+        {/* Catch-all Redirect */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
