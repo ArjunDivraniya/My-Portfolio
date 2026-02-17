@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useTransform, useSpring, useAnimation } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import { useNavigate } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaCamera, FaStar, FaAward, FaCode, FaTrophy } from "react-icons/fa";
 import { SiCplusplus, SiLeetcode } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";
@@ -206,6 +207,7 @@ const MagneticButton = ({ children, ...props }) => {
 };
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
   const cursorX = useMotionValue(0);
@@ -403,12 +405,12 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <MagneticButton onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
+            <MagneticButton onClick={() => navigate("/contact")}>
               Get In Touch
             </MagneticButton>
 
             <motion.a
-              href="#portfolio"
+              href="#projects"
               className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 sm:px-8 py-3 sm:py-4 border border-yellow-400/50 text-white font-semibold hover:border-yellow-300 hover:bg-yellow-500/10 transition-all"
               whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(250,204,21,0.3)" }}
               whileTap={{ scale: 0.95 }}
@@ -428,7 +430,7 @@ const Hero = () => {
             {[
               { Icon: FaGithub, href: "https://github.com/ArjunDivraniya", label: "GitHub" },
               { Icon: FaLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
-              { Icon: FaCamera, href: "#portfolio", label: "Photography" },
+              { Icon: FaCamera, href: "#projects", label: "Photography" },
             ].map((social, idx) => (
               <motion.a
                 key={idx}
