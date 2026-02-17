@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaGithub, FaPython, FaJava, FaBootstrap, FaFigma, FaShieldAlt, FaAws, FaLinux, FaDocker, FaServer, FaCloud } from "react-icons/fa";
 import { SiTailwindcss, SiNextdotjs, SiTypescript, SiExpress, SiMongodb, SiMysql, SiAdobephotoshop, SiAdobexd, SiCplusplus, SiCanva, SiPostman, SiFirebase, SiSocketdotio, SiRedux, SiVercel, SiKubernetes, SiJenkins, SiGooglecloud, SiApache, SiNginx, SiGit } from "react-icons/si";
+import { isMobile, getHoverProps, getMobileInViewProps } from "../utils/mobileOptimization";
 
 const skills = [
   {

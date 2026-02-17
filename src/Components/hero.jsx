@@ -5,30 +5,35 @@ import { useNavigate } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaCamera, FaStar, FaAward, FaCode, FaTrophy } from "react-icons/fa";
 import { SiCplusplus, SiLeetcode } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";
+import { isMobile, getHoverProps, getMobileInViewProps, conditionalAnimation } from "../utils/mobileOptimization";
 
-// Animated Name Characters with Fire Effect
+// Animated Name Characters with Fire Effect (Mobile-Optimized)
 const AnimatedNameChar = ({ char, index }) => {
+  const mobile = isMobile();
+  
   return (
     <motion.span
       className="inline-block relative"
-      whileHover={{
-        scale: 1.3,
-        color: "#fbbf24",
-      }}
+      {...(!mobile && {
+        whileHover: {
+          scale: 1.3,
+          color: "#fbbf24",
+        }
+      })}
       transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
     >
       <motion.span
         className="inline-block"
-        animate={{
+        animate={!mobile ? {
           textShadow: [
             "0 0 10px rgba(250, 204, 21, 0.6)",
             "0 0 20px rgba(251, 191, 36, 0.8)",
             "0 0 10px rgba(250, 204, 21, 0.6)",
           ],
-        }}
+        } : {}}
         transition={{
-          duration: 2,
-          repeat: Infinity,
+          duration: mobile ? 0 : 2,
+          repeat: mobile ? 0 : Infinity,
           ease: "easeInOut",
         }}
       >
@@ -38,34 +43,35 @@ const AnimatedNameChar = ({ char, index }) => {
   );
 };
 
-// Floating 3D Achievement Cards with Draggable Physics
+// Floating 3D Achievement Cards with Draggable Physics (Mobile-Optimized)
 const AchievementCard = ({ title, subtitle, badge, icon: Icon, iconColor, link, delay, position }) => {
+  const mobile = isMobile();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [10, -10]);
-  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+  const rotateX = useTransform(y, [-100, 100], mobile ? [0, 0] : [10, -10]);
+  const rotateY = useTransform(x, [-100, 100], mobile ? [0, 0] : [-10, 10]);
 
   const CardContent = (
     <motion.div
       className="p-4 rounded-2xl bg-gradient-to-br from-black/70 via-black/60 to-purple-900/40 border border-yellow-500/30 backdrop-blur-2xl shadow-[0_20px_60px_-15px_rgba(234,179,8,0.4)] cursor-grab active:cursor-grabbing max-w-xs"
       style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
+        rotateX: mobile ? 0 : rotateX,
+        rotateY: mobile ? 0 : rotateY,
+        transformStyle: mobile ? "flat" : "preserve-3d",
       }}
-      whileHover={{ 
+      {...getHoverProps({ 
         scale: 1.2, 
         zIndex: 100,
         boxShadow: "0 30px 80px -15px rgba(234,179,8,0.6)",
         borderColor: "rgba(234,179,8,0.6)"
-      }}
-      animate={{
+      })}
+      animate={!mobile ? {
         y: [0, -25, 0],
-      }}
+      } : {}}
       transition={{
         y: {
           duration: 3.5 + Math.random() * 2,
-          repeat: Infinity,
+          repeat: mobile ? 0 : Infinity,
           ease: "easeInOut",
           delay: delay * 0.5,
         },
@@ -75,17 +81,17 @@ const AchievementCard = ({ title, subtitle, badge, icon: Icon, iconColor, link, 
         {Icon && (
           <motion.div
             className={`h-14 w-14 rounded-xl bg-black/60 border border-yellow-400/30 flex items-center justify-center ${iconColor} backdrop-blur`}
-            animate={{ 
+            animate={!mobile ? { 
               rotate: 360,
               boxShadow: [
                 "0 0 20px rgba(234,179,8,0.3)",
                 "0 0 30px rgba(234,179,8,0.6)",
                 "0 0 20px rgba(234,179,8,0.3)",
               ]
-            }}
+            } : {}}
             transition={{ 
-              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-              boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+              rotate: { duration: mobile ? 0 : 20, repeat: mobile ? 0 : Infinity, ease: "linear" },
+              boxShadow: { duration: mobile ? 0 : 2, repeat: mobile ? 0 : Infinity, ease: "easeInOut" }
             }}
           >
             <Icon size={26} />
@@ -97,14 +103,14 @@ const AchievementCard = ({ title, subtitle, badge, icon: Icon, iconColor, link, 
           {badge && (
             <motion.span 
               className="inline-block text-[10px] bg-yellow-500/30 text-yellow-100 px-2.5 py-1 rounded-full border border-yellow-400/60 font-bold shadow-lg"
-              animate={{
+              animate={!mobile ? {
                 boxShadow: [
                   "0 0 10px rgba(234,179,8,0.3)",
                   "0 0 20px rgba(234,179,8,0.6)",
                   "0 0 10px rgba(234,179,8,0.3)",
                 ]
-              }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              } : {}}
+              transition={{ duration: mobile ? 0 : 2, repeat: mobile ? 0 : Infinity, ease: "easeInOut" }}
             >
               {badge}
             </motion.span>
@@ -117,7 +123,7 @@ const AchievementCard = ({ title, subtitle, badge, icon: Icon, iconColor, link, 
           target="_blank"
           rel="noopener noreferrer"
           className="absolute -top-2 -right-2 h-7 w-7 rounded-full bg-purple-600 border-2 border-yellow-400 flex items-center justify-center text-white text-xs hover:bg-purple-500 z-10"
-          whileHover={{ scale: 1.3, rotate: 360 }}
+          {...getHoverProps({ scale: 1.3, rotate: 360 })}
           whileTap={{ scale: 0.9 }}
           title="Verify Credential"
         >
@@ -134,18 +140,18 @@ const AchievementCard = ({ title, subtitle, badge, icon: Icon, iconColor, link, 
       initial={{ opacity: 0, scale: 0.5, y: 50 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay, duration: 0.6, type: "spring", stiffness: 100 }}
-      drag
-      dragElastic={0.2}
-      dragMomentum={true}
-      onMouseMove={(e) => {
+      drag={!mobile}
+      dragElastic={mobile ? 0 : 0.2}
+      dragMomentum={!mobile}
+      onMouseMove={!mobile ? (e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         x.set(e.clientX - (rect.left + rect.width / 2));
         y.set(e.clientY - (rect.top + rect.height / 2));
-      }}
-      onMouseLeave={() => {
+      } : undefined}
+      onMouseLeave={!mobile ? () => {
         x.set(0);
         y.set(0);
-      }}
+      } : undefined}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
     >
@@ -154,8 +160,9 @@ const AchievementCard = ({ title, subtitle, badge, icon: Icon, iconColor, link, 
   );
 };
 
-// Magnetic Button Component
+// Magnetic Button Component (Mobile-Optimized)
 const MagneticButton = ({ children, ...props }) => {
+  const mobile = isMobile();
   const ref = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const targetX = useMotionValue(0);
@@ -164,6 +171,7 @@ const MagneticButton = ({ children, ...props }) => {
   const y = useSpring(targetY, { stiffness: 200, damping: 10 });
 
   const handleMouseMove = (e) => {
+    if (mobile) return; // Disable magnetic effect on mobile
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
 
@@ -192,14 +200,17 @@ const MagneticButton = ({ children, ...props }) => {
         targetX.set(0);
         targetY.set(0);
       }}
-      style={{ x, y }}
+      style={mobile ? {} : { x, y }}
       className="relative inline-flex items-center gap-2 rounded-2xl px-8 py-4 text-black font-bold bg-gradient-to-r from-yellow-400 to-amber-500 shadow-[0_20px_60px_-12px_rgba(234,179,8,0.6)] hover:shadow-[0_25px_70px_-12px_rgba(234,179,8,0.8)] transition-shadow"
-      whileHover={{ scale: 1.05 }}
+      {...getHoverProps({ scale: 1.05 })}
       whileTap={{ scale: 0.95 }}
       {...props}
     >
       {children}
-      <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
+      <motion.span 
+        animate={!mobile ? { x: [0, 6, 0] } : {}} 
+        transition={{ duration: mobile ? 0 : 1.2, repeat: mobile ? 0 : Infinity }}
+      >
         →
       </motion.span>
     </motion.button>
@@ -208,6 +219,7 @@ const MagneticButton = ({ children, ...props }) => {
 
 const Hero = () => {
   const navigate = useNavigate();
+  const mobile = isMobile();
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
   const cursorX = useMotionValue(0);
@@ -218,8 +230,8 @@ const Hero = () => {
   const smoothX = useSpring(cursorX, { stiffness: 100, damping: 25 });
   const smoothY = useSpring(cursorY, { stiffness: 100, damping: 25 });
 
-  const rotateX = useTransform(smoothY, [-300, 300], [15, -15]);
-  const rotateY = useTransform(smoothX, [-300, 300], [-15, 15]);
+  const rotateX = useTransform(smoothY, [-300, 300], mobile ? [0, 0] : [15, -15]);
+  const rotateY = useTransform(smoothX, [-300, 300], mobile ? [0, 0] : [-15, 15]);
 
   const auraX = useSpring(mouseXForAura, { stiffness: 80, damping: 30 });
   const auraY = useSpring(mouseYForAura, { stiffness: 80, damping: 30 });
@@ -227,7 +239,7 @@ const Hero = () => {
   useEffect(() => setMounted(true), []);
 
   const handlePointer = (e) => {
-    if (!containerRef.current) return;
+    if (mobile || !containerRef.current) return; // Disable on mobile
     const rect = containerRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -238,6 +250,7 @@ const Hero = () => {
   };
 
   const handleLeave = () => {
+    if (mobile) return; // Disable on mobile
     cursorX.set(0);
     cursorY.set(0);
     mouseXForAura.set(0);
@@ -299,9 +312,9 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-black"
+      className="relative min-h-screen w-full overflow-x-hidden overflow-y-visible flex items-center justify-center bg-black"
     >
-      {/* Staggered Background Aurora */}
+      {/* Staggered Background Aurora - Simplified on Mobile */}
       <motion.div
         className="absolute inset-0 -z-10"
         initial={{ opacity: 0 }}
@@ -313,16 +326,16 @@ const Hero = () => {
           style={{
             background: "radial-gradient(circle at 20% 20%, rgba(168,85,247,0.3), transparent 40%)",
           }}
-          animate={{ scale: [1, 1.08, 1], x: [0, 20, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          animate={!mobile ? { scale: [1, 1.08, 1], x: [0, 20, 0] } : {}}
+          transition={{ duration: mobile ? 0 : 12, repeat: mobile ? 0 : Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute inset-0 opacity-40"
           style={{
             background: "radial-gradient(circle at 80% 40%, rgba(250,204,21,0.25), transparent 45%)",
           }}
-          animate={{ scale: [1.05, 0.95, 1.05], x: [0, -20, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          animate={!mobile ? { scale: [1.05, 0.95, 1.05], x: [0, -20, 0] } : {}}
+          transition={{ duration: mobile ? 0 : 14, repeat: mobile ? 0 : Infinity, ease: "easeInOut" }}
         />
       </motion.div>
 
@@ -420,7 +433,7 @@ const Hero = () => {
             </motion.a>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Social Links - Mobile Optimized */}
           <motion.div
             className="flex flex-wrap gap-2 sm:gap-3 pt-2 sm:pt-4"
             initial={{ opacity: 0, x: -20 }}
@@ -435,10 +448,10 @@ const Hero = () => {
               <motion.a
                 key={idx}
                 href={social.href}
-                target="_blank"
+                target={social.href.startsWith('#') ? '_self' : '_blank'}
                 rel="noopener noreferrer"
                 className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center rounded-xl border border-white/20 text-white hover:border-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 transition-all"
-                whileHover={{ scale: 1.2, y: -4 }}
+                {...getHoverProps({ scale: 1.2, y: -4 })}
                 whileTap={{ scale: 0.9 }}
                 title={social.label}
               >
@@ -448,55 +461,57 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Visual Column - 3D Photo with Aura */}
+        {/* Right Visual Column - 3D Photo with Aura (Mobile-Optimized) */}
         <motion.div
           ref={containerRef}
           className="relative w-full flex justify-center lg:order-2 order-1"
-          onMouseMove={handlePointer}
-          onMouseLeave={handleLeave}
-          style={{ perspective: "2000px" }}
+          onMouseMove={!mobile ? handlePointer : undefined}
+          onMouseLeave={!mobile ? handleLeave : undefined}
+          style={mobile ? {} : { perspective: "2000px" }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {/* Interactive Aura Glow */}
-          <motion.div
-            className="absolute -inset-20 rounded-full blur-3xl pointer-events-none"
-            style={{
-              background: "radial-gradient(circle, rgba(250,204,21,0.3) 0%, rgba(168,85,247,0.2) 50%, transparent 70%)",
-              x: auraX,
-              y: auraY,
-            }}
-            animate={{
-              scale: [1, 1.15, 1],
-              opacity: [0.4, 0.6, 0.4],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
+          {/* Interactive Aura Glow - Disabled on Mobile */}
+          {!mobile && (
+            <motion.div
+              className="absolute -inset-20 rounded-full blur-3xl pointer-events-none"
+              style={{
+                background: "radial-gradient(circle, rgba(250,204,21,0.3) 0%, rgba(168,85,247,0.2) 50%, transparent 70%)",
+                x: auraX,
+                y: auraY,
+              }}
+              animate={{
+                scale: [1, 1.15, 1],
+                opacity: [0.4, 0.6, 0.4],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          )}
 
-          {/* 3D Tilt Photo Container */}
+          {/* 3D Tilt Photo Container - Flat on Mobile */}
           <motion.div
             className="relative w-full max-w-sm sm:max-w-md md:max-w-lg h-[420px] sm:h-[520px] md:h-[620px] rounded-2xl sm:rounded-3xl border-2 border-yellow-500/30 bg-gradient-to-br from-black/40 to-purple-900/30 shadow-[0_60px_120px_-40px_rgba(250,204,21,0.4)] overflow-hidden"
-            style={{
+            style={mobile ? {} : {
               rotateX,
               rotateY,
               transformStyle: "preserve-3d",
             }}
           >
-            {/* Depth Layer 1 - Glow Behind */}
+            {/* Depth Layer 1 - Glow Behind - Simplified on Mobile */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-tr from-purple-600/40 via-transparent to-yellow-500/20"
-              animate={{
+              animate={!mobile ? {
                 scale: [1, 1.1, 1],
                 opacity: [0.3, 0.6, 0.3],
-              }}
+              } : {}}
               transition={{
-                duration: 6,
-                repeat: Infinity,
+                duration: mobile ? 0 : 6,
+                repeat: mobile ? 0 : Infinity,
                 ease: "easeInOut",
               }}
             />
@@ -506,25 +521,25 @@ const Hero = () => {
               src={desktopImage}
               alt="Arjun Divraniya - Full Stack Architect"
               className="relative z-10 h-full w-full object-cover object-[center_20%] sm:object-[center_20%] rounded-2xl sm:rounded-3xl"
-              style={{ transform: "translateZ(40px)" }}
-              whileHover={{ scale: 1.03 }}
+              style={mobile ? {} : { transform: "translateZ(40px)" }}
+              {...getHoverProps({ scale: 1.03 })}
               transition={{ duration: 0.4 }}
             />
 
-            {/* Depth Layer 3 - Border Glow */}
+            {/* Depth Layer 3 - Border Glow - Simplified on Mobile */}
             <motion.div
               className="absolute inset-0 rounded-3xl border border-yellow-300/40 shadow-[inset_0_0_40px_rgba(250,204,21,0.2)]"
-              style={{ transform: "translateZ(50px)" }}
-              animate={{
+              style={mobile ? {} : { transform: "translateZ(50px)" }}
+              animate={!mobile ? {
                 boxShadow: [
                   "inset 0 0 40px rgba(250,204,21,0.1)",
                   "inset 0 0 60px rgba(250,204,21,0.3)",
                   "inset 0 0 40px rgba(250,204,21,0.1)",
                 ],
-              }}
+              } : {}}
               transition={{
-                duration: 4,
-                repeat: Infinity,
+                duration: mobile ? 0 : 4,
+                repeat: mobile ? 0 : Infinity,
                 ease: "easeInOut",
               }}
             />

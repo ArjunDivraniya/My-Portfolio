@@ -1,5 +1,5 @@
 // File: src/Components/Achievements.jsx
-// High-End 3D Proof of Work Command Center
+// High-End 3D Proof of Work Command Center (Mobile-Optimized)
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
@@ -13,22 +13,24 @@ import {
   FaDatabase, FaCloud, FaChartBar, FaUserTie, FaBriefcase, FaGraduationCap
 } from 'react-icons/fa';
 import { SiLeetcode, SiMeta, SiHackerrank, SiJavascript, SiAmazondocumentdb } from 'react-icons/si';
+import { isMobile, getHoverProps, getMobileInViewProps } from '../utils/mobileOptimization';
 import Certifications from './Certifications';
 import Hackathons from './Hackathons';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 3D Tilt Card Component (Custom Implementation)
+// 3D Tilt Card Component (Custom Implementation - Mobile-Optimized)
 const TiltCard = ({ children, className = "" }) => {
+  const mobile = isMobile();
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   
-  const rotateX = useTransform(useSpring(y, { stiffness: 150, damping: 20 }), [-100, 100], [10, -10]);
-  const rotateY = useTransform(useSpring(x, { stiffness: 150, damping: 20 }), [-100, 100], [-10, 10]);
+  const rotateX = useTransform(useSpring(y, { stiffness: 150, damping: 20 }), [-100, 100], mobile ? [0, 0] : [10, -10]);
+  const rotateY = useTransform(useSpring(x, { stiffness: 150, damping: 20 }), [-100, 100], mobile ? [0, 0] : [-10, 10]);
 
   const handleMove = (e) => {
-    if (!ref.current) return;
+    if (mobile || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -37,6 +39,7 @@ const TiltCard = ({ children, className = "" }) => {
   };
 
   const handleLeave = () => {
+    if (mobile) return;
     x.set(0);
     y.set(0);
   };
@@ -46,7 +49,11 @@ const TiltCard = ({ children, className = "" }) => {
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+      style={{ 
+        rotateX: mobile ? 0 : rotateX, 
+        rotateY: mobile ? 0 : rotateY, 
+        transformStyle: mobile ? 'flat' : 'preserve-3d' 
+      }}
       className={className}
     >
       {children}

@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaCamera, FaCode, FaPython } from 'react-icons/fa';
 import { MdAutoFixHigh } from 'react-icons/md';
+import { isMobile, getHoverProps, setupResponsiveGSAP } from '../utils/mobileOptimization';
 import './AboutJourney.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,10 +19,15 @@ export default function AboutJourney() {
     const timeline = timelineRef.current;
     if (!timeline) return;
 
+    const mobile = isMobile();
+    
     // Get all phase cards and nodes
     const phaseCards = gsap.utils.toArray('.phase-card');
     const phaseNodes = gsap.utils.toArray('.phase-node');
     const glowPath = glowPathRef.current;
+
+    // ===================== GSAP MATCH MEDIA (Mobile vs Desktop) =====================
+    const mm = gsap.matchMedia();
 
     // ===================== ANIMATE THE GLOWING PATH =====================
     gsap.to(glowPath, {
@@ -29,7 +35,7 @@ export default function AboutJourney() {
         trigger: timeline,
         start: 'top center',
         end: 'bottom center',
-        scrub: 1,
+        scrub: mobile ? 0.5 : 1,
         markers: false,
       },
       strokeDashoffset: 0,
@@ -37,89 +43,151 @@ export default function AboutJourney() {
       ease: 'none',
     });
 
-    // ===================== ANIMATE PHASE CARDS =====================
-    phaseCards.forEach((card, index) => {
-      const node = phaseNodes[index];
-      const isLeft = index % 2 === 0;
+    // ===================== DESKTOP ANIMATIONS (768px+) =====================
+    mm.add("(min-width: 768px)", () => {
+      phaseCards.forEach((card, index) => {
+        const node = phaseNodes[index];
+        const isLeft = index % 2 === 0;
 
-      gsap.fromTo(
-        card,
-        {
-          opacity: 0,
-          x: isLeft ? -100 : 100,
-          rotationY: isLeft ? -45 : 45,
-          scale: 0.8,
-        },
-        {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top center+=100px',
-            end: 'top center-=100px',
-            scrub: 0.5,
-            markers: false,
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            x: isLeft ? -100 : 100,
+            rotationY: isLeft ? -45 : 45,
+            scale: 0.8,
           },
-          opacity: 1,
-          x: 0,
-          rotationY: 0,
-          scale: 1,
-          duration: 1,
-          ease: 'back.out',
-        }
-      );
+          {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top center+=100px',
+              end: 'top center-=100px',
+              scrub: 0.5,
+              markers: false,
+            },
+            opacity: 1,
+            x: 0,
+            rotationY: 0,
+            scale: 1,
+            duration: 1,
+            ease: 'back.out',
+          }
+        );
 
-      // ===================== PULSE ANIMATION FOR NODES =====================
-      gsap.fromTo(
-        node,
-        {
-          scale: 1,
-          boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
-        },
-        {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top center',
-            end: 'bottom center',
-            onEnter: () => {
-              gsap.to(node, {
-                scale: 1.3,
-                boxShadow: '0 0 30px rgba(234, 179, 8, 1)',
-                duration: 0.6,
-                repeat: -1,
-                yoyo: true,
-              });
-            },
-            onLeave: () => {
-              gsap.killTweensOf(node);
-              gsap.to(node, {
-                scale: 1,
-                boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
-                duration: 0.3,
-              });
-            },
-            onEnterBack: () => {
-              gsap.to(node, {
-                scale: 1.3,
-                boxShadow: '0 0 30px rgba(234, 179, 8, 1)',
-                duration: 0.6,
-                repeat: -1,
-                yoyo: true,
-              });
-            },
-            onLeaveBack: () => {
-              gsap.killTweensOf(node);
-              gsap.to(node, {
-                scale: 1,
-                boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
-                duration: 0.3,
-              });
-            },
+        // Pulse animation for nodes
+        gsap.fromTo(
+          node,
+          {
+            scale: 1,
+            boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
           },
-        }
-      );
+          {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top center',
+              end: 'bottom center',
+              onEnter: () => {
+                gsap.to(node, {
+                  scale: 1.3,
+                  boxShadow: '0 0 30px rgba(234, 179, 8, 1)',
+                  duration: 0.6,
+                  repeat: -1,
+                  yoyo: true,
+                });
+              },
+              onLeave: () => {
+                gsap.killTweensOf(node);
+                gsap.to(node, {
+                  scale: 1,
+                  boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
+                  duration: 0.3,
+                });
+              },
+              onEnterBack: () => {
+                gsap.to(node, {
+                  scale: 1.3,
+                  boxShadow: '0 0 30px rgba(234, 179, 8, 1)',
+                  duration: 0.6,
+                  repeat: -1,
+                  yoyo: true,
+                });
+              },
+              onLeaveBack: () => {
+                gsap.killTweensOf(node);
+                gsap.to(node, {
+                  scale: 1,
+                  boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
+                  duration: 0.3,
+                });
+              },
+            },
+          }
+        );
+      });
+    });
+
+    // ===================== MOBILE ANIMATIONS (< 768px) - SIMPLIFIED =====================
+    mm.add("(max-width: 767px)", () => {      
+      phaseCards.forEach((card, index) => {
+        const node = phaseNodes[index];
+
+        // Simple fade-up animation for mobile (no 3D rotation)
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: 50,
+          },
+          {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top center+=100px',
+              end: 'top center',
+              scrub: 0.3,
+              markers: false,
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+          }
+        );
+
+        // Simple node glow on mobile (no infinite pulse)
+        gsap.fromTo(
+          node,
+          {
+            scale: 1,
+            boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
+          },
+          {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top center',
+              end: 'bottom center',
+              onEnter: () => {
+                gsap.to(node, {
+                  scale: 1.2,
+                  boxShadow: '0 0 20px rgba(234, 179, 8, 0.8)',
+                  duration: 0.3,
+                });
+              },
+              onLeave: () => {
+                gsap.to(node, {
+                  scale: 1,
+                  boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
+                  duration: 0.3,
+                });
+              },
+            },
+          }
+        );
+      });
     });
 
     // ===================== SCROLL TRIGGER CLEANUP =====================
     return () => {
+      mm.revert();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
@@ -193,9 +261,9 @@ export default function AboutJourney() {
   ];
 
   return (
-    <div className="relative w-full min-h-screen bg-black py-20 px-4 overflow-hidden">
-      {/* ===================== BACKGROUND ELEMENTS ===================== */}
-      <div className="fixed inset-0 pointer-events-none">
+    <div className="relative w-full min-h-screen bg-black py-20 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+      {/* ===================== BACKGROUND ELEMENTS - Hidden on Mobile ===================== */}
+      <div className="fixed inset-0 pointer-events-none hidden md:block">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl opacity-20"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl opacity-20"></div>
       </div>
@@ -253,53 +321,53 @@ export default function AboutJourney() {
             />
           </svg>
 
-          {/* ===================== PHASE CARDS ===================== */}
-          <div className="space-y-20">
+          {/* ===================== PHASE CARDS - Mobile-Optimized Layout ===================== */}
+          <div className="space-y-20 md:space-y-20">
             {phases.map((phase, index) => (
-              <div key={index} className="relative h-96">
+              <div key={index} className="relative md:h-96">
                 {/* Timeline Node */}
                 <div
                   ref={(el) => (phasesRef.current[index] = el)}
-                  className={`phase-node absolute top-1/2 left-1/2 w-6 h-6 bg-yellow-500 rounded-full border-4 border-black transform -translate-x-1/2 -translate-y-1/2 z-20 transition-all duration-300`}
+                  className={`phase-node absolute top-8 md:top-1/2 left-4 md:left-1/2 w-6 h-6 bg-yellow-500 rounded-full border-4 border-black transform md:-translate-x-1/2 md:-translate-y-1/2 z-20 transition-all duration-300`}
                   style={{
                     boxShadow: '0 0 10px rgba(234, 179, 8, 0.5)',
                   }}
                 />
 
-                {/* Phase Card Container */}
+                {/* Phase Card Container - Single Column on Mobile */}
                 <motion.div
-                  className={`phase-card absolute top-1/2 transform -translate-y-1/2 w-full md:w-5/12 ${
+                  className={`phase-card w-full pl-14 md:pl-0 md:absolute md:top-1/2 md:transform md:-translate-y-1/2 md:w-5/12 ${
                     phase.isLeft
-                      ? 'md:left-0 md:text-right md:pr-20 left-1/2 md:translate-x-0 -translate-x-1/2'
-                      : 'md:right-0 md:text-left md:pl-20 left-1/2 md:translate-x-0 -translate-x-1/2'
+                      ? 'md:left-0 md:text-right md:pr-20'
+                      : 'md:right-0 md:text-left md:pl-20'
                   }`}
                   style={{ perspective: '1000px' }}
                 >
                   {/* Glassmorphism Card */}
-                  <div className="group relative p-8 bg-gradient-to-br from-black/80 via-black/70 to-purple-900/10 backdrop-blur-lg border border-yellow-500/20 rounded-2xl hover:border-yellow-500/50 transition-all duration-500 overflow-hidden shadow-2xl">
-                    {/* Glow Background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-yellow-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="group relative p-6 md:p-8 bg-gradient-to-br from-black/80 via-black/70 to-purple-900/10 backdrop-blur-lg border border-yellow-500/20 rounded-2xl hover:border-yellow-500/50 transition-all duration-500 overflow-hidden shadow-2xl">
+                    {/* Glow Background - Disabled on Mobile */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-yellow-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block"></div>
 
                     {/* Content */}
                     <div className="relative z-10">
                       {/* Year Badge */}
                       <div className="inline-block mb-4">
-                        <span className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-black text-sm rounded-full">
+                        <span className="px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-black text-xs md:text-sm rounded-full">
                           {phase.year}
                         </span>
                       </div>
 
                       {/* Icon */}
-                      <div className={`mb-4 text-4xl ${phase.color} bg-gradient-to-r bg-clip-text text-transparent`}>
+                      <div className={`mb-4 text-3xl md:text-4xl ${phase.color} bg-gradient-to-r bg-clip-text text-transparent flex ${phase.isLeft ? 'md:justify-end' : 'md:justify-start'} justify-start`}>
                         {phase.icon}
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-3xl font-black text-white mb-1">{phase.title}</h3>
-                      <p className="text-yellow-500 font-semibold mb-4">{phase.subtitle}</p>
+                      <h3 className="text-2xl md:text-3xl font-black text-white mb-1">{phase.title}</h3>
+                      <p className="text-yellow-500 font-semibold mb-4 text-sm md:text-base">{phase.subtitle}</p>
 
                       {/* Description */}
-                      <p className="text-gray-300 mb-6 leading-relaxed text-justify md:text-left">
+                      <p className="text-gray-300 mb-6 leading-relaxed text-sm md:text-base text-left">
                         {phase.description}
                       </p>
 
@@ -307,8 +375,8 @@ export default function AboutJourney() {
                       <div className="space-y-2 mb-6">
                         {phase.highlights.map((highlight, idx) => (
                           <div key={idx} className="flex items-start gap-2">
-                            <span className="text-yellow-500 mt-1">▸</span>
-                            <p className="text-sm text-gray-300">{highlight}</p>
+                            <span className="text-yellow-500 mt-1 text-xs md:text-sm">▸</span>
+                            <p className="text-xs md:text-sm text-gray-300 text-left">{highlight}</p>
                           </div>
                         ))}
                       </div>
@@ -317,17 +385,17 @@ export default function AboutJourney() {
                       {phase.cgpa && (
                         <motion.div
                           className="flex items-center justify-start md:justify-end gap-3 pt-4 border-t border-yellow-500/20"
-                          whileHover={{ scale: 1.05 }}
+                          {...getHoverProps({ scale: 1.05 })}
                         >
-                          <span className="text-sm font-semibold text-gray-400">Elite Achievement:</span>
-                          <span className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black font-black rounded-lg shadow-lg">
+                          <span className="text-xs md:text-sm font-semibold text-gray-400">Elite Achievement:</span>
+                          <span className="px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black font-black text-sm md:text-base rounded-lg shadow-lg">
                             {phase.cgpa} CGPA
                           </span>
                         </motion.div>
                       )}
 
-                      {/* Hover Effect Border */}
-                      <div className="absolute top-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-purple-500 group-hover:w-full transition-all duration-500"></div>
+                      {/* Hover Effect Border - Hidden on Mobile */}
+                      <div className="absolute top-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-purple-500 group-hover:w-full transition-all duration-500 hidden md:block"></div>
                     </div>
                   </div>
                 </motion.div>
@@ -344,13 +412,13 @@ export default function AboutJourney() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-400 text-lg mb-6">
+          <p className="text-gray-400 text-base md:text-lg mb-6 px-4">
             This is just the beginning. Let's build something extraordinary together.
           </p>
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            {...getHoverProps({ scale: 1.05 })}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold rounded-lg hover:shadow-lg transition-all duration-300"
+            className="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold rounded-lg hover:shadow-lg transition-all duration-300 text-sm md:text-base"
           >
             Let's Collaborate 🚀
           </motion.button>

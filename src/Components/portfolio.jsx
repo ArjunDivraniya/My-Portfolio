@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaYoutube, FaCrown, FaTrophy, FaReact, FaNodeJs, FaCode } from "react-icons/fa";
 import { SiMongodb, SiPython, SiPostgresql, SiRedis, SiNextdotjs, SiFigma, SiOdoo } from "react-icons/si";
+import { isMobile, getHoverProps, getMobileInViewProps, conditionalAnimation } from "../utils/mobileOptimization";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -222,17 +223,17 @@ const FlagshipCarousel = memo(() => {
               Flagship Project
             </motion.div>
 
-            <h3 className="text-4xl font-black text-white mb-3">{project.title}</h3>
-            <p className="text-gray-300 text-base leading-relaxed mb-6">{project.about}</p>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-3 leading-tight">{project.title}</h3>
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">{project.about}</p>
 
             {/* Tech Stack */}
             <div className="mb-6">
-              <p className="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-2">Tech Stack</p>
+              <p className="text-xs sm:text-sm font-bold text-yellow-400 uppercase tracking-wider mb-2">Tech Stack</p>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((t, i) => (
                   <motion.span
                     key={i}
-                    className="px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-xs font-semibold"
+                    className="px-2 sm:px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-xs font-semibold whitespace-nowrap"
                     whileHover={{ scale: 1.08 }}
                   >
                     {t.label}
@@ -243,12 +244,12 @@ const FlagshipCarousel = memo(() => {
 
             {/* Development Phases */}
             <div className="mb-6">
-              <p className="text-xs font-bold text-purple-300 uppercase tracking-wider mb-2">Build Timeline</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-wider mb-2">Build Timeline</p>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {project.phases.map((phase, i) => (
                   <motion.span
                     key={i}
-                    className="px-3 py-1 rounded-lg bg-purple-500/20 border border-purple-400/40 text-purple-200 text-xs"
+                    className="px-2 sm:px-3 py-1 rounded-lg bg-purple-500/20 border border-purple-400/40 text-purple-200 text-xs whitespace-nowrap"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 + i * 0.1 }}
@@ -261,13 +262,13 @@ const FlagshipCarousel = memo(() => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex gap-3 flex-wrap mt-6">
             {project.links.demo && (
               <motion.a
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3 rounded-xl bg-yellow-500 text-black font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-yellow-500/50"
+                className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-yellow-500 text-black font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-yellow-500/50 text-sm sm:text-base"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -279,7 +280,7 @@ const FlagshipCarousel = memo(() => {
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-bold flex items-center gap-2 hover:bg-white/20"
+                className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/10 border border-white/20 text-white font-bold flex items-center gap-2 hover:bg-white/20 text-sm sm:text-base"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -291,7 +292,7 @@ const FlagshipCarousel = memo(() => {
                 href={project.links.video}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3 rounded-xl bg-red-500/20 border border-red-400/40 text-red-300 font-bold flex items-center gap-2 hover:bg-red-500/30"
+                className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-red-500/20 border border-red-400/40 text-red-300 font-bold flex items-center gap-2 hover:bg-red-500/30 text-sm sm:text-base"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -376,17 +377,17 @@ const HackathonCard = memo(({ project, isActive }) => {
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <h3 className="text-3xl md:text-4xl font-black text-white mb-2">
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-2 leading-tight">
                 {project.title}
               </h3>
-              <p className="text-yellow-400 font-bold text-base md:text-lg mb-4 flex items-center gap-2">
+              <p className="text-yellow-400 font-bold text-sm sm:text-base md:text-lg mb-4 flex items-center gap-2">
                 <span className="w-2 h-2 bg-yellow-400 rounded-full" />
                 {project.subtitle}
               </p>
 
               {/* Description */}
               <motion.p
-                className="text-gray-300 text-sm md:text-base leading-relaxed mb-6"
+                className="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed mb-6"
                 initial={{ opacity: 0 }}
                 animate={isActive ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -402,12 +403,12 @@ const HackathonCard = memo(({ project, isActive }) => {
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <p className="text-yellow-300 text-xs font-bold mb-3 uppercase tracking-wider">Technologies</p>
+              <p className="text-yellow-300 text-xs sm:text-sm font-bold mb-3 uppercase tracking-wider">Technologies</p>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech, i) => (
                   <motion.span
                     key={i}
-                    className="px-3 py-1 rounded-full bg-yellow-500/30 border border-yellow-400/60 text-yellow-200 text-xs font-semibold"
+                    className="px-2 sm:px-3 py-1 rounded-full bg-yellow-500/30 border border-yellow-400/60 text-yellow-200 text-xs font-semibold whitespace-nowrap"
                     initial={{ scale: 0 }}
                     animate={isActive ? { scale: 1 } : { scale: 0 }}
                     transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
@@ -420,7 +421,7 @@ const HackathonCard = memo(({ project, isActive }) => {
 
             {/* Action Buttons */}
             <motion.div
-              className="flex gap-3 flex-wrap"
+              className="flex gap-3 flex-wrap mt-4"
               initial={{ opacity: 0, y: 10 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ delay: 0.4, duration: 0.6 }}
@@ -671,13 +672,13 @@ const BackendCard = memo(({ project }) => {
       )}
 
       {/* Action Buttons */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {project.links.github && (
           <motion.a
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 py-2 rounded-lg bg-yellow-500/20 border border-yellow-400/40 text-yellow-300 text-xs font-bold hover:bg-yellow-500/30"
+            className="px-2.5 sm:px-3 py-2 rounded-lg bg-yellow-500/20 border border-yellow-400/40 text-yellow-300 text-xs font-bold hover:bg-yellow-500/30 whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
           >
             <FaGithub size={14} className="inline mr-1" /> Code
@@ -751,24 +752,24 @@ const OSSCard = memo(({ project }) => {
         )}
       </div>
 
-      <h3 className="text-xl font-black text-white mb-2">{project.title}</h3>
-      <p className="text-gray-300 text-sm mb-4">{project.about}</p>
+      <h3 className="text-lg sm:text-xl font-black text-white mb-2 leading-tight break-words">{project.title}</h3>
+      <p className="text-gray-300 text-xs sm:text-sm mb-4 line-clamp-3">{project.about}</p>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {project.tech.map((t, i) => (
-          <span key={i} className="px-2 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-200">
+          <span key={i} className="px-2 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-200 whitespace-nowrap">
             {t}
           </span>
         ))}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {project.links.github && (
           <motion.a
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 py-2 rounded-lg bg-green-500/20 border border-green-400/40 text-green-300 text-xs font-bold hover:bg-green-500/30"
+            className="px-2.5 sm:px-3 py-2 rounded-lg bg-green-500/20 border border-green-400/40 text-green-300 text-xs font-bold hover:bg-green-500/30 whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
           >
             <FaGithub size={14} className="inline mr-1" /> Repo
@@ -859,7 +860,7 @@ const LearningLabRibbon = memo(() => {
             
             {/* Title & Info */}
             <div className="absolute inset-0 flex flex-col items-end justify-end p-6">
-              <h4 className="text-white font-black text-lg text-right leading-tight">{project.title}</h4>
+              <h4 className="text-white font-black text-base sm:text-lg text-right leading-tight break-words">{project.title}</h4>
               <motion.div
                 className="mt-3 px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-300 text-xs font-bold"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -932,13 +933,13 @@ const UIUXCard = memo(({ project }) => {
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
-        <h4 className="text-white font-black text-xl mb-3">{project.title}</h4>
+        <h4 className="text-white font-black text-lg sm:text-xl mb-3 leading-tight">{project.title}</h4>
         {project.links.figma && (
           <motion.a
             href={project.links.figma}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-sm w-fit flex items-center gap-2"
+            className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-xs sm:text-sm w-fit flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -985,7 +986,7 @@ export const Portfolio = memo(() => {
         <motion.div key="backend" className="space-y-8">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8">Backend Systems</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {projectData.backend.map((project) => (
                 <BackendCard key={project.id} project={project} />
               ))}
@@ -998,7 +999,7 @@ export const Portfolio = memo(() => {
         <motion.div key="oss" className="space-y-8">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8">Open Source Contributions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {projectData.oss.map((project) => (
                 <OSSCard key={project.id} project={project} />
               ))}
@@ -1055,7 +1056,7 @@ export const Portfolio = memo(() => {
       return (
         <motion.div className="space-y-8">
           <h2 className="text-4xl font-black text-white mb-8">Backend Systems</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {projectData.backend.map((project) => (
               <BackendCard key={project.id} project={project} />
             ))}
@@ -1068,7 +1069,7 @@ export const Portfolio = memo(() => {
       return (
         <motion.div className="space-y-8">
           <h2 className="text-4xl font-black text-white mb-8">Open Source Contributions</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {projectData.oss.map((project) => (
               <OSSCard key={project.id} project={project} />
             ))}
@@ -1090,7 +1091,7 @@ export const Portfolio = memo(() => {
       return (
         <motion.div className="space-y-8">
           <h2 className="text-4xl font-black text-white mb-8">UI/UX Designs</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projectData.uiux.map((project) => (
               <UIUXCard key={project.id} project={project} />
             ))}
@@ -1101,7 +1102,7 @@ export const Portfolio = memo(() => {
   };
 
   return (
-    <section id="projects" className="min-h-screen bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12">
+    <section id="projects" className="min-h-screen bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -1111,11 +1112,11 @@ export const Portfolio = memo(() => {
           transition={{ duration: 0.6 }}
         >
           <p className="text-yellow-500 uppercase font-bold tracking-widest mb-2 sm:mb-3 text-xs sm:text-sm">Featured & Interactive</p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 sm:mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-3 sm:mb-4 leading-tight px-2">
             Immersive <span className="text-yellow-500">Project</span> Showcase
           </h1>
-          <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
-            3D tilt, live orbits, and glass overlays that connect engineering depth with visual craft.
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl mx-auto px-4">
+            High-performance project gallery optimized for all devices
           </p>
         </motion.div>
 

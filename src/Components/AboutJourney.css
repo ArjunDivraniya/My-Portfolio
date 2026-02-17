@@ -163,7 +163,7 @@ svg line {
 
 /* Timeline responsiveness */
 @media (max-width: 1024px) {
-  .absolute.left-1/2 {
+  .phase-node {
     left: 1rem !important;
   }
 

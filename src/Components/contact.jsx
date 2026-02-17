@@ -129,13 +129,13 @@ const ContactMe = () => {
         {/* Header Section */}
         <motion.div
           ref={headerRef}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 px-4"
           initial={{ opacity: 0, y: -50 }}
           animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ duration: 0.8 }}
         >
           <motion.h1 
-            className="text-5xl sm:text-7xl font-extrabold mb-4"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 leading-tight"
             initial={{ scale: 0.5 }}
             animate={headerInView ? { scale: 1 } : { scale: 0.5 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -145,7 +145,7 @@ const ContactMe = () => {
             </span>
           </motion.h1>
           <motion.p
-            className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto"
+            className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto px-2"
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4 }}
@@ -155,7 +155,7 @@ const ContactMe = () => {
         </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-start px-4">
           {/* Left Side - Contact Info & Social */}
           <motion.div
             ref={infoRef}
@@ -169,29 +169,29 @@ const ContactMe = () => {
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
-                  className="p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-purple-500 transition-all duration-300"
+                  className="p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-purple-500 transition-all duration-300"
                   initial={{ opacity: 0, x: -50 }}
                   animate={infoInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168, 85, 247, 0.2)" }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className={`p-4 rounded-xl bg-gradient-to-br from-purple-900 to-black border border-purple-500`}>
-                      <info.icon className={`text-2xl ${info.color}`} />
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className={`p-3 sm:p-4 rounded-xl bg-gradient-to-br from-purple-900 to-black border border-purple-500 flex-shrink-0`}>
+                      <info.icon className={`text-xl sm:text-2xl ${info.color}`} />
                     </div>
-                    <div>
-                      <p className="text-gray-500 text-sm font-semibold uppercase tracking-wider">{info.title}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-gray-500 text-xs sm:text-sm font-semibold uppercase tracking-wider">{info.title}</p>
                       {info.link ? (
                         <a 
                           href={info.link} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-white text-lg font-semibold hover:text-yellow-400 transition"
+                          className="text-white text-sm sm:text-base md:text-lg font-semibold hover:text-yellow-400 transition break-words"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <p className="text-white text-lg font-semibold">{info.value}</p>
+                        <p className="text-white text-sm sm:text-base md:text-lg font-semibold break-words">{info.value}</p>
                       )}
                     </div>
                   </div>
@@ -201,15 +201,15 @@ const ContactMe = () => {
 
             {/* Social Media Links */}
             <motion.div
-              className="p-8 rounded-2xl bg-gradient-to-br from-purple-900/30 to-black border border-purple-500/50"
+              className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-purple-900/30 to-black border border-purple-500/50"
               initial={{ opacity: 0, y: 50 }}
               animate={infoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ delay: 0.4 }}
             >
-              <h3 className="text-2xl font-bold text-yellow-400 mb-6 text-center">
+              <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-4 sm:mb-6 text-center">
                 Follow Me On
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
                 {socialLinks.map(({ icon: Icon, link, color, hoverColor }, index) => (
                   <motion.a
                     key={index}
@@ -259,33 +259,33 @@ const ContactMe = () => {
             transition={{ duration: 0.8 }}
           >
             <motion.form
-              className="p-8 rounded-3xl bg-gradient-to-br from-gray-900 to-black border-2 border-purple-500/50 shadow-2xl"
+              className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-gray-900 to-black border-2 border-purple-500/50 shadow-2xl"
               onSubmit={handleSubmit}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               whileHover={{ borderColor: "rgba(168, 85, 247, 0.8)" }}
             >
-              <h2 className="text-3xl font-bold text-yellow-400 mb-8 text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 sm:mb-8 text-center">
                 Send Me a Message
               </h2>
 
               {/* Name Input */}
               <motion.div 
-                className="mb-6"
+                className="mb-5 sm:mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={formInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.2 }}
               >
-                <label className="block text-gray-400 text-sm font-semibold mb-2 uppercase tracking-wider">
+                <label className="block text-gray-400 text-xs sm:text-sm font-semibold mb-2 uppercase tracking-wider">
                   Your Name
                 </label>
                 <div className="relative">
-                  <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400" />
+                  <FaUser className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-purple-400 text-sm" />
                   <input
                     type="text"
                     name="name"
                     placeholder="Arjun Divraniya"
-                    className="w-full pl-12 pr-4 py-4 bg-black/50 border-2 border-gray-700 rounded-xl text-white outline-none focus:border-yellow-500 transition-all duration-300"
+                    className="w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-4 bg-black/50 border-2 border-gray-700 rounded-xl text-white text-sm sm:text-base outline-none focus:border-yellow-500 transition-all duration-300"
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -295,21 +295,21 @@ const ContactMe = () => {
 
               {/* Email Input */}
               <motion.div 
-                className="mb-6"
+                className="mb-5 sm:mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={formInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.3 }}
               >
-                <label className="block text-gray-400 text-sm font-semibold mb-2 uppercase tracking-wider">
+                <label className="block text-gray-400 text-xs sm:text-sm font-semibold mb-2 uppercase tracking-wider">
                   Your Email
                 </label>
                 <div className="relative">
-                  <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400" />
+                  <FaEnvelope className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-purple-400 text-sm" />
                   <input
                     type="email"
                     name="email"
                     placeholder="arjundivramiya8@gmail.com"
-                    className="w-full pl-12 pr-4 py-4 bg-black/50 border-2 border-gray-700 rounded-xl text-white outline-none focus:border-yellow-500 transition-all duration-300"
+                    className="w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-4 bg-black/50 border-2 border-gray-700 rounded-xl text-white text-sm sm:text-base outline-none focus:border-yellow-500 transition-all duration-300"
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -319,20 +319,20 @@ const ContactMe = () => {
 
               {/* Message Input */}
               <motion.div 
-                className="mb-8"
+                className="mb-6 sm:mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={formInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.4 }}
               >
-                <label className="block text-gray-400 text-sm font-semibold mb-2 uppercase tracking-wider">
+                <label className="block text-gray-400 text-xs sm:text-sm font-semibold mb-2 uppercase tracking-wider">
                   Your Message
                 </label>
                 <div className="relative">
-                  <FaCommentDots className="absolute left-4 top-6 text-purple-400" />
+                  <FaCommentDots className="absolute left-3 sm:left-4 top-5 sm:top-6 text-purple-400 text-sm" />
                   <textarea
                     name="message"
                     placeholder="Tell me about your project or just say hi..."
-                    className="w-full pl-12 pr-4 py-4 bg-black/50 border-2 border-gray-700 rounded-xl text-white outline-none focus:border-yellow-500 transition-all duration-300 min-h-[150px] resize-none"
+                    className="w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-4 bg-black/50 border-2 border-gray-700 rounded-xl text-white text-sm sm:text-base outline-none focus:border-yellow-500 transition-all duration-300 min-h-[120px] sm:min-h-[150px] resize-none"
                     value={formData.message}
                     onChange={handleChange}
                     required
@@ -344,7 +344,7 @@ const ContactMe = () => {
               <motion.button
                 ref={buttonRef}
                 type="submit"
-                className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold text-lg relative overflow-hidden"
+                className="w-full py-3 sm:py-4 px-6 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold text-base sm:text-lg relative overflow-hidden"
                 animate={{
                   x: mousePosition.x,
                   y: mousePosition.y
@@ -387,13 +387,13 @@ const ContactMe = () => {
 
         {/* Bottom Tagline */}
         <motion.div
-          className="mt-20 text-center"
+          className="mt-12 sm:mt-16 lg:mt-20 text-center px-4"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg">
             Let's create something <span className="text-yellow-400 font-bold">amazing</span> together! 🚀
           </p>
         </motion.div>
