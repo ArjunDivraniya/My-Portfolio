@@ -2,48 +2,37 @@
 
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Portfolio from "./Components/portfolio";
 import Header from "./Components/header";
-import Hero from "./Components/hero";
-import Skills from "./Components/skills";
-import Footer from "./Components/footer";
-import Tools from "./Components/tool";
 import Bg from "./Components/bg";
 import Pre from "./Components/preloader";
 import VideoLoader from "./Components/VideoLoader";
 import AboutMe from "./Components/aboutme";
 import ContactMe from "./Components/contact";
-import Ebg from "./Components/editingbg";
+import Footer from "./Components/footer";
 // New Imports
+import HomePage from "./Components/HomePage";
 import Achievements from "./Components/Achievements"; 
 import EducationRoadmap from "./Components/EducationRoadmap";
 import LeetCodeProfile from "./Components/LeetCodeProfile";
 import Experience from "./Components/Experience";
 import ScrollToTop from "./Components/ScrollToTop";
-import CreativePassions from "./Components/CreativePassions";
 import "./index.css"; 
+// Google Analytics
+import { usePageTracking, useScrollDepthTracking } from "./hooks/useAnalytics";
 
 function App() {
+  // Enable page tracking and scroll depth tracking
+  usePageTracking();
+  useScrollDepthTracking();
+
   return (
     <>
       <ScrollToTop />
       <VideoLoader />
       {/* <Pre /> */}
       <Routes>
-        {/* Home Page (Single Page Scroll Layout) */}
-        <Route path="/" element={
-          <>
-            <Bg />
-            <Header />
-            <Hero />
-            <Portfolio />
-            <Skills />
-            <Tools />
-            <CreativePassions />
-            
-            <Footer />
-          </>
-        } />
+        {/* Home Page (Single Page Scroll Layout with Section Tracking) */}
+        <Route path="/" element={<HomePage />} />
 
         {/* Dedicated Pages */}
         <Route path="/about" element={<> <Bg /><Header /><AboutMe /></>} />
