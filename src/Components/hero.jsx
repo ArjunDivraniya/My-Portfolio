@@ -221,6 +221,7 @@ const Hero = () => {
   const navigate = useNavigate();
   const mobile = isMobile();
   const [mounted, setMounted] = useState(false);
+  const [leetcodeData, setLeetcodeData] = useState(null);
   const containerRef = useRef(null);
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
@@ -237,6 +238,49 @@ const Hero = () => {
   const auraY = useSpring(mouseYForAura, { stiffness: 80, damping: 30 });
 
   useEffect(() => setMounted(true), []);
+
+  // Fetch LeetCode data
+  useEffect(() => {
+    const fetchLeetCodeData = async () => {
+      try {
+        console.log('Fetching LeetCode data...');
+        const response = await fetch('https://alfa-leetcode-api.onrender.com/userProfile/Arjun_divraniya');
+        console.log('Response status:', response.status);
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('LeetCode API data received:', data);
+          
+          const leetcodeStats = {
+            totalSolved: data.totalSolved || 0,
+            easySolved: data.easySolved || 0,
+            mediumSolved: data.mediumSolved || 0,
+            hardSolved: data.hardSolved || 0,
+            ranking: data.ranking || 'N/A',
+          };
+          
+          console.log('Setting LeetCode data:', leetcodeStats);
+          setLeetcodeData(leetcodeStats);
+        } else {
+          console.error('API response not OK:', response.status);
+        }
+      } catch (error) {
+        console.error('Failed to fetch LeetCode data:', error);
+      }
+    };
+    fetchLeetCodeData();
+  }, []);
+
+  // Debug: Log when leetcodeData updates
+  useEffect(() => {
+    if (leetcodeData) {
+      console.log('Achievement cards will show:', {
+        problems: `${leetcodeData.totalSolved}+ Problems`,
+        breakdown: `E:${leetcodeData.easySolved} M:${leetcodeData.mediumSolved} H:${leetcodeData.hardSolved}`,
+        rank: `Rank #${Math.floor(leetcodeData.ranking / 1000)}K`,
+      });
+    }
+  }, [leetcodeData]);
 
   const handlePointer = (e) => {
     if (mobile || !containerRef.current) return; // Disable on mobile
@@ -272,9 +316,9 @@ const Hero = () => {
       position: { top: "8%", left: "5%" },
     },
     {
-      title: "200+ Problems",
+      title: leetcodeData ? `${leetcodeData.totalSolved}+ Problems` : "Loading...",
       subtitle: "DSA Mastery",
-      badge: "5★ C++ Golden",
+      badge: leetcodeData ? `E:${leetcodeData.easySolved} M:${leetcodeData.mediumSolved} H:${leetcodeData.hardSolved}` : "C++ • Java",
       icon: SiCplusplus,
       iconColor: "text-blue-500",
       link: "https://leetcode.com/u/Arjun_divraniya",
@@ -290,9 +334,9 @@ const Hero = () => {
       position: { top: "45%", right: "4%" },
     },
     {
-      title: "Top 10%",
-      subtitle: "LeetCode Rank",
-      badge: "721K+ Ranking",
+      title: leetcodeData ? `Rank #${Math.floor(leetcodeData.ranking / 1000)}K` : "Loading...",
+      subtitle: "LeetCode Global",
+      badge: leetcodeData ? `${leetcodeData.totalSolved} Accepted` : "Competitive Coding",
       icon: SiLeetcode,
       iconColor: "text-orange-500",
       link: "https://leetcode.com/u/Arjun_divraniya",

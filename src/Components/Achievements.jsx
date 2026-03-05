@@ -199,17 +199,26 @@ const Achievements = () => {
   useEffect(() => {
     const fetchLeetCode = async () => {
       try {
-        const response = await axios.get('https://leetcode-stats-api.herokuapp.com/Arjun_divraniya');
-        setLeetCodeData(response.data);
+        const response = await axios.get('https://alfa-leetcode-api.onrender.com/userProfile/Arjun_divraniya');
+        console.log('LeetCode data fetched:', response.data);
+        setLeetCodeData({
+          totalSolved: response.data.totalSolved || 0,
+          ranking: response.data.ranking || 'N/A',
+          easySolved: response.data.easySolved || 0,
+          mediumSolved: response.data.mediumSolved || 0,
+          hardSolved: response.data.hardSolved || 0,
+          contributionPoint: response.data.contributionPoint || 0,
+        });
       } catch (error) {
         console.error('Error fetching LeetCode data:', error);
         // Fallback data
         setLeetCodeData({
-          totalSolved: 450,
-          ranking: 125000,
-          easySolved: 200,
-          mediumSolved: 180,
-          hardSolved: 70
+          totalSolved: 248,
+          ranking: 568931,
+          easySolved: 172,
+          mediumSolved: 73,
+          hardSolved: 3,
+          contributionPoint: 644,
         });
       }
     };

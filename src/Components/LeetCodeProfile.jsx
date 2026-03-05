@@ -20,24 +20,24 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
         
         console.log('Fetching LeetCode data for:', username);
         
-        // Try LeetCode Stats API (most reliable)
-        let response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`, {
+        // Use Alfa LeetCode API with correct endpoint
+        let response = await fetch(`https://alfa-leetcode-api.onrender.com/userProfile/${username}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
         });
         
-        console.log('Stats API response status:', response.status);
+        console.log('API response status:', response.status);
         
         let data = null;
         
         if (response.ok) {
           data = await response.json();
-          console.log('Stats API data:', data);
+          console.log('API data:', data);
         } else {
-          console.warn('Stats API failed, trying alternative...');
-          // Try alternative API
+          console.warn('Primary API failed, trying base profile endpoint...');
+          // Try base profile endpoint as fallback
           const altResponse = await fetch(`https://alfa-leetcode-api.onrender.com/${username}`, {
             method: 'GET',
             headers: {
@@ -50,6 +50,17 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
           if (altResponse.ok) {
             data = await altResponse.json();
             console.log('Alternative API data:', data);
+            // If using base endpoint, also fetch solved stats
+            try {
+              const solvedResponse = await fetch(`https://alfa-leetcode-api.onrender.com/${username}/solved`);
+              if (solvedResponse.ok) {
+                const solvedData = await solvedResponse.json();
+                data = { ...data, ...solvedData };
+                console.log('Merged with solved data:', data);
+              }
+            } catch (e) {
+              console.warn('Unable to fetch solved stats:', e);
+            }
           } else {
             console.warn('Alternative API also failed');
           }
@@ -60,8 +71,10 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
           let totalSolved = 0, easySolved = 0, mediumSolved = 0, hardSolved = 0;
           let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
           let realUsername = username;
+          let ranking = data.ranking || 'N/A';
+          let contributionPoints = data.contributionPoint || data.reputation || 0;
           
-          // Handle LeetCode Stats API format
+          // Handle Alfa LeetCode API format
           if (data.totalSolved !== undefined) {
             totalSolved = data.totalSolved || 0;
             easySolved = data.easySolved || 0;
@@ -69,94 +82,30 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
             hardSolved = data.hardSolved || 0;
           }
           
-          // Try to get avatar and more info from LeetCode GraphQL as secondary source
-          try {
-            const graphqlResponse = await fetch('https://leetcode.com/graphql/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Referer': 'https://leetcode.com',
-              },
-              body: JSON.stringify({
-                query: `{
-                  allQuestionsCount {
-                    difficulty
-                    count
-                  }
-                  matchedUser(username: "${username}") {
-                    username
-                    profile {
-                      userAvatar
-                      realName
-                      reputation
-                      ranking
-                    }
-                    submitStats {
-                      acSubmissionNum {
-                        difficulty
-                        count
-                        submissions
-                      }
-                    }
-                    contestBadge {
-                      name
-                      expired
-                      medal {
-                        slug
-                        config {
-                          color
-                        }
-                      }
-                    }
-                  }
-                }`,
-              })
-            });
-            
-            if (graphqlResponse.ok) {
-              const graphqlData = await graphqlResponse.json();
-              console.log('GraphQL data:', graphqlData);
-              
-              if (graphqlData.data?.matchedUser) {
-                const user = graphqlData.data.matchedUser;
-                if (user.profile?.userAvatar) {
-                  avatar = user.profile.userAvatar;
-                }
-                if (user.profile?.ranking) {
-                  data.ranking = user.profile.ranking;
-                }
-                if (user.profile?.reputation) {
-                  data.reputation = user.profile.reputation;
-                }
-                if (user.username) {
-                  realUsername = user.username;
-                }
-                // Update stats from GraphQL if not already set
-                if (user.submitStats?.acSubmissionNum) {
-                  user.submitStats.acSubmissionNum.forEach(item => {
-                    if (item.difficulty === 'All') totalSolved = item.count || totalSolved;
-                    if (item.difficulty === 'Easy') easySolved = item.count || easySolved;
-                    if (item.difficulty === 'Medium') mediumSolved = item.count || mediumSolved;
-                    if (item.difficulty === 'Hard') hardSolved = item.count || hardSolved;
-                  });
-                }
-              }
-            }
-          } catch (e) {
-            console.warn('GraphQL query failed (expected due to CORS):', e.message);
+          // Handle solvedProblem field (alternative field name)
+          if (data.solvedProblem !== undefined) {
+            totalSolved = data.solvedProblem || 0;
+          }
+          
+          // Get username and avatar from API
+          if (data.username) {
+            realUsername = data.username;
+          }
+          if (data.avatar) {
+            avatar = data.avatar;
           }
           
           const transformedData = {
             username: realUsername,
             avatar: avatar,
-            ranking: data.ranking || 'N/A',
+            ranking: ranking,
             totalSolved: totalSolved,
             easySolved: easySolved,
             mediumSolved: mediumSolved,
             hardSolved: hardSolved,
-            contributionPoints: data.reputation || data.contributionPoints || 0,
+            contributionPoints: contributionPoints,
             badges: data.badges || [],
-            contestRating: data.contestRating || data.contestRatings?.highest?.rating || 0,
+            contestRating: data.contestRating || 0,
             totalContests: data.totalContests || 0,
             profileUrl: `https://leetcode.com/u/${username}`,
           };
