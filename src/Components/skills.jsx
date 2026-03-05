@@ -315,7 +315,7 @@ const SkillCard = ({ skill, index }) => {
 // ===================== MAIN SKILLS SECTION =====================
 const Skills = () => {
   return (
-    <section id="skills" className="py-12 sm:py-16 md:py-20 text-center text-white w-full bg-black relative">
+    <section id="skills" className="pt-28 sm:pt-32 pb-12 sm:pb-16 md:pb-20 text-center text-white w-full bg-black relative">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black pointer-events-none" />
 

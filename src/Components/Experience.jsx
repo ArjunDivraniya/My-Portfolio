@@ -518,7 +518,7 @@ export default function Experience() {
   ];
 
   return (
-    <div className="relative w-full min-h-screen bg-black py-20 px-4">
+    <div id="experience" className="relative w-full min-h-screen bg-black pt-28 sm:pt-32 pb-20 px-4">
       {/* Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl opacity-20"></div>

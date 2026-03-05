@@ -312,7 +312,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-x-hidden overflow-y-visible flex items-center justify-center bg-black"
+      className="relative min-h-screen w-full overflow-x-hidden overflow-y-visible flex items-center justify-center bg-black pt-20 sm:pt-24"
     >
       {/* Staggered Background Aurora - Simplified on Mobile */}
       <motion.div

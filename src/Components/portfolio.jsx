@@ -1102,7 +1102,7 @@ export const Portfolio = memo(() => {
   };
 
   return (
-    <section id="projects" className="min-h-screen bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-x-hidden">
+    <section id="projects" className="min-h-screen bg-black pt-28 sm:pt-32 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-x-hidden">
       <div className="max-w-full sm:max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

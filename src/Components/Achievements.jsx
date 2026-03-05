@@ -445,7 +445,7 @@ const Achievements = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
+    <div id="achievements" className="min-h-screen bg-black text-white pt-28 sm:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
       {/* Hero Title with GSAP Animation */}
       <div ref={titleRef} className="text-center mb-12 sm:mb-16 md:mb-20 px-4">
         <motion.div

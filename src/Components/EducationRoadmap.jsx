@@ -329,7 +329,7 @@ const EducationRoadmap = () => {
     <section
       id="education-journey"
       ref={ref}
-      className="relative py-24 px-4 sm:px-8 overflow-hidden"
+      className="relative pt-28 sm:pt-32 pb-24 px-4 sm:px-8 overflow-hidden"
       style={{
         background: "var(--section-background-color)"
       }}

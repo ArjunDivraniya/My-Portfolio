@@ -404,7 +404,7 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className="relative py-24 px-4 sm:px-8 overflow-hidden min-h-screen"
+      className="relative pt-28 sm:pt-32 pb-24 px-4 sm:px-8 overflow-hidden min-h-screen"
       style={{ background: "var(--section-background-color)" }}
     >
       {/* Background Effect */}
