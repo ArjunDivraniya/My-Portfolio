@@ -116,7 +116,7 @@ const ContactMe = () => {
   };
 
   return (
-    <section className="min-h-screen relative overflow-hidden py-20 px-4 sm:px-8">
+    <section id="contact" className="min-h-screen relative overflow-hidden py-20 px-4 sm:px-8">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-black">
         <div className="absolute inset-0 opacity-10">

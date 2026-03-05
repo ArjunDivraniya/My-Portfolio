@@ -362,7 +362,7 @@ const ExperienceCard = ({ experience, index }) => {
         className="group cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
-        <div className="relative p-8 bg-gradient-to-br from-black via-purple-900/10 to-black border border-yellow-500/30 rounded-2xl hover:border-yellow-500/60 transition-all duration-300 overflow-hidden">
+        <div className="relative w-full max-w-full p-4 sm:p-6 md:p-8 bg-gradient-to-br from-black via-purple-900/10 to-black border border-yellow-500/30 rounded-2xl hover:border-yellow-500/60 transition-all duration-300 overflow-hidden">
           {/* Animated Background Glow */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r from-yellow-500 via-purple-500 to-black blur-2xl pointer-events-none"></div>
 
@@ -379,7 +379,30 @@ const ExperienceCard = ({ experience, index }) => {
             </div>
 
             {/* Description */}
-            <p className="text-gray-300 mb-6 leading-relaxed">{experience.description}</p>
+            <p className="text-gray-300 mb-6 leading-relaxed text-sm sm:text-base [overflow-wrap:anywhere]">{experience.description}</p>
+
+            <div className="space-y-5 mb-6">
+              <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4 sm:p-5">
+                <h4 className="text-yellow-400 font-bold text-sm uppercase tracking-wider mb-2">Challenge</h4>
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed [overflow-wrap:anywhere]">{experience.challenge}</p>
+              </div>
+
+              <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4 sm:p-5">
+                <h4 className="text-purple-300 font-bold text-sm uppercase tracking-wider mb-2">Solution</h4>
+                <ul className="space-y-2">
+                  {experience.solution.map((point) => (
+                    <li key={point} className="text-gray-300 text-sm sm:text-base leading-relaxed [overflow-wrap:anywhere]">
+                      • {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-4 sm:p-5">
+                <h4 className="text-green-300 font-bold text-sm uppercase tracking-wider mb-2">Outcome</h4>
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed [overflow-wrap:anywhere]">{experience.outcome}</p>
+              </div>
+            </div>
 
             {/* Architecture Highlights */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -502,7 +525,7 @@ export default function Experience() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl opacity-20"></div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-full mx-auto">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -530,29 +553,6 @@ export default function Experience() {
           ))}
         </div>
 
-        {/* Stats Section */}
-        <motion.div
-          className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          {[
-            { label: 'Years Experience', value: '5+', icon: '📅' },
-            { label: 'Projects Delivered', value: '50+', icon: '🚀' },
-            { label: 'Client Satisfaction', value: '99%', icon: '⭐' },
-          ].map((stat, idx) => (
-            <div
-              key={idx}
-              className="p-6 bg-gradient-to-br from-purple-900/20 to-black border border-yellow-500/20 rounded-xl text-center hover:border-yellow-500/50 transition"
-            >
-              <p className="text-3xl mb-2">{stat.icon}</p>
-              <h4 className="text-gray-400 text-sm mb-2">{stat.label}</h4>
-              <p className="text-4xl font-black text-yellow-500">{stat.value}</p>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </div>
   );

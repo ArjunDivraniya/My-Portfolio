@@ -12,14 +12,29 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const scrollToSectionWithOffset = (sectionId) => {
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+
+    const navbar = document.querySelector('header');
+    const navbarHeight = navbar?.offsetHeight || 88;
+    const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+    const offsetTop = targetTop - navbarHeight - 8;
+
+    window.scrollTo({
+      top: Math.max(offsetTop, 0),
+      behavior: 'smooth',
+    });
+  };
+
   const handleScroll = (section) => {
     if (location.pathname !== "/") {
       navigate("/", { replace: true });
       setTimeout(() => {
-        document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
+        scrollToSectionWithOffset(section);
       }, 500);
     } else {
-      document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
+      scrollToSectionWithOffset(section);
     }
     setIsMenuOpen(false);
   };

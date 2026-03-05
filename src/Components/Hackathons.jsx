@@ -191,7 +191,7 @@ const Hackathons = () => {
 
   return (
     <section className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-4 py-20 sm:px-8">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-full sm:max-w-7xl">
         <div className="flex items-end justify-between gap-6 mb-4">
           <div>
             <p className="text-sm uppercase tracking-[0.4em] text-amber-400 font-bold">Hackathons & Competitions</p>
@@ -347,7 +347,7 @@ const HackathonCard = ({ hackathon, onOpen }) => {
               href={hackathon.links.live}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
               onClick={(event) => event.stopPropagation()}
             >
               View Project
@@ -359,7 +359,7 @@ const HackathonCard = ({ hackathon, onOpen }) => {
                 event.stopPropagation();
                 onOpen(hackathon, event);
               }}
-              className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-2 text-sm font-semibold text-amber-200 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/70 hover:bg-amber-300/20 hover:shadow-[0_0_20px_rgba(251,191,36,0.6)]"
+              className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-2 text-xs sm:text-sm font-semibold text-amber-200 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/70 hover:bg-amber-300/20 hover:shadow-[0_0_20px_rgba(251,191,36,0.6)]"
             >
               View Certificate
             </button>

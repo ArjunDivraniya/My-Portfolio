@@ -62,6 +62,25 @@ body {
   letter-spacing: 0.04em;
 }
 
+:root {
+  --navbar-offset: 92px;
+}
+
+html {
+  scroll-padding-top: var(--navbar-offset);
+}
+
+section[id],
+div[id] {
+  scroll-margin-top: var(--navbar-offset);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --navbar-offset: 84px;
+  }
+}
+
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }

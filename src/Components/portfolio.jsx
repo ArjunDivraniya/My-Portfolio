@@ -97,14 +97,14 @@ const FilterNav = memo(({ active, onChange }) => {
 
   return (
     <motion.div
-      className="sticky top-20 z-40 flex justify-center py-4 sm:py-6 bg-gradient-to-b from-black via-black/95 to-black/80 border-b border-yellow-500/20 backdrop-blur-xl px-4 sm:px-6"
+      className="sticky top-20 z-40 flex justify-center py-4 sm:py-6 bg-gradient-to-b from-black via-black/95 to-black/80 border-b border-yellow-500/20 backdrop-blur-xl px-4 sm:px-6 max-w-full"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
       <div
         ref={containerRef}
-        className="relative flex gap-2 sm:gap-3 px-3 sm:px-6 py-2 rounded-full bg-black/60 border border-yellow-500/20 backdrop-blur overflow-x-auto"
+        className="relative flex flex-wrap justify-center gap-2 px-3 sm:px-6 py-2 rounded-2xl sm:rounded-full bg-black/60 border border-yellow-500/20 backdrop-blur max-w-full"
       >
         {/* GSAP Animated Blob */}
         <div
@@ -151,7 +151,7 @@ const FlagshipCarousel = memo(() => {
     <AnimatePresence mode="wait">
       <motion.div
         key={currentIndex}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-stretch"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-stretch w-full max-w-full"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -100 }}
@@ -209,7 +209,7 @@ const FlagshipCarousel = memo(() => {
 
         {/* Right: Project Details */}
         <motion.div
-          className="p-8 rounded-3xl bg-gradient-to-br from-black/80 via-purple-900/20 to-black border border-yellow-500/30 backdrop-blur flex flex-col justify-between"
+          className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-black/80 via-purple-900/20 to-black border border-yellow-500/30 backdrop-blur flex flex-col justify-between w-full max-w-full"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
@@ -224,7 +224,7 @@ const FlagshipCarousel = memo(() => {
             </motion.div>
 
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-3 leading-tight">{project.title}</h3>
-            <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">{project.about}</p>
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 break-words [overflow-wrap:anywhere]">{project.about}</p>
 
             {/* Tech Stack */}
             <div className="mb-6">
@@ -324,7 +324,7 @@ const FlagshipCarousel = memo(() => {
 const HackathonCard = memo(({ project, isActive }) => {
   return (
     <motion.div
-      className="absolute inset-0"
+      className="absolute inset-0 w-full max-w-full"
       initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
       animate={
         isActive
@@ -370,7 +370,7 @@ const HackathonCard = memo(({ project, isActive }) => {
           </div>
 
           {/* Right Content - 40% width on desktop */}
-          <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-black/80 to-purple-950/20 overflow-y-auto">
+          <div className="md:col-span-2 p-4 sm:p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-black/80 to-purple-950/20 overflow-y-auto overflow-x-hidden w-full max-w-full">
             {/* Title Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -387,7 +387,7 @@ const HackathonCard = memo(({ project, isActive }) => {
 
               {/* Description */}
               <motion.p
-                className="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed mb-6"
+                className="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed mb-6 break-words [overflow-wrap:anywhere]"
                 initial={{ opacity: 0 }}
                 animate={isActive ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -504,7 +504,7 @@ const HackathonVerticalCinema = memo(() => {
       viewport={{ once: true }}
     >
       {/* Carousel Container */}
-      <div className="relative w-full h-96 md:h-96 rounded-3xl overflow-hidden bg-black">
+      <div className="relative w-full max-w-full h-[28rem] sm:h-96 md:h-96 rounded-2xl sm:rounded-3xl overflow-hidden bg-black">
         {projectData.hackathons.map((project, index) => (
           <HackathonCard
             key={project.id}
@@ -516,7 +516,7 @@ const HackathonVerticalCinema = memo(() => {
 
       {/* Navigation Dots */}
       <motion.div
-        className="flex justify-center items-center gap-4"
+        className="flex justify-center items-center gap-3 sm:gap-4 max-w-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}
@@ -524,7 +524,7 @@ const HackathonVerticalCinema = memo(() => {
         {/* Left Arrow */}
         <motion.button
           onClick={() => handleDotClick((currentIndex - 1 + projectData.hackathons.length) % projectData.hackathons.length)}
-          className="p-2 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 hover:bg-yellow-500/40"
+          className="p-2 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 text-xs sm:text-sm hover:bg-yellow-500/40"
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -558,7 +558,7 @@ const HackathonVerticalCinema = memo(() => {
         {/* Right Arrow */}
         <motion.button
           onClick={() => handleDotClick((currentIndex + 1) % projectData.hackathons.length)}
-          className="p-2 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 hover:bg-yellow-500/40"
+          className="p-2 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 text-xs sm:text-sm hover:bg-yellow-500/40"
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -630,7 +630,7 @@ const BackendCard = memo(({ project }) => {
 
   return (
     <motion.div
-      className="relative p-6 rounded-2xl bg-gradient-to-br from-black/80 via-purple-900/20 to-black border border-yellow-500/30 overflow-hidden group cursor-pointer"
+      className="relative p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-black/80 via-purple-900/20 to-black border border-yellow-500/30 overflow-hidden group cursor-pointer w-full max-w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ scale: 1.02 }}
@@ -718,7 +718,7 @@ const OSSCard = memo(({ project }) => {
 
   return (
     <motion.div
-      className="relative p-6 rounded-2xl bg-black border border-yellow-500/30 group cursor-pointer"
+      className="relative p-4 sm:p-6 rounded-2xl bg-black border border-yellow-500/30 group cursor-pointer w-full max-w-full"
       onMouseEnter={() => setIsRevealed(true)}
       onMouseLeave={() => setIsRevealed(false)}
       whileHover={{ scale: 1.02 }}
@@ -919,7 +919,7 @@ const UIUXCard = memo(({ project }) => {
   return (
     <motion.div
       ref={cardRef}
-      className="relative w-full h-80 rounded-2xl overflow-hidden border border-yellow-500/30 group cursor-pointer"
+      className="relative w-full max-w-full h-80 rounded-2xl overflow-hidden border border-yellow-500/30 group cursor-pointer"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
@@ -1103,7 +1103,7 @@ export const Portfolio = memo(() => {
 
   return (
     <section id="projects" className="min-h-screen bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full sm:max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           className="mb-12 sm:mb-16 text-center"

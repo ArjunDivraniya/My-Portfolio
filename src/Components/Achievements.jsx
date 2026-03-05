@@ -10,7 +10,7 @@ import {
   FaTrophy, FaCode, FaAward, FaGithub, FaLinkedin, FaExternalLinkAlt, 
   FaCheckCircle, FaStar, FaFire, FaCrown, FaRocket, FaChartLine,
   FaShieldAlt, FaBolt, FaGem, FaPlay, FaTimes, FaAws, FaMicrosoft,
-  FaDatabase, FaCloud, FaChartBar, FaUserTie, FaBriefcase, FaGraduationCap
+  FaDatabase, FaCloud, FaChartBar, FaUserTie, FaBriefcase
 } from 'react-icons/fa';
 import { SiLeetcode, SiMeta, SiHackerrank, SiJavascript, SiAmazondocumentdb } from 'react-icons/si';
 import { isMobile, getHoverProps, getMobileInViewProps } from '../utils/mobileOptimization';
@@ -192,6 +192,8 @@ const Achievements = () => {
   const [selectedDetail, setSelectedDetail] = useState(null);
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
+  const linkedInProfileUrl = 'https://www.linkedin.com/in/divraniya-arjun/';
+  const linkedInProfileImage = 'https://ui-avatars.com/api/?name=Arjun+Divraniya&background=0A66C2&color=ffffff&size=256';
 
   // Fetch LeetCode Data
   useEffect(() => {
@@ -466,7 +468,7 @@ const Achievements = () => {
         </motion.div>
       </div>
 
-      <div ref={sectionRef} className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24 md:space-y-32">
+      <div ref={sectionRef} className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24 md:space-y-32">
         {/* 1. REAL-TIME PROFILE DASHBOARD */}
         <section className="space-y-6 sm:space-y-8">
           <motion.h2
@@ -478,12 +480,12 @@ const Achievements = () => {
             <span className="text-purple-400">⚡</span> Real-Time Command Center
           </motion.h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch overflow-hidden">
             {/* LeetCode Card */}
-            <TiltCard className="achievement-card">
+            <TiltCard className="achievement-card h-full">
               <motion.div
                 className="relative h-full bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-500/30 rounded-2xl p-6 hover:border-yellow-500 transition-all duration-300 overflow-hidden"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(234, 179, 8, 0.3)' }}
+                whileHover={{ y: -6, boxShadow: '0 0 40px rgba(234, 179, 8, 0.3)' }}
               >
                 {/* Glowing effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
@@ -522,7 +524,7 @@ const Achievements = () => {
                         </div>
                       </div>
 
-                      <div className="flex justify-around pt-4 border-t border-gray-800">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 place-items-center pt-4 border-t border-gray-800">
                         <CircularGauge
                           value={leetCodeData.easySolved || 200}
                           max={300}
@@ -553,10 +555,10 @@ const Achievements = () => {
             </TiltCard>
 
             {/* GitHub Card */}
-            <TiltCard className="achievement-card">
+            <TiltCard className="achievement-card h-full">
               <motion.div
                 className="relative h-full bg-gradient-to-br from-gray-900 to-black border-2 border-purple-400/30 rounded-2xl p-6 hover:border-purple-400 transition-all duration-300 overflow-hidden"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(167, 139, 250, 0.3)' }}
+                whileHover={{ y: -6, boxShadow: '0 0 40px rgba(167, 139, 250, 0.3)' }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 
@@ -635,10 +637,10 @@ const Achievements = () => {
             </TiltCard>
 
             {/* LinkedIn Profile Card */}
-            <TiltCard className="achievement-card">
+            <TiltCard className="achievement-card h-full">
               <motion.div
                 className="relative h-full bg-gradient-to-br from-gray-900 to-black border-2 border-blue-400/30 rounded-2xl p-6 hover:border-blue-400 transition-all duration-300 overflow-hidden"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(59, 130, 246, 0.3)' }}
+                whileHover={{ y: -6, boxShadow: '0 0 40px rgba(59, 130, 246, 0.3)' }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 
@@ -659,8 +661,16 @@ const Achievements = () => {
                   <div className="space-y-6">
                     <div className="text-center">
                       <div className="mb-4">
-                        <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-3">
-                          <FaGraduationCap className="text-4xl text-white" />
+                        <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-blue-400/40 mb-3 bg-blue-900/30">
+                          <img
+                            src={linkedInProfileImage}
+                            alt="Arjun Divraniya LinkedIn profile"
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                            onError={(event) => {
+                              event.currentTarget.src = 'https://ui-avatars.com/api/?name=Arjun+Divraniya&background=1D4ED8&color=ffffff&size=256';
+                            }}
+                          />
                         </div>
                         <h4 className="text-xl font-bold text-white">Arjun Divraniya</h4>
                         <p className="text-sm text-blue-400">Full-Stack Developer</p>
@@ -688,7 +698,7 @@ const Achievements = () => {
                       </p>
                       
                       <motion.a
-                        href="https://www.linkedin.com/in/arjun-divraniya/"
+                        href={linkedInProfileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-400 transition-colors text-center"
@@ -761,7 +771,7 @@ const Achievements = () => {
                 <FaGithub /> GitHub Profile
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/arjun-divraniya/"
+                href={linkedInProfileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-400 transition-colors flex items-center gap-2"

@@ -291,7 +291,7 @@ const JourneyPhaseCard = ({ data, index }) => {
   return (
     <motion.div
       ref={ref}
-      className={`relative flex w-full mb-32 ${isLeft ? 'justify-start' : 'justify-end'}`}
+      className={`relative flex w-full mb-16 md:mb-32 justify-center ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}
       variants={cardVariants}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
@@ -484,14 +484,16 @@ const AboutMe = () => {
           </motion.h2>
 
           {/* Central Timeline Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 z-0">
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 z-0 hidden md:block">
             <TimelineLine scaleY={scaleY} />
           </div>
 
           {/* Milestone Nodes */}
-          {journeyData.map((data, index) => (
-            <MilestoneNode key={index} index={index} data={data} total={journeyData.length} />
-          ))}
+          <div className="hidden md:block">
+            {journeyData.map((data, index) => (
+              <MilestoneNode key={index} index={index} data={data} total={journeyData.length} />
+            ))}
+          </div>
 
           {/* Journey Phase Cards */}
           <div className="relative z-5">
@@ -512,9 +514,9 @@ const AboutMe = () => {
           <h3 className="text-3xl font-bold text-center mb-8 text-purple-400">
             What Makes Me Unique
           </h3>
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="flex flex-col md:flex-row gap-6 mb-12 max-w-full">
             <motion.div
-              className="p-6 rounded-xl bg-gradient-to-br from-purple-900/40 to-black border border-purple-500"
+              className="w-full md:w-1/2 p-6 rounded-xl bg-gradient-to-br from-purple-900/40 to-black border border-purple-500"
               whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168, 85, 247, 0.3)" }}
             >
               <FaCode className="text-4xl text-yellow-400 mb-3" />
@@ -525,7 +527,7 @@ const AboutMe = () => {
             </motion.div>
 
             <motion.div
-              className="p-6 rounded-xl bg-gradient-to-br from-pink-900/40 to-black border border-pink-500"
+              className="w-full md:w-1/2 p-6 rounded-xl bg-gradient-to-br from-pink-900/40 to-black border border-pink-500"
               whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(236, 72, 153, 0.3)" }}
             >
               <FaPalette className="text-4xl text-yellow-400 mb-3" />
@@ -544,7 +546,7 @@ const AboutMe = () => {
             viewport={{ once: true }}
           >
             <motion.a
-              href="/contact"
+              href="/contact#contact"
               className="inline-block px-8 py-4 bg-gradient-to-r from-yellow-500 to-purple-600 text-white font-bold rounded-lg text-lg"
               whileHover={{ 
                 scale: 1.05, 

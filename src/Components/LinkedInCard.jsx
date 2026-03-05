@@ -4,7 +4,7 @@ import { ExternalLink, Briefcase, Users, Award, TrendingUp } from 'lucide-react'
 import { FaLinkedin } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
 
-const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/arjun-divraniya-/" }) => {
+const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/divraniya-arjun/" }) => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   // LinkedIn profile data - you can customize this with your actual data
@@ -13,6 +13,7 @@ const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/arjun-divraniy
     headline: "Full Stack Developer | MERN Stack | React.js | Node.js",
     connections: "500+",
     profileUrl: profileUrl,
+    profileImage: "https://ui-avatars.com/api/?name=Arjun+Divraniya&background=0A66C2&color=ffffff&size=256",
     skills: [
       "React.js",
       "Node.js",
@@ -106,6 +107,17 @@ const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/arjun-divraniy
 
         {/* Headline */}
         <div className="relative z-10 mb-6">
+          <div className="mb-4 h-20 w-20 overflow-hidden rounded-full border-2 border-blue-400/40 bg-slate-800/60">
+            <img
+              src={linkedInData.profileImage}
+              alt="Arjun Divraniya profile"
+              className="h-full w-full object-cover"
+              loading="lazy"
+              onError={(event) => {
+                event.currentTarget.src = 'https://ui-avatars.com/api/?name=Arjun+Divraniya&background=1D4ED8&color=ffffff&size=256';
+              }}
+            />
+          </div>
           <p className="text-gray-300 text-sm leading-relaxed">
             {linkedInData.headline}
           </p>

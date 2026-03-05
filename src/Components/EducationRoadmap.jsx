@@ -1,6 +1,6 @@
 // File: src/Components/EducationRoadmap.jsx
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaGraduationCap, FaSchool, FaMapMarkerAlt } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
@@ -218,7 +218,7 @@ const LearningPhaseCard = ({ data, index }) => {
   return (
     <motion.div
       ref={ref}
-      className={`relative flex w-full mb-32 ${isLeft ? 'justify-start' : 'justify-end'}`}
+      className={`relative flex w-full mb-16 md:mb-32 justify-center ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}
       variants={cardVariants}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
@@ -317,6 +317,7 @@ const LearningPhaseCard = ({ data, index }) => {
 // Main Component
 const EducationRoadmap = () => {
   const ref = useRef(null);
+  const [activeSemester, setActiveSemester] = useState('Sem 1');
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start center", "end center"]
@@ -392,22 +393,48 @@ const EducationRoadmap = () => {
           </motion.div>
         </motion.div>
 
+        <div className="mx-auto mb-10 grid max-w-full grid-cols-2 gap-3 px-4 sm:grid-cols-3 md:grid-cols-4">
+          {educationData.map((item) => (
+            <button
+              key={item.semester}
+              type="button"
+              onClick={() => {
+                setActiveSemester(item.semester);
+                const semesterId = `semester-${item.semester.toLowerCase().replace(/\s+/g, '-')}`;
+                const node = document.getElementById(semesterId);
+                if (node) node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+              className={`rounded-lg border px-3 py-2 text-xs sm:text-sm font-semibold transition-all ${
+                activeSemester === item.semester
+                  ? 'border-yellow-400 bg-yellow-500/20 text-yellow-300'
+                  : 'border-purple-500/40 bg-black/40 text-gray-200 hover:border-purple-400'
+              }`}
+            >
+              {item.semester}
+            </button>
+          ))}
+        </div>
+
         {/* Timeline Container */}
         <div className="relative max-w-6xl mx-auto">
           {/* Central Timeline Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 z-0">
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 z-0 hidden md:block">
             <TimelineLine scaleY={scaleY} />
           </div>
 
           {/* Milestone Nodes */}
-          {educationData.map((_, index) => (
-            <MilestoneNode key={index} index={index} />
-          ))}
+          <div className="hidden md:block">
+            {educationData.map((_, index) => (
+              <MilestoneNode key={index} index={index} />
+            ))}
+          </div>
 
           {/* Learning Phase Cards */}
           <div className="relative z-5">
             {educationData.map((data, index) => (
-              <LearningPhaseCard key={index} data={data} index={index} />
+              <div key={index} id={`semester-${data.semester.toLowerCase().replace(/\s+/g, '-')}`}>
+                <LearningPhaseCard data={data} index={index} />
+              </div>
             ))}
           </div>
         </div>
@@ -423,13 +450,6 @@ const EducationRoadmap = () => {
           <p className="text-gray-400 text-lg">
             Each phase shaped my skills and brought me closer to mastering full-stack development.
           </p>
-          <motion.p
-            className="mt-4 text-purple-400 font-semibold"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            ⬇️ Scroll to explore my journey
-          </motion.p>
         </motion.div>
       </div>
     </section>

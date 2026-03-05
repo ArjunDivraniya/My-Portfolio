@@ -287,7 +287,7 @@ const Certifications = () => {
           backgroundSize: '22px 22px',
         }}
       />
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-full sm:max-w-7xl">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm uppercase tracking-[0.4em] text-amber-300 font-bold">Certifications</p>
@@ -321,7 +321,7 @@ const Certifications = () => {
 
         <motion.div
           layout
-          className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3"
+          className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"
           variants={{
             hidden: {},
             visible: {
@@ -436,6 +436,8 @@ const Certifications = () => {
 
 const CertificationCard = ({ cert, onOpen }) => {
   const Icon = cert.logo;
+  const previewImage = getCertPreviewImage(cert);
+  const [imageFailed, setImageFailed] = useState(false);
 
   return (
     <motion.article
@@ -456,13 +458,22 @@ const CertificationCard = ({ cert, onOpen }) => {
             allow="fullscreen"
             referrerPolicy="no-referrer-when-downgrade"
           />
-        ) : (
+        ) : previewImage && !imageFailed ? (
           <img
-            src={getCertPreviewImage(cert)}
+            src={previewImage}
             alt={cert.name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
+            onError={() => setImageFailed(true)}
           />
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 px-4 text-center">
+            <div className={`mb-3 flex h-14 w-14 items-center justify-center rounded-xl border border-slate-600 bg-slate-800/70 text-2xl ${cert.logoColor}`}>
+              <Icon />
+            </div>
+            <p className="text-sm font-semibold text-slate-100">Certificate Preview Unavailable</p>
+            <p className="mt-1 text-xs text-slate-400">Open details to verify this credential</p>
+          </div>
         )}
         <div className="absolute inset-x-0 bottom-0 translate-y-full bg-black/95 p-4 transition-transform duration-300 ease-in-out group-hover:translate-y-0">
           <div className="flex items-center justify-between text-xs uppercase tracking-[0.25em] text-white">
