@@ -12,11 +12,11 @@ import DeepDetailModal from './DeepDetailModal';
 
 import azureFundamentals from '../assets/certificates/Azure-Fundamentals.jpg';
 import microsoftPowerBi from '../assets/certificates/Microsoft-Power-BI.jpg';
-import frontendDeveloperReactPdf from '../assets/certificates/frontend_developer_react certificate.pdf';
-import javascriptBasicPdf from '../assets/certificates/javascript_basic certificate.pdf';
-import problemSolvingBasicPdf from '../assets/certificates/problem_solving_basic certificate.pdf';
-import problemSolvingIntermediatePdf from '../assets/certificates/problem_solving_intermediate certificate.pdf';
-import restApiIntermediatePdf from '../assets/certificates/rest_api_intermediate certificate.pdf';
+import frontendDeveloperReactJpg from '../assets/certificates/frontend_developer_react certificate_page-0001.jpg';
+import javascriptBasicJpg from '../assets/certificates/javascript_basic certificate_page-0001.jpg';
+import problemSolvingBasicJpg from '../assets/certificates/problem_solving_basic certificate_page-0001.jpg';
+import problemSolvingIntermediateJpg from '../assets/certificates/problem_solving_intermediate certificate_page-0001.jpg';
+import restApiIntermediateJpg from '../assets/certificates/rest_api_intermediate certificate_page-0001.jpg';
 
 const certifications = [
   {
@@ -54,11 +54,9 @@ const certifications = [
     issuedBy: 'Meta',
     category: 'Frontend',
     date: '2025',
-    thumbnail: null,
-    iframeLink: frontendDeveloperReactPdf,
+    thumbnail: frontendDeveloperReactJpg,
     logo: SiMeta,
     logoColor: 'text-blue-400',
-    verifyLink: frontendDeveloperReactPdf,
     verificationId: 'FRONTEND-REACT',
     skills: ['React', 'Components', 'State Management'],
   },
@@ -69,11 +67,9 @@ const certifications = [
     issuedBy: 'HackerRank',
     category: 'Frontend',
     date: '2025',
-    thumbnail: null,
-    iframeLink: javascriptBasicPdf,
+    thumbnail: javascriptBasicJpg,
     logo: SiJavascript,
     logoColor: 'text-yellow-400',
-    verifyLink: javascriptBasicPdf,
     verificationId: 'JAVASCRIPT-BASIC',
     skills: ['ES6+', 'DOM', 'Async Basics'],
   },
@@ -84,11 +80,9 @@ const certifications = [
     issuedBy: 'HackerRank',
     category: 'Hackathon',
     date: '2025',
-    thumbnail: null,
-    iframeLink: problemSolvingBasicPdf,
+    thumbnail: problemSolvingBasicJpg,
     logo: SiHackerrank,
     logoColor: 'text-green-400',
-    verifyLink: problemSolvingBasicPdf,
     verificationId: 'PROBLEM-SOLVING-BASIC',
     skills: ['Logic', 'Problem Solving', 'Complexity Basics'],
   },
@@ -99,11 +93,9 @@ const certifications = [
     issuedBy: 'HackerRank',
     category: 'Hackathon',
     date: '2025',
-    thumbnail: null,
-    iframeLink: problemSolvingIntermediatePdf,
+    thumbnail: problemSolvingIntermediateJpg,
     logo: SiHackerrank,
     logoColor: 'text-green-400',
-    verifyLink: problemSolvingIntermediatePdf,
     verificationId: 'PROBLEM-SOLVING-INTERMEDIATE',
     skills: ['Algorithms', 'Optimization', 'Time Complexity'],
   },
@@ -114,11 +106,9 @@ const certifications = [
     issuedBy: 'HackerRank',
     category: 'Backend',
     date: '2025',
-    thumbnail: null,
-    iframeLink: restApiIntermediatePdf,
+    thumbnail: restApiIntermediateJpg,
     logo: SiHackerrank,
     logoColor: 'text-green-400',
-    verifyLink: restApiIntermediatePdf,
     verificationId: 'REST-API-INTERMEDIATE',
     skills: ['HTTP', 'API Design', 'Authentication'],
   },

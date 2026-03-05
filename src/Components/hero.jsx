@@ -312,7 +312,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-x-hidden overflow-y-visible flex items-center justify-center bg-black pt-20 sm:pt-24"
+      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-black pt-20 sm:pt-24"
     >
       {/* Staggered Background Aurora - Simplified on Mobile */}
       <motion.div
@@ -475,7 +475,7 @@ const Hero = () => {
           {/* Interactive Aura Glow - Disabled on Mobile */}
           {!mobile && (
             <motion.div
-              className="absolute -inset-20 rounded-full blur-3xl pointer-events-none"
+              className="absolute inset-0 rounded-full blur-3xl pointer-events-none"
               style={{
                 background: "radial-gradient(circle, rgba(250,204,21,0.3) 0%, rgba(168,85,247,0.2) 50%, transparent 70%)",
                 x: auraX,
