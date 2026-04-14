@@ -3,17 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import videoSource from "../assets/public/Signature 2.o.mp4";
 
 const VideoLoader = () => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
-  }, []);
-
   return (
-    <AnimatePresence>
-      {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
@@ -43,8 +33,6 @@ const VideoLoader = () => {
             Your browser does not support the video tag.
           </video>
         </motion.div>
-      )}
-    </AnimatePresence>
   );
 };
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../index.css";
 
@@ -85,37 +85,76 @@ const Header = () => {
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </div>
 
-          {/* Mobile Navigation Menu */}
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              className="motion-div absolute top-20 right-4 w-64 bg-gray-900 border border-gray-700 text-white p-6 rounded-2xl shadow-2xl z-50 flex flex-col space-y-4"
-            >
-              <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
-              <NavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</NavLink>
-              <button onClick={() => handleScroll("skills")} className="text-left">Skills</button>
-              <button onClick={() => handleScroll("projects")} className="text-left">Projects</button>
-              
-              {/* Mobile Links for New Routes */}
-              <NavLink to="/education" onClick={() => setIsMenuOpen(false)} className="text-purple-400 font-semibold">Education 📚</NavLink>
-              <NavLink to="/experience" onClick={() => setIsMenuOpen(false)} className="text-yellow-400 font-semibold">Experience 💼</NavLink>
-              <NavLink to="/achievements" onClick={() => setIsMenuOpen(false)} className="text-yellow-400 font-semibold">Achievements 🏆</NavLink>
-              
-              <NavLink to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
-
-              <button
-                onClick={() => {
-                  setShowResume(true);
-                  setIsMenuOpen(false);
-                }}
-                className="resume-btn mt-2 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-400 transition"
+          {/* Mobile Navigation Overlay */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 bg-black/90 backdrop-blur-xl z-[60] flex flex-col items-center justify-center p-8 md:hidden"
               >
-                See Resume
-              </button>
-            </motion.div>
-          )}
+                {/* Header inside overlay */}
+                <div className="absolute top-0 left-0 w-full p-6 flex justify-between items-center">
+                  <img
+                    src="https://res.cloudinary.com/dncosrakg/image/upload/v1739989872/uag9e6plq4hm1v1ajl4p.png"
+                    alt="Logo"
+                    className="h-12 w-12"
+                    onClick={() => { setIsMenuOpen(false); navigate('/'); }}
+                  />
+                  <button 
+                    className="text-yellow-400 text-4xl hover:rotate-90 transition-transform duration-300"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <FaTimes />
+                  </button>
+                </div>
+
+                <nav className="flex flex-col items-center space-y-2 w-full max-w-sm mt-12">
+                  {[
+                    { name: 'Home', path: '/' },
+                    { name: 'About', path: '/about' },
+                    { name: 'Skills', id: 'skills' },
+                    { name: 'Projects', id: 'projects' },
+                    { name: 'Education 📚', path: '/education', color: 'text-purple-400' },
+                    { name: 'Experience 💼', path: '/experience', color: 'text-yellow-400' },
+                    { name: 'Achievements 🏆', path: '/achievements', color: 'text-yellow-400' },
+                    { name: 'Contact', path: '/contact' }
+                  ].map((item, index) => (
+                    <div key={index} className="w-full">
+                      {item.path ? (
+                        <NavLink 
+                          to={item.path} 
+                          onClick={() => setIsMenuOpen(false)} 
+                          className={`block py-4 text-xl text-center border-b border-gray-800/50 hover:text-yellow-400 transition-colors ${item.color || 'text-white'}`}
+                        >
+                          {item.name}
+                        </NavLink>
+                      ) : (
+                        <button 
+                          onClick={() => handleScroll(item.id)} 
+                          className="w-full py-4 text-xl text-center border-b border-gray-800/50 hover:text-yellow-400 transition-colors text-white"
+                        >
+                          {item.name}
+                        </button>
+                      )}
+                    </div>
+                  ))}
+
+                  <button
+                    onClick={() => {
+                      setShowResume(true);
+                      setIsMenuOpen(false);
+                    }}
+                    className="resume-btn mt-8 bg-yellow-500 text-black w-full py-4 rounded-2xl font-bold text-xl shadow-[0_0_20px_rgba(250,204,21,0.4)] hover:shadow-[0_0_30px_rgba(250,204,21,0.6)] transition-all duration-300 transform hover:scale-[1.02]"
+                  >
+                    See Resume
+                  </button>
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Resume Button (Desktop) */}
           <button

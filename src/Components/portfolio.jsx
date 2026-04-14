@@ -63,7 +63,7 @@ const projectData = {
     { id: 406, title: "Cocktail Finder", thumbnail: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400", links: { github: "https://github.com/ArjunDivraniya/Component-react", demo: "#" } },
   ],
   uiux: [
-    { id: 501, title: "CodingGuta Website", thumbnail: "https://res.cloudinary.com/deucrairj/image/upload/v1769684647/v42imcd0pyxyar7qbpar.png?w=400", links: { figma: "https://www.figma.com/design/9JVEOazbDfoTztz4zNEIkv/Personal?node-id=2-450&t=6dDeHXniAMMWZy1E-1" } },
+    { id: 501, title: "CodingGita Website", thumbnail: "https://res.cloudinary.com/deucrairj/image/upload/v1769684647/v42imcd0pyxyar7qbpar.png?w=400", links: { figma: "https://www.figma.com/design/9JVEOazbDfoTztz4zNEIkv/Personal?node-id=2-450&t=6dDeHXniAMMWZy1E-1" } },
       { id: 502, title: "Photographer Booking UI", thumbnail: "https://res.cloudinary.com/deucrairj/image/upload/v1769685057/bbprhd4nfxbaxluinh0f.png?w=400", links: { figma: "https://www.figma.com/design/rGMySFjXI7AcEytfM11DgC/Full-Stack-Project?node-id=0-1&t=AcZ2ScHJCTZe4Dbi-1" } },
     { id: 503, title: "Photography Portfolio UI", thumbnail: "https://res.cloudinary.com/deucrairj/image/upload/v1769685056/sbjaamneni6dqrrs2o9t.png?w=400", links: { figma: "https://www.figma.com/design/caL2xnuuFymXGs4p3GUs1T/MY-WEBSITE?node-id=0-1&t=v5cYSzBfBgyBrdSk-1" } },
     { id: 504, title: "AI Mirror Designing", thumbnail: "https://res.cloudinary.com/deucrairj/image/upload/v1769684628/ee75649c-9731-47ee-92ef-586756ea4c5f.png?w=400", links: { figma: "https://www.figma.com/design/piATVvho8lgpKSg2guw9HO/ai-mirror-project?node-id=0-1&t=yVwTPt5DSHw00aFi-1" } },
