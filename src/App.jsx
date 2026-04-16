@@ -19,14 +19,15 @@ import Experience from "./Components/Experience";
 import ScrollToTop from "./Components/ScrollToTop";
 import "./index.css"; 
 // Google Analytics
-import { usePageTracking, useScrollDepthTracking } from "./hooks/useAnalytics";
+import { usePageTracking, useScrollDepthTracking, useLinkTracking } from "./hooks/useAnalytics";
 
 function App() {
   const [loading, setLoading] = React.useState(true);
 
-  // Enable page tracking and scroll depth tracking
+  // Enable page tracking, scroll depth tracking, and link tracking
   usePageTracking();
   useScrollDepthTracking();
+  useLinkTracking();
 
   React.useEffect(() => {
     // Matches the duration in VideoLoader.jsx (approx 3s) + fade out

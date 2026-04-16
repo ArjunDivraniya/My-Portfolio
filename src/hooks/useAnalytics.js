@@ -1,7 +1,7 @@
 // Custom React Hook for Google Analytics tracking
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { trackPageView, initGA, trackTimeOnPage } from '../utils/analytics';
+import { trackPageView, initGA, trackTimeOnPage, trackClick, trackDownload } from '../utils/analytics';
 
 // Hook to track page views on route changes
 export const usePageTracking = () => {
@@ -115,5 +115,32 @@ export const useScrollDepthTracking = () => {
       window.removeEventListener('scroll', handleScroll);
       trackedDepths.current.clear();
     };
+  }, []);
+};
+
+// Hook to track clicks on external links and downloads automatically
+export const useLinkTracking = () => {
+  useEffect(() => {
+    const handleGlobalClick = (e) => {
+      const link = e.target.closest('a');
+      if (!link || !link.href) return;
+
+      const url = link.href;
+      const isExternal = url.startsWith('http') && !url.includes('arjundivraniya.in');
+      const isDownload = url.toLowerCase().endsWith('.pdf') || 
+                         url.toLowerCase().endsWith('.zip') || 
+                         url.toLowerCase().endsWith('.docx') ||
+                         link.hasAttribute('download');
+
+      if (isDownload) {
+        const fileName = url.split('/').pop() || 'file';
+        trackDownload(fileName);
+      } else if (isExternal) {
+        trackClick('Outbound Link', url);
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick);
+    return () => document.removeEventListener('click', handleGlobalClick);
   }, []);
 };
