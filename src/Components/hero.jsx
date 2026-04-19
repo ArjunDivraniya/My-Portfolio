@@ -6,6 +6,17 @@ import { FaGithub, FaLinkedin, FaCamera, FaStar, FaAward, FaCode, FaTrophy } fro
 import { SiCplusplus, SiLeetcode } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";
 import { isMobile, getHoverProps, getMobileInViewProps, conditionalAnimation } from "../utils/mobileOptimization";
+import headshotImage from "../assets/Profile/Arjun-2.png";
+import photographyImageOne from "../assets/Profile/Arjun-Portfolio-2.png";
+import photographyImageTwo from "../assets/Profile/Arjun-Portfolio-3.jpeg";
+
+const floatingStackSlots = [
+  { x: 0, y: -8, rotate: 0, scale: 1, opacity: 1, zIndex: 50 },
+  { x: -34, y: 16, rotate: -8, scale: 0.95, opacity: 0.78, zIndex: 40 },
+  { x: 36, y: 30, rotate: 9, scale: 0.9, opacity: 0.64, zIndex: 30 },
+  { x: -22, y: 48, rotate: -5, scale: 0.86, opacity: 0.5, zIndex: 20 },
+  { x: 24, y: 62, rotate: 5, scale: 0.82, opacity: 0.36, zIndex: 10 },
+];
 
 // Animated Name Characters with Fire Effect (Mobile-Optimized)
 const AnimatedNameChar = ({ char, index }) => {
@@ -222,6 +233,7 @@ const Hero = () => {
   const mobile = isMobile();
   const [mounted, setMounted] = useState(false);
   const [leetcodeData, setLeetcodeData] = useState(null);
+  const [activeStackIndex, setActiveStackIndex] = useState(0);
   const containerRef = useRef(null);
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
@@ -238,6 +250,14 @@ const Hero = () => {
   const auraY = useSpring(mouseYForAura, { stiffness: 80, damping: 30 });
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStackIndex((prev) => (prev + 1) % 5);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   // Fetch LeetCode data
   useEffect(() => {
@@ -301,7 +321,39 @@ const Hero = () => {
     mouseYForAura.set(0);
   };
 
-  const desktopImage = "https://res.cloudinary.com/dncosrakg/image/upload/v1740032195/x608ojr0yuf8j87wdnba.jpg";
+  const floatingStackImages = [
+    {
+      id: "headshot",
+      src: headshotImage,
+      alt: "Arjun Divraniya headshot",
+    },
+    {
+      id: "photography-1",
+      src: photographyImageOne,
+      alt: "Arjun photography work one",
+    },
+    {
+      id: "photography-2",
+      src: photographyImageTwo,
+      alt: "Arjun photography work two",
+    },
+    {
+      id: "dashboard-1",
+      src: "https://res.cloudinary.com/deucrairj/image/upload/v1769684647/v42imcd0pyxyar7qbpar.png",
+      alt: "Project dashboard preview one",
+    },
+    {
+      id: "dashboard-2",
+      src: "https://res.cloudinary.com/deucrairj/image/upload/v1769685057/bbprhd4nfxbaxluinh0f.png",
+      alt: "Project dashboard preview two",
+    },
+  ];
+
+  const getFloatingSlot = (index) => {
+    const relative = (index - activeStackIndex + floatingStackImages.length) % floatingStackImages.length;
+    return floatingStackSlots[relative] || floatingStackSlots[floatingStackSlots.length - 1];
+  };
+
   const nameText = "ARJUN DIVRANIYA";
 
   // Achievement Cards Configuration - Tech Architect Focus
@@ -537,7 +589,7 @@ const Hero = () => {
             />
           )}
 
-          {/* 3D Tilt Photo Container - Flat on Mobile */}
+          {/* Floating Stack Image Container - Replaces Single Hero Image */}
           <motion.div
             className="relative w-full max-w-sm sm:max-w-md md:max-w-lg h-[420px] sm:h-[520px] md:h-[620px] rounded-2xl sm:rounded-3xl border-2 border-yellow-500/30 bg-gradient-to-br from-black/40 to-purple-900/30 shadow-[0_60px_120px_-40px_rgba(250,204,21,0.4)] overflow-hidden"
             style={mobile ? {} : {
@@ -546,12 +598,11 @@ const Hero = () => {
               transformStyle: "preserve-3d",
             }}
           >
-            {/* Depth Layer 1 - Glow Behind - Simplified on Mobile */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-tr from-purple-600/40 via-transparent to-yellow-500/20"
+              className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-transparent to-yellow-500/15"
               animate={!mobile ? {
-                scale: [1, 1.1, 1],
-                opacity: [0.3, 0.6, 0.3],
+                scale: [1, 1.06, 1],
+                opacity: [0.26, 0.46, 0.26],
               } : {}}
               transition={{
                 duration: mobile ? 0 : 6,
@@ -560,33 +611,47 @@ const Hero = () => {
               }}
             />
 
-            {/* Depth Layer 2 - Image */}
-            <motion.img
-              src={desktopImage}
-              alt="Arjun Divraniya - Full Stack Architect"
-              className="relative z-10 h-full w-full object-cover object-[center_20%] sm:object-[center_20%] rounded-2xl sm:rounded-3xl"
-              style={mobile ? {} : { transform: "translateZ(40px)" }}
-              {...getHoverProps({ scale: 1.03 })}
-              transition={{ duration: 0.4 }}
-            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div
+                className="absolute h-52 w-52 rounded-full blur-3xl"
+                style={{ backgroundColor: "rgba(59,130,246,0.10)" }}
+                animate={!mobile ? { y: [0, -14, 0] } : {}}
+                transition={{ duration: mobile ? 0 : 5, repeat: mobile ? 0 : Infinity, ease: "easeInOut" }}
+              />
 
-            {/* Depth Layer 3 - Border Glow - Simplified on Mobile */}
-            <motion.div
-              className="absolute inset-0 rounded-3xl border border-yellow-300/40 shadow-[inset_0_0_40px_rgba(250,204,21,0.2)]"
-              style={mobile ? {} : { transform: "translateZ(50px)" }}
-              animate={!mobile ? {
-                boxShadow: [
-                  "inset 0 0 40px rgba(250,204,21,0.1)",
-                  "inset 0 0 60px rgba(250,204,21,0.3)",
-                  "inset 0 0 40px rgba(250,204,21,0.1)",
-                ],
-              } : {}}
-              transition={{
-                duration: mobile ? 0 : 4,
-                repeat: mobile ? 0 : Infinity,
-                ease: "easeInOut",
-              }}
-            />
+              <motion.div
+                className="relative h-[320px] w-[240px] sm:h-[360px] sm:w-[270px]"
+                animate={!mobile ? { y: [0, -10, 0] } : {}}
+                transition={{ duration: mobile ? 0 : 5, repeat: mobile ? 0 : Infinity, ease: "easeInOut" }}
+              >
+                {floatingStackImages.map((image, index) => {
+                  const slot = getFloatingSlot(index);
+                  return (
+                    <motion.figure
+                      key={image.id}
+                      className="absolute inset-0 overflow-hidden rounded-2xl border border-white/20 bg-black/30 shadow-[0_22px_40px_-18px_rgba(15,23,42,0.75)]"
+                      initial={false}
+                      animate={{
+                        x: slot.x,
+                        y: slot.y,
+                        rotate: slot.rotate,
+                        scale: slot.scale,
+                        opacity: slot.opacity,
+                      }}
+                      transition={{ duration: 1, ease: "easeInOut" }}
+                      style={{ zIndex: slot.zIndex }}
+                    >
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </motion.figure>
+                  );
+                })}
+              </motion.div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
