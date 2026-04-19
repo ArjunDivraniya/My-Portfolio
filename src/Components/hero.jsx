@@ -7,16 +7,9 @@ import { SiCplusplus, SiLeetcode } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";
 import { isMobile, getHoverProps, getMobileInViewProps, conditionalAnimation } from "../utils/mobileOptimization";
 import headshotImage from "../assets/Profile/Arjun-2.png";
+import portfolioImageOne from "../assets/Profile/Arjun-Portfolio-1.png";
 import photographyImageOne from "../assets/Profile/Arjun-Portfolio-2.png";
 import photographyImageTwo from "../assets/Profile/Arjun-Portfolio-3.jpeg";
-
-const floatingStackSlots = [
-  { x: 0, y: -8, rotate: 0, scale: 1, opacity: 1, zIndex: 50 },
-  { x: -34, y: 16, rotate: -8, scale: 0.95, opacity: 0.78, zIndex: 40 },
-  { x: 36, y: 30, rotate: 9, scale: 0.9, opacity: 0.64, zIndex: 30 },
-  { x: -22, y: 48, rotate: -5, scale: 0.86, opacity: 0.5, zIndex: 20 },
-  { x: 24, y: 62, rotate: 5, scale: 0.82, opacity: 0.36, zIndex: 10 },
-];
 
 // Animated Name Characters with Fire Effect (Mobile-Optimized)
 const AnimatedNameChar = ({ char, index }) => {
@@ -253,7 +246,7 @@ const Hero = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveStackIndex((prev) => (prev + 1) % 5);
+      setActiveStackIndex((prev) => (prev + 1) % floatingStackImages.length);
     }, 5000);
 
     return () => clearInterval(timer);
@@ -328,6 +321,11 @@ const Hero = () => {
       alt: "Arjun Divraniya headshot",
     },
     {
+      id: "portfolio-1",
+      src: portfolioImageOne,
+      alt: "Arjun portfolio image one",
+    },
+    {
       id: "photography-1",
       src: photographyImageOne,
       alt: "Arjun photography work one",
@@ -337,22 +335,7 @@ const Hero = () => {
       src: photographyImageTwo,
       alt: "Arjun photography work two",
     },
-    {
-      id: "dashboard-1",
-      src: "https://res.cloudinary.com/deucrairj/image/upload/v1769684647/v42imcd0pyxyar7qbpar.png",
-      alt: "Project dashboard preview one",
-    },
-    {
-      id: "dashboard-2",
-      src: "https://res.cloudinary.com/deucrairj/image/upload/v1769685057/bbprhd4nfxbaxluinh0f.png",
-      alt: "Project dashboard preview two",
-    },
   ];
-
-  const getFloatingSlot = (index) => {
-    const relative = (index - activeStackIndex + floatingStackImages.length) % floatingStackImages.length;
-    return floatingStackSlots[relative] || floatingStackSlots[floatingStackSlots.length - 1];
-  };
 
   const nameText = "ARJUN DIVRANIYA";
 
@@ -589,28 +572,15 @@ const Hero = () => {
             />
           )}
 
-          {/* Floating Stack Image Container - Replaces Single Hero Image */}
+          {/* Direct Image Animation Container */}
           <motion.div
-            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg h-[420px] sm:h-[520px] md:h-[620px] rounded-2xl sm:rounded-3xl border-2 border-yellow-500/30 bg-gradient-to-br from-black/40 to-purple-900/30 shadow-[0_60px_120px_-40px_rgba(250,204,21,0.4)] overflow-hidden"
+            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg h-[420px] sm:h-[520px] md:h-[620px]"
             style={mobile ? {} : {
               rotateX,
               rotateY,
               transformStyle: "preserve-3d",
             }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-transparent to-yellow-500/15"
-              animate={!mobile ? {
-                scale: [1, 1.06, 1],
-                opacity: [0.26, 0.46, 0.26],
-              } : {}}
-              transition={{
-                duration: mobile ? 0 : 6,
-                repeat: mobile ? 0 : Infinity,
-                ease: "easeInOut",
-              }}
-            />
-
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
                 className="absolute h-52 w-52 rounded-full blur-3xl"
@@ -620,34 +590,28 @@ const Hero = () => {
               />
 
               <motion.div
-                className="relative h-[320px] w-[240px] sm:h-[360px] sm:w-[270px]"
+                className="relative h-full w-full"
                 animate={!mobile ? { y: [0, -10, 0] } : {}}
                 transition={{ duration: mobile ? 0 : 5, repeat: mobile ? 0 : Infinity, ease: "easeInOut" }}
               >
                 {floatingStackImages.map((image, index) => {
-                  const slot = getFloatingSlot(index);
+                  const isActive = index === activeStackIndex;
                   return (
-                    <motion.figure
+                    <motion.img
                       key={image.id}
-                      className="absolute inset-0 overflow-hidden rounded-2xl border border-white/20 bg-black/30 shadow-[0_22px_40px_-18px_rgba(15,23,42,0.75)]"
+                      src={image.src}
+                      alt={image.alt}
+                      className="absolute inset-0 h-full w-full object-cover rounded-2xl sm:rounded-3xl"
                       initial={false}
                       animate={{
-                        x: slot.x,
-                        y: slot.y,
-                        rotate: slot.rotate,
-                        scale: slot.scale,
-                        opacity: slot.opacity,
+                        opacity: isActive ? 1 : 0,
+                        scale: isActive ? 1.03 : 1,
+                        rotate: isActive ? 0 : index % 2 === 0 ? -1.2 : 1.2,
                       }}
                       transition={{ duration: 1, ease: "easeInOut" }}
-                      style={{ zIndex: slot.zIndex }}
-                    >
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                      />
-                    </motion.figure>
+                      style={{ zIndex: isActive ? 20 : 10 }}
+                      loading="lazy"
+                    />
                   );
                 })}
               </motion.div>
