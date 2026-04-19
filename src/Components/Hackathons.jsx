@@ -36,7 +36,7 @@ const hackathonData = [
       video: 'https://example.com',
       certificate: 'https://example.com',
     },
-    badge: 'Selected for Top 1% Offline Round',
+    badge: 'Selected for Offline Round',
   },
   {
     id: 'odoo-nmit',

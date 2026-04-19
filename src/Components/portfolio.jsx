@@ -40,7 +40,7 @@ const projectData = {
     },
   ],
   hackathons: [
-    { id: 101, title: "HRMS", subtitle: "IIT GN Offline", video: "https://www.youtube.com/embed/mFVR0ihWdTo", badge: "🏆 Top 1% Select", tech: ["Odoo", "PostgreSQL", "Python"], about: "Enterprise HR system with multi-level workflows and policy enforcement.", links: { github: "https://github.com/mayank-dudhatra/ODOOxIITGxHRMS", demo: "#", video: "https://www.youtube.com/embed/mFVR0ihWdTo" } },
+    { id: 101, title: "HRMS", subtitle: "IIT GN Offline", video: "https://www.youtube.com/embed/mFVR0ihWdTo", badge: "🏆 Offline Selection", tech: ["Odoo", "PostgreSQL", "Python"], about: "Enterprise HR system with multi-level workflows and policy enforcement.", links: { github: "https://github.com/mayank-dudhatra/ODOOxIITGxHRMS", demo: "#", video: "https://www.youtube.com/embed/mFVR0ihWdTo" } },
     { id: 102, title: "Expense Management", subtitle: "IIT GN Online", video: "https://www.youtube.com/embed/RrZAaDPay9g", tech: ["Odoo", "Python", "Reports"], about: "Multi-level approvals and policy guardrails for expense tracking.", links: { github: "https://github.com/ArjunDivraniya/ODOOxIITG-Virtual-Round-", demo: "https://expense-managment-eight.vercel.app/", video: "https://www.youtube.com/embed/RrZAaDPay9g" } },
     { id: 103, title: "StockMaster", subtitle: "SPIT", video: "https://www.youtube.com/embed/dRXl1a0PcGA", tech: ["Odoo", "Inventory", "Analytics"], about: "Smart warehouse with reorder signals and stock optimization.", links: { github: "https://github.com/ArjunDivraniya/Odoo-X-SPIT", demo: "https://odoo-management-system-ad.vercel.app/login", video: "https://www.youtube.com/embed/dRXl1a0PcGA" } },
     { id: 104, title: "Project Collab", subtitle: "NMIT", video: "https://www.youtube.com/embed/lj_SfjZODq0", tech: ["React", "Node", "Kanban"], about: "Team project platform with sprint management and collaboration.", links: { github: "https://github.com/ArjunDivraniya/ODOOxNMIT", demo: "#", video: "https://www.youtube.com/embed/lj_SfjZODq0" } },
@@ -72,62 +72,53 @@ const projectData = {
 
 const categories = ["All", "Flagship", "Hackathons", "Backend", "Open Source", "Learning Lab", "UI/UX"];
 
+const getYouTubeVideoId = (url) => {
+  const match = url?.match(/embed\/([^?&]+)/);
+  return match ? match[1] : "";
+};
+
+const toPrivacyEmbedUrl = (url) => {
+  const id = getYouTubeVideoId(url);
+  return id ? `https://www.youtube-nocookie.com/embed/${id}` : url;
+};
+
+const getYouTubeThumbnail = (url) => {
+  const id = getYouTubeVideoId(url);
+  return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "";
+};
+
 // ===================== FILTER NAVIGATION WITH GSAP BLOB =====================
 const FilterNav = memo(({ active, onChange }) => {
-  const blobRef = useRef(null);
-  const containerRef = useRef(null);
-  const itemRefs = useRef({});
-
-  useEffect(() => {
-    if (!blobRef.current || !containerRef.current) return;
-
-    const activeButton = itemRefs.current[active];
-    if (!activeButton) return;
-
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const buttonRect = activeButton.getBoundingClientRect();
-
-    gsap.to(blobRef.current, {
-      left: buttonRect.left - containerRect.left,
-      width: buttonRect.width,
-      duration: 0.5,
-      ease: "power3.out",
-    });
-  }, [active]);
-
   return (
     <motion.div
-      className="sticky top-20 z-40 flex justify-center py-4 sm:py-6 bg-gradient-to-b from-black via-black/95 to-black/80 border-b border-yellow-500/20 backdrop-blur-xl px-4 sm:px-6 max-w-full"
+      className="sticky top-20 z-40 flex justify-center py-4 sm:py-6 bg-gradient-to-b from-black via-black/95 to-black/80 backdrop-blur-xl px-4 sm:px-6 max-w-full"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <div
-        ref={containerRef}
-        className="relative flex flex-wrap justify-center gap-2 px-3 sm:px-6 py-2 rounded-2xl sm:rounded-full bg-black/60 border border-yellow-500/20 backdrop-blur max-w-full"
-      >
-        {/* GSAP Animated Blob */}
+      <div className="relative w-full sm:w-auto">
         <div
-          ref={blobRef}
-          className="absolute top-0 h-full bg-gradient-to-r from-yellow-500/20 via-yellow-500/10 to-transparent rounded-full blur-xl pointer-events-none"
-          style={{ left: 0, width: 0 }}
-        />
+          className="relative flex md:flex-wrap md:justify-center gap-2 px-1 sm:px-2 py-1.5 rounded-none bg-transparent max-w-full w-full sm:w-auto overflow-x-auto md:overflow-visible whitespace-nowrap snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {/* Filter Buttons */}
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => onChange(cat)}
+              className={`relative snap-start shrink-0 min-h-[44px] min-w-[98px] sm:min-w-0 px-4 sm:px-5 py-2.5 rounded-xl md:rounded-full font-bold text-xs sm:text-sm transition-all whitespace-nowrap z-10 border ${
+                active === cat
+                  ? "text-black bg-gradient-to-r from-yellow-400 to-amber-500 border-yellow-300 shadow-[0_6px_20px_rgba(250,204,21,0.45)]"
+                  : "text-gray-300 border-white/10 bg-white/[0.03] hover:text-white hover:bg-white/10"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-        {/* Filter Buttons */}
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            ref={(el) => (itemRefs.current[cat] = el)}
-            onClick={() => onChange(cat)}
-            className={`relative px-3 sm:px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition-all whitespace-nowrap z-10 ${
-              active === cat
-                ? "text-black bg-yellow-500 shadow-lg shadow-yellow-500/50"
-                : "text-gray-300 hover:text-white hover:bg-white/10"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+        {/* Subtle swipe affordance for mobile */}
+        <div className="md:hidden pointer-events-none absolute inset-y-2 left-0 w-6 bg-gradient-to-r from-sky-500/35 to-transparent" />
+        <div className="md:hidden pointer-events-none absolute inset-y-2 right-0 w-7 bg-gradient-to-l from-sky-500/45 to-transparent" />
       </div>
     </motion.div>
   );
@@ -159,16 +150,18 @@ const FlagshipCarousel = memo(() => {
       >
         {/* Left: Video Background */}
         <motion.div
-          className="relative h-80 sm:h-96 rounded-2xl sm:rounded-3xl overflow-hidden border border-yellow-500/40 bg-black group"
+          className="relative h-44 sm:h-72 md:h-96 w-[92%] md:w-full mx-auto md:mx-0 rounded-2xl sm:rounded-3xl overflow-hidden border border-yellow-500/40 bg-black group"
           whileHover={{ scale: 1.02 }}
         >
           <iframe
             ref={(el) => (videoRefs.current[currentIndex] = el)}
-            src={`${project.video}?autoplay=1&mute=1&loop=1&controls=0`}
+            src={`${toPrivacyEmbedUrl(project.video)}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0`}
             className="absolute inset-0 w-full h-full object-cover"
             allow="autoplay; encrypted-media"
             frameBorder="0"
             title={project.title}
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
 
@@ -196,14 +189,14 @@ const FlagshipCarousel = memo(() => {
             9.74 CGPA
           </motion.div>
 
-          {/* Top 1% Badge - Bottom Left */}
+          {/* Achievement Badge - Bottom Left */}
           <motion.div
             className="absolute bottom-6 left-6 px-3 py-1.5 rounded-full bg-purple-600/90 border border-purple-400/50 text-white text-xs font-bold backdrop-blur"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            ⭐ Top 1% Student
+            ⭐ High Performer
           </motion.div>
         </motion.div>
 
@@ -309,8 +302,9 @@ const FlagshipCarousel = memo(() => {
           <motion.button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
+            style={{ minWidth: 0, minHeight: 0 }}
             className={`rounded-full transition-all ${
-              idx === currentIndex ? "w-8 h-3 bg-yellow-400" : "w-3 h-3 bg-white/30 hover:bg-white/50"
+              idx === currentIndex ? "w-6 h-2 sm:w-8 sm:h-3 bg-yellow-400" : "w-2 h-2 sm:w-3 sm:h-3 bg-white/30 hover:bg-white/50"
             }`}
             whileHover={{ scale: 1.2 }}
           />
@@ -323,7 +317,7 @@ const FlagshipCarousel = memo(() => {
 // ===================== HACKATHON CARD COMPONENT =====================
 const HackathonCard = memo(({ project, isActive }) => {
   return (
-    <motion.div
+      <motion.div
       className="absolute inset-0 w-full max-w-full"
       initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
       animate={
@@ -347,14 +341,25 @@ const HackathonCard = memo(({ project, isActive }) => {
         {/* Video Section */}
         <div className="grid grid-cols-1 md:grid-cols-5 h-full">
           {/* Left Video - 60% width on desktop */}
-          <div className="md:col-span-3 relative bg-black overflow-hidden">
-            <iframe
-              src={`${project.video}?autoplay=${isActive ? 1 : 0}&mute=1&controls=1`}
-              className="w-full h-full object-cover"
-              allow="autoplay; encrypted-media"
-              frameBorder="0"
-              title={project.title}
-            />
+          <div className="md:col-span-3 relative bg-black overflow-hidden h-40 sm:h-52 md:h-auto min-h-[160px] md:min-h-0">
+            {isActive ? (
+              <iframe
+                src={`${toPrivacyEmbedUrl(project.video)}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0`}
+                className="w-full h-full min-h-[160px] md:min-h-0"
+                allow="autoplay; encrypted-media"
+                frameBorder="0"
+                title={project.title}
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            ) : (
+              <img
+                src={getYouTubeThumbnail(project.video)}
+                alt={`${project.title} thumbnail`}
+                className="w-full h-full min-h-[160px] md:min-h-0 object-cover"
+                loading="lazy"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/40" />
 
             {/* Badge */}
@@ -504,7 +509,7 @@ const HackathonVerticalCinema = memo(() => {
       viewport={{ once: true }}
     >
       {/* Carousel Container */}
-      <div className="relative w-full max-w-full h-[28rem] sm:h-96 md:h-96 rounded-2xl sm:rounded-3xl overflow-hidden bg-black">
+      <div className="relative w-full max-w-full h-[20rem] sm:h-[23rem] md:h-96 rounded-2xl sm:rounded-3xl overflow-hidden bg-black">
         {projectData.hackathons.map((project, index) => (
           <HackathonCard
             key={project.id}
@@ -524,7 +529,8 @@ const HackathonVerticalCinema = memo(() => {
         {/* Left Arrow */}
         <motion.button
           onClick={() => handleDotClick((currentIndex - 1 + projectData.hackathons.length) % projectData.hackathons.length)}
-          className="p-2 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 text-xs sm:text-sm hover:bg-yellow-500/40"
+          style={{ minWidth: 0, minHeight: 0 }}
+          className="w-8 h-8 sm:w-9 sm:h-9 p-0 flex items-center justify-center rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 text-xs sm:text-sm hover:bg-yellow-500/40"
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -539,13 +545,14 @@ const HackathonVerticalCinema = memo(() => {
             <motion.button
               key={idx}
               onClick={() => handleDotClick(idx)}
+              style={{ minWidth: 0, minHeight: 0 }}
               className={`rounded-full transition-all ${
                 idx === currentIndex
-                  ? "w-3 h-3 bg-yellow-400"
-                  : "w-2 h-2 bg-white/40 hover:bg-white/60"
+                  ? "w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-400"
+                  : "w-2 h-2 sm:w-2.5 sm:h-2.5 bg-white/40 hover:bg-white/60"
               }`}
               animate={{
-                scale: idx === currentIndex ? 1.2 : 1,
+                scale: idx === currentIndex ? 1.15 : 1,
                 boxShadow:
                   idx === currentIndex ? "0 0 15px rgba(234, 179, 8, 0.6)" : "none",
               }}
@@ -558,7 +565,8 @@ const HackathonVerticalCinema = memo(() => {
         {/* Right Arrow */}
         <motion.button
           onClick={() => handleDotClick((currentIndex + 1) % projectData.hackathons.length)}
-          className="p-2 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 text-xs sm:text-sm hover:bg-yellow-500/40"
+          style={{ minWidth: 0, minHeight: 0 }}
+          className="w-8 h-8 sm:w-9 sm:h-9 p-0 flex items-center justify-center rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-400 text-xs sm:text-sm hover:bg-yellow-500/40"
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -599,7 +607,7 @@ const HackathonVerticalCinema = memo(() => {
           whileHover={{ scale: 1.05 }}
         >
           <div className="text-2xl font-black text-purple-400">🏆</div>
-          <p className="text-gray-300 text-xs mt-2">Top 1%</p>
+          <p className="text-gray-300 text-xs mt-2">Recognized</p>
         </motion.div>
         <motion.div
           className="text-center p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/30"
@@ -930,7 +938,7 @@ const UIUXCard = memo(({ project }) => {
       <img
         src={project.thumbnail}
         alt={project.title}
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+        className="responsive-media h-full group-hover:scale-110 transition-transform duration-300"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
         <h4 className="text-white font-black text-lg sm:text-xl mb-3 leading-tight">{project.title}</h4>
@@ -964,7 +972,7 @@ export const Portfolio = memo(() => {
         <motion.div key="flagship" className="space-y-8">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8 flex items-center gap-2 sm:gap-3">
-              <FaCrown className="text-yellow-500 text-lg sm:text-2xl\" /> Full Stack Projects
+              <FaCrown className="text-yellow-500 text-lg sm:text-2xl" /> Full Stack Projects
             </h2>
             <FlagshipCarousel />
           </div>
@@ -974,8 +982,8 @@ export const Portfolio = memo(() => {
       sections.push(
         <motion.div key="hackathons" className="space-y-8">
           <div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8 flex items-center gap-2 sm:gap-3\">
-              <FaTrophy className="text-yellow-500 text-lg sm:text-2xl\" /> Hackathon Projects
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8 flex items-center gap-2 sm:gap-3">
+              <FaTrophy className="text-yellow-500 text-lg sm:text-2xl" /> Hackathon Projects
             </h2>
             <HackathonVerticalCinema />
           </div>
@@ -986,7 +994,7 @@ export const Portfolio = memo(() => {
         <motion.div key="backend" className="space-y-8">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8">Backend Systems</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            <div className="project-grid-auto">
               {projectData.backend.map((project) => (
                 <BackendCard key={project.id} project={project} />
               ))}
@@ -999,7 +1007,7 @@ export const Portfolio = memo(() => {
         <motion.div key="oss" className="space-y-8">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8">Open Source Contributions</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            <div className="project-grid-auto">
               {projectData.oss.map((project) => (
                 <OSSCard key={project.id} project={project} />
               ))}
@@ -1021,7 +1029,7 @@ export const Portfolio = memo(() => {
         <motion.div key="uiux" className="space-y-8">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 sm:mb-8">UI/UX Designs</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="project-grid-auto">
               {projectData.uiux.map((project) => (
                 <UIUXCard key={project.id} project={project} />
               ))}
@@ -1037,7 +1045,7 @@ export const Portfolio = memo(() => {
     if (activeFilter === "Flagship") {
       return (
         <motion.div className="space-y-8">
-          <h2 className="text-4xl font-black text-white mb-8">Flagship Projects</h2>
+          <h2 className="fluid-title font-black text-white mb-8">Flagship Projects</h2>
           <FlagshipCarousel />
         </motion.div>
       );
@@ -1046,7 +1054,7 @@ export const Portfolio = memo(() => {
     if (activeFilter === "Hackathons") {
       return (
         <motion.div className="space-y-8">
-          <h2 className="text-4xl font-black text-white mb-8">Hackathon Vertical Cinema</h2>
+          <h2 className="fluid-title font-black text-white mb-8">Hackathon Vertical Cinema</h2>
           <HackathonVerticalCinema />
         </motion.div>
       );
@@ -1055,8 +1063,8 @@ export const Portfolio = memo(() => {
     if (activeFilter === "Backend") {
       return (
         <motion.div className="space-y-8">
-          <h2 className="text-4xl font-black text-white mb-8">Backend Systems</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <h2 className="fluid-title font-black text-white mb-8">Backend Systems</h2>
+          <div className="project-grid-auto">
             {projectData.backend.map((project) => (
               <BackendCard key={project.id} project={project} />
             ))}
@@ -1068,8 +1076,8 @@ export const Portfolio = memo(() => {
     if (activeFilter === "Open Source") {
       return (
         <motion.div className="space-y-8">
-          <h2 className="text-4xl font-black text-white mb-8">Open Source Contributions</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <h2 className="fluid-title font-black text-white mb-8">Open Source Contributions</h2>
+          <div className="project-grid-auto">
             {projectData.oss.map((project) => (
               <OSSCard key={project.id} project={project} />
             ))}
@@ -1081,7 +1089,7 @@ export const Portfolio = memo(() => {
     if (activeFilter === "Learning Lab") {
       return (
         <motion.div className="space-y-8">
-          <h2 className="text-4xl font-black text-white mb-8">Learning Lab - Continuous Ribbon</h2>
+          <h2 className="fluid-title font-black text-white mb-8">Learning Lab - Continuous Ribbon</h2>
           <LearningLabRibbon />
         </motion.div>
       );
@@ -1090,8 +1098,8 @@ export const Portfolio = memo(() => {
     if (activeFilter === "UI/UX") {
       return (
         <motion.div className="space-y-8">
-          <h2 className="text-4xl font-black text-white mb-8">UI/UX Designs</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="fluid-title font-black text-white mb-8">UI/UX Designs</h2>
+          <div className="project-grid-auto">
             {projectData.uiux.map((project) => (
               <UIUXCard key={project.id} project={project} />
             ))}
@@ -1102,8 +1110,8 @@ export const Portfolio = memo(() => {
   };
 
   return (
-    <section id="projects" className="min-h-screen bg-black pt-28 sm:pt-32 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-x-hidden">
-      <div className="max-w-full sm:max-w-7xl mx-auto">
+    <section id="projects" className="min-h-screen bg-black pt-28 sm:pt-32 pb-16 sm:pb-20 md:pb-24 overflow-x-hidden">
+      <div className="section-container max-w-full sm:max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           className="mb-12 sm:mb-16 text-center"
@@ -1112,7 +1120,7 @@ export const Portfolio = memo(() => {
           transition={{ duration: 0.6 }}
         >
           <p className="text-yellow-500 uppercase font-bold tracking-widest mb-2 sm:mb-3 text-xs sm:text-sm">Featured & Interactive</p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-3 sm:mb-4 leading-tight px-2">
+          <h1 className="fluid-title font-black text-white mb-3 sm:mb-4 leading-tight px-2 mobile-safe-text">
             Immersive <span className="text-yellow-500">Project</span> Showcase
           </h1>
           <p className="text-gray-400 text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl mx-auto px-4">

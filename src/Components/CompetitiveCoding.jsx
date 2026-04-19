@@ -9,7 +9,7 @@ const hackathons = [
     name: "Odoo X IIT Gandhinagar",
     role: "Offline Selected Round",
     date: "2025",
-    badge: "Top 1% Selection",
+    badge: "Elite Selection",
     highlight: "Elite Offline Selection",
     description: "Selected for the prestigious offline round after a highly competitive online phase.",
     tech: ["Odoo", "Python", "PostgreSQL", "REST"],

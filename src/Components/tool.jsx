@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaFigma, FaCode, FaGitAlt, FaGithub } from "react-icons/fa";
 import { SiMongodb, SiPostman, SiExpress, SiReact, SiTailwindcss, SiVercel, SiNextdotjs } from "react-icons/si";
+import { isMobile } from "../utils/mobileOptimization";
 
 const tools = [
   {
@@ -92,6 +93,7 @@ const tools = [
 
 // ===================== TOOL CARD COMPONENT =====================
 const ToolCard = ({ tool, index }) => {
+  const mobile = isMobile();
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const Icon = tool.icon;
@@ -184,14 +186,14 @@ const ToolCard = ({ tool, index }) => {
       <AnimatePresence>
         {showDetails && (
           <motion.div
-            className="absolute -bottom-20 sm:-bottom-24 left-1/2 transform -translate-x-1/2 w-48 sm:w-56 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border border-yellow-500/60 backdrop-blur-xl shadow-2xl z-50"
-            initial={{ opacity: 0, y: -10, scale: 0.9 }}
+            className={mobile ? "mt-3 w-full p-3 rounded-lg bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border border-yellow-500/60 backdrop-blur-xl shadow-2xl z-50" : "absolute -bottom-20 sm:-bottom-24 left-1/2 transform -translate-x-1/2 w-48 sm:w-56 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border border-yellow-500/60 backdrop-blur-xl shadow-2xl z-50"}
+            initial={{ opacity: 0, y: mobile ? 8 : -10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.9 }}
+            exit={{ opacity: 0, y: mobile ? 8 : -10, scale: 0.9 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
             {/* Arrow Pointer */}
-            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-br from-black/95 to-purple-950/80 border-l border-t border-yellow-500/60 rotate-45" />
+            {!mobile && <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-br from-black/95 to-purple-950/80 border-l border-t border-yellow-500/60 rotate-45" />}
 
             {/* Description */}
             <p className="text-gray-200 text-xs sm:text-sm leading-relaxed text-center">
@@ -201,8 +203,8 @@ const ToolCard = ({ tool, index }) => {
             {/* Bottom Accent */}
             <motion.div
               className="h-0.5 w-8 mx-auto mt-2 sm:mt-3 bg-gradient-to-r from-yellow-500 to-purple-400 rounded-full"
-              animate={{ width: [8, 32, 8] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              animate={mobile ? {} : { width: [8, 32, 8] }}
+              transition={{ duration: mobile ? 0 : 2, repeat: mobile ? 0 : Infinity }}
             />
           </motion.div>
         )}
@@ -218,7 +220,7 @@ const ToolsIUse = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/5 to-black pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="section-container relative z-10 max-w-7xl mx-auto">
         {/* Title Section */}
         <motion.div
           className="mb-10 sm:mb-12 md:mb-16"
@@ -227,7 +229,7 @@ const ToolsIUse = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 sm:mb-4">
+          <h2 className="fluid-title font-black mb-3 sm:mb-4">
             Tools <span className="bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">I Use</span>
           </h2>
           <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">

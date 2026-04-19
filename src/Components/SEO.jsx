@@ -13,10 +13,13 @@ const SEO = ({
   const siteUrl = 'https://arjundivraniya.in';
   const fullTitle = title
     ? `${title} | ${siteTitle}`
-    : `${siteTitle} | Full Stack Developer`;
+    : `${siteTitle} | Cloud-Native Full Stack Engineer`;
 
   const defaultDescription =
-    'Portfolio of Arjun Divraniya - Full Stack Developer, Competitive Programmer, and Tech Enthusiast. Building meaningful web applications with modern technologies.';
+    'Portfolio of Arjun Divraniya, a cloud-native full stack engineer building resilient MERN applications, scalable systems, and DevOps-driven digital products.';
+
+  const defaultKeywords =
+    'Arjun Divraniya, Full Stack Developer, Cloud Native, DevOps, MERN Stack, AWS, Docker, Portfolio, Software Engineer';
 
   const currentUrl =
     url ||
@@ -29,9 +32,12 @@ const SEO = ({
       {/* Standard Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description || defaultDescription} />
-      {keywords && <meta name="keywords" content={keywords} />}
+      <meta name="keywords" content={keywords || defaultKeywords} />
       <meta name="author" content="Arjun Divraniya" />
       <meta name="robots" content="index,follow" />
+      <meta name="theme-color" content="#0f172a" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />

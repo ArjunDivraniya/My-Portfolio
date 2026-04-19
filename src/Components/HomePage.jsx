@@ -15,7 +15,7 @@ const TrackedSection = ({ sectionName, children, id }) => {
   const sectionRef = useSectionTracking(sectionName, 0.3);
   
   return (
-    <section ref={sectionRef} id={id}>
+    <section ref={sectionRef} id={id} className="responsive-section">
       {children}
     </section>
   );

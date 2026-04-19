@@ -43,7 +43,7 @@ export default function CreativePassions() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-green-950/5 to-black overflow-hidden"
+      className="relative py-16 md:py-24 bg-gradient-to-b from-black via-green-950/5 to-black overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 opacity-5">
@@ -56,7 +56,7 @@ export default function CreativePassions() {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="section-container relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           className="text-center mb-16"
@@ -75,7 +75,7 @@ export default function CreativePassions() {
             <span className="text-purple-400 text-sm font-bold">🌲 Beyond the Code</span>
           </motion.div>
 
-          <h2 className="text-3xl md:text-5xl font-black mb-3 bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
+          <h2 className="fluid-title font-black mb-3 bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
             Exploring the Wild
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">

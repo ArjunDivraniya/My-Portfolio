@@ -50,7 +50,7 @@ const Header = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed w-full bg-gradient-to-r from-gray-900 to-black shadow-lg py-4 z-50 border-b border-gray-800"
       >
-        <div className="container mx-auto flex justify-between items-center px-6">
+        <div className="container mx-auto flex justify-between items-center px-4 sm:px-6">
           {/* Logo Section */}
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => navigate('/')}>
             <img
@@ -111,7 +111,7 @@ const Header = () => {
                   </button>
                 </div>
 
-                <nav className="flex flex-col items-center space-y-2 w-full max-w-sm mt-12">
+                <nav className="flex flex-col items-center space-y-1 w-full max-w-sm mt-12">
                   {[
                     { name: 'Home', path: '/' },
                     { name: 'About', path: '/about' },
@@ -127,14 +127,14 @@ const Header = () => {
                         <NavLink 
                           to={item.path} 
                           onClick={() => setIsMenuOpen(false)} 
-                          className={`block py-4 text-xl text-center border-b border-gray-800/50 hover:text-yellow-400 transition-colors ${item.color || 'text-white'}`}
+                          className={`block py-3.5 text-lg sm:text-xl text-center border-b border-gray-800/50 hover:text-yellow-400 transition-colors ${item.color || 'text-white'}`}
                         >
                           {item.name}
                         </NavLink>
                       ) : (
                         <button 
                           onClick={() => handleScroll(item.id)} 
-                          className="w-full py-4 text-xl text-center border-b border-gray-800/50 hover:text-yellow-400 transition-colors text-white"
+                          className="w-full py-3.5 text-lg sm:text-xl text-center border-b border-gray-800/50 hover:text-yellow-400 transition-colors text-white"
                         >
                           {item.name}
                         </button>
@@ -207,6 +207,7 @@ const Header = () => {
           </div>
         </motion.div>
       )}
+
     </>
   );
 };

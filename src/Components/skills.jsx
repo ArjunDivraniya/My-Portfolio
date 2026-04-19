@@ -203,6 +203,7 @@ const categories = ["All", "Frontend", "Backend", "AI & Advanced", "Dev Tools", 
 
 // ===================== SKILL CARD WITH HOVER DETAILS =====================
 const SkillCard = ({ skill, index }) => {
+  const mobile = isMobile();
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
@@ -272,18 +273,18 @@ const SkillCard = ({ skill, index }) => {
       <AnimatePresence>
         {showDetails && (
           <motion.div
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 sm:w-72 md:w-80 p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border-2 border-yellow-500/60 backdrop-blur-xl shadow-2xl z-20"
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: -120, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className={mobile ? "mt-3 w-full p-3 rounded-xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border border-yellow-500/60 backdrop-blur-xl shadow-2xl z-20" : "absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 sm:w-72 md:w-80 p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border-2 border-yellow-500/60 backdrop-blur-xl shadow-2xl z-20"}
+            initial={{ opacity: 0, y: mobile ? 8 : 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: mobile ? 0 : -120, scale: 1 }}
+            exit={{ opacity: 0, y: mobile ? 8 : 20, scale: 0.9 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
             {/* Icon in Detail Card */}
             <div className="flex items-center justify-center mb-2 sm:mb-3">
               <motion.div
                 className="p-2 sm:p-3 rounded-lg bg-yellow-500/20 border border-yellow-400/50"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={mobile ? {} : { scale: [1, 1.05, 1] }}
+                transition={{ duration: mobile ? 0 : 2, repeat: mobile ? 0 : Infinity }}
               >
                 <skill.icon className="text-2xl sm:text-3xl" style={{ color: skill.color }} />
               </motion.div>
@@ -302,8 +303,8 @@ const SkillCard = ({ skill, index }) => {
             {/* Bottom Accent */}
             <motion.div
               className="h-1 w-12 mx-auto bg-gradient-to-r from-yellow-500 to-purple-400 rounded-full"
-              animate={{ width: [8, 48, 8] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              animate={mobile ? {} : { width: [8, 48, 8] }}
+              transition={{ duration: mobile ? 0 : 2, repeat: mobile ? 0 : Infinity }}
             />
           </motion.div>
         )}
@@ -319,7 +320,7 @@ const Skills = () => {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="section-container relative z-10 max-w-7xl mx-auto">
         {/* Title Section */}
         <motion.div
           className="mb-10 sm:mb-12 md:mb-16"
@@ -328,7 +329,7 @@ const Skills = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 sm:mb-4">
+          <h2 className="fluid-title font-black mb-3 sm:mb-4">
             Professional <span className="bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">Skillset</span>
           </h2>
           <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
@@ -346,7 +347,7 @@ const Skills = () => {
         >
           <span className="text-yellow-400 font-black text-xs sm:text-sm md:text-base">⭐ 9.74 CGPA</span>
           <span className="text-gray-300 hidden sm:inline">|</span>
-          <span className="text-purple-300 font-bold text-xs sm:text-sm md:text-base">Top 1% Performer</span>
+          <span className="text-purple-300 font-bold text-xs sm:text-sm md:text-base">Consistent Performer</span>
         </motion.div>
 
         {/* Skills by Category */}
