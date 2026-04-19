@@ -17,6 +17,7 @@ import EducationRoadmap from "./Components/EducationRoadmap";
 import LeetCodeProfile from "./Components/LeetCodeProfile";
 import Experience from "./Components/Experience";
 import ScrollToTop from "./Components/ScrollToTop";
+import SEO from "./Components/SEO";
 import "./index.css"; 
 // Google Analytics
 import { usePageTracking, useScrollDepthTracking, useLinkTracking } from "./hooks/useAnalytics";
@@ -51,25 +52,60 @@ function App() {
             transition={{ duration: 0.5 }}
           >
             <Routes>
-              {/* Home Page (Single Page Scroll Layout with Section Tracking) */}
-              <Route path="/" element={<HomePage />} />
+              {/* Home Page (Single Page Scroll Layout) */}
+              <Route path="/" element={
+                <>
+                  <SEO title="Home" description="Explore Arjun Divraniya's portfolio - Full Stack Developer & Competitive Programmer." />
+                  <HomePage />
+                </>
+              } />
 
               {/* Dedicated Pages */}
-              <Route path="/about" element={<> <Bg /><Header /><AboutMe /></>} />
+              <Route path="/about" element={
+                <>
+                  <SEO title="About Me" description="Learn more about Arjun Divraniya's background, skills, and passion for coding." />
+                  <Bg /><Header /><AboutMe />
+                </>
+              } />
               
-              {/* NEW ROUTE: Achievements Page */}
-              <Route path="/achievements" element={<> <Bg /><Header /><Achievements /><Footer /></>} />
+              {/* Achievements Page */}
+              <Route path="/achievements" element={
+                <>
+                  <SEO title="Achievements" description="Showcasing the technical achievements and milestones of Arjun Divraniya." />
+                  <Bg /><Header /><Achievements /><Footer />
+                </>
+              } />
               
-              {/* NEW ROUTE: Education Journey */}
-              <Route path="/education" element={<> <Bg /><Header /><EducationRoadmap /><Footer /></>} />
+              {/* Education Journey */}
+              <Route path="/education" element={
+                <>
+                  <SEO title="Education" description="The academic journey and coding certifications of Arjun Divraniya." />
+                  <Bg /><Header /><EducationRoadmap /><Footer />
+                </>
+              } />
               
-              {/* NEW ROUTE: Experience & Freelancing */}
-              <Route path="/experience" element={<> <Bg /><Header /><Experience /><Footer /></>} />
+              {/* Experience & Projects */}
+              <Route path="/experience" element={
+                <>
+                  <SEO title="Experience" description="A professional overview of Arjun Divraniya's work experience and projects." />
+                  <Bg /><Header /><Experience /><Footer />
+                </>
+              } />
               
-              {/* NEW ROUTE: LeetCode Profile */}
-              <Route path="/leetcode" element={<> <Bg /><Header /><LeetCodeProfile username="Arjun_divraniya" /><Footer /></>} />
+              {/* LeetCode Profile */}
+              <Route path="/leetcode" element={
+                <>
+                  <SEO title="LeetCode Stats" description="Competitive programming profile and statistics of Arjun Divraniya." />
+                  <Bg /><Header /><LeetCodeProfile username="Arjun_divraniya" /><Footer />
+                </>
+              } />
               
-              <Route path="/contact" element={<> <Bg /><Header /><ContactMe /></>} />
+              <Route path="/contact" element={
+                <>
+                  <SEO title="Contact" description="Get in touch with Arjun Divraniya for professional inquiries or collaborations." />
+                  <Bg /><Header /><ContactMe />
+                </>
+              } />
               
               {/* Catch-all Redirect */}
               <Route path="*" element={<Navigate to="/" />} />
