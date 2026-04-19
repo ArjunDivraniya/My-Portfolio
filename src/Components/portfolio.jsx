@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaYoutube, FaCrown, FaTrophy, FaReact, FaNodeJs, FaCode } from "react-icons/fa";
 import { SiMongodb, SiPython, SiPostgresql, SiRedis, SiNextdotjs, SiFigma, SiOdoo } from "react-icons/si";
 import { isMobile, getHoverProps, getMobileInViewProps, conditionalAnimation } from "../utils/mobileOptimization";
+import portfolioLoopVideo from "../assets/public/Signature 2.o.mp4";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,11 +41,57 @@ const projectData = {
     },
   ],
   hackathons: [
-    { id: 101, title: "HRMS", subtitle: "IIT GN Offline", video: "https://www.youtube.com/embed/mFVR0ihWdTo", badge: "🏆 Offline Selection", tech: ["Odoo", "PostgreSQL", "Python"], about: "Enterprise HR system with multi-level workflows and policy enforcement.", links: { github: "https://github.com/mayank-dudhatra/ODOOxIITGxHRMS", demo: "#", video: "https://www.youtube.com/embed/mFVR0ihWdTo" } },
-    { id: 102, title: "Expense Management", subtitle: "IIT GN Online", video: "https://www.youtube.com/embed/RrZAaDPay9g", tech: ["Odoo", "Python", "Reports"], about: "Multi-level approvals and policy guardrails for expense tracking.", links: { github: "https://github.com/ArjunDivraniya/ODOOxIITG-Virtual-Round-", demo: "https://expense-managment-eight.vercel.app/", video: "https://www.youtube.com/embed/RrZAaDPay9g" } },
-    { id: 103, title: "StockMaster", subtitle: "SPIT", video: "https://www.youtube.com/embed/dRXl1a0PcGA", tech: ["Odoo", "Inventory", "Analytics"], about: "Smart warehouse with reorder signals and stock optimization.", links: { github: "https://github.com/ArjunDivraniya/Odoo-X-SPIT", demo: "https://odoo-management-system-ad.vercel.app/login", video: "https://www.youtube.com/embed/dRXl1a0PcGA" } },
-    { id: 104, title: "Project Collab", subtitle: "NMIT", video: "https://www.youtube.com/embed/lj_SfjZODq0", tech: ["React", "Node", "Kanban"], about: "Team project platform with sprint management and collaboration.", links: { github: "https://github.com/ArjunDivraniya/ODOOxNMIT", demo: "#", video: "https://www.youtube.com/embed/lj_SfjZODq0" } },
-    { id: 105, title: "Dayflow", subtitle: "GCET", video: "https://www.youtube.com/embed/43DaRK0WBLg", tech: ["Odoo", "Auth", "Analytics"], about: "HR suite for attendance, leave, and employee engagement.", links: { github: "https://github.com/mayank-dudhatra/ODOOxGCET", demo: "#", video: "https://www.youtube.com/embed/43DaRK0WBLg" } },
+    {
+      id: 101,
+      title: "HRMS",
+      subtitle: "IIT GN Offline",
+      video: "https://www.youtube.com/embed/mFVR0ihWdTo",
+      badge: "🏆 Offline Selection",
+      tech: ["Odoo", "PostgreSQL", "Python"],
+      about: "Enterprise HR suite with secure onboarding, multi-level approvals, attendance policy enforcement, and payroll-ready workflows.",
+      highlights: ["Role-based employee onboarding", "Approval pipelines with audit trail", "Policy-aware attendance and leave"],
+      links: { github: "https://github.com/mayank-dudhatra/ODOOxIITGxHRMS", demo: "#", video: "https://www.youtube.com/embed/mFVR0ihWdTo" },
+    },
+    {
+      id: 102,
+      title: "Expense Management",
+      subtitle: "IIT GN Online",
+      video: "https://www.youtube.com/embed/RrZAaDPay9g",
+      tech: ["Odoo", "Python", "Reports"],
+      about: "Smart expense platform with rule-driven approvals, reimbursement validation, and finance-friendly reporting dashboards.",
+      highlights: ["Multi-level approval flow", "Duplicate claim prevention", "Insights-ready reporting views"],
+      links: { github: "https://github.com/ArjunDivraniya/ODOOxIITG-Virtual-Round-", demo: "https://expense-managment-eight.vercel.app/", video: "https://www.youtube.com/embed/RrZAaDPay9g" },
+    },
+    {
+      id: 103,
+      title: "StockMaster",
+      subtitle: "SPIT",
+      video: "https://www.youtube.com/embed/dRXl1a0PcGA",
+      tech: ["Odoo", "Inventory", "Analytics"],
+      about: "Inventory intelligence system for live stock visibility, reorder automation, and warehouse-level performance tracking.",
+      highlights: ["Low-stock early alerts", "Smart reorder recommendations", "Warehouse analytics dashboards"],
+      links: { github: "https://github.com/ArjunDivraniya/Odoo-X-SPIT", demo: "https://odoo-management-system-ad.vercel.app/login", video: "https://www.youtube.com/embed/dRXl1a0PcGA" },
+    },
+    {
+      id: 104,
+      title: "Project Collab",
+      subtitle: "NMIT",
+      video: "https://www.youtube.com/embed/lj_SfjZODq0",
+      tech: ["React", "Node", "Kanban"],
+      about: "Collaboration workspace for sprint planning, team ownership, and transparent project delivery from backlog to release.",
+      highlights: ["Kanban sprint board", "Task ownership and status flow", "Team collaboration timeline"],
+      links: { github: "https://github.com/ArjunDivraniya/ODOOxNMIT", demo: "#", video: "https://www.youtube.com/embed/lj_SfjZODq0" },
+    },
+    {
+      id: 105,
+      title: "Dayflow",
+      subtitle: "GCET",
+      video: "https://www.youtube.com/embed/43DaRK0WBLg",
+      tech: ["Odoo", "Auth", "Analytics"],
+      about: "Daily workforce operations platform for attendance, leave handling, and engagement analytics in one streamlined dashboard.",
+      highlights: ["Attendance and leave automation", "Secure login and access control", "Employee engagement insights"],
+      links: { github: "https://github.com/mayank-dudhatra/ODOOxGCET", demo: "#", video: "https://www.youtube.com/embed/43DaRK0WBLg" },
+    },
   ],
   backend: [
     { id: 201, title: "Mutual Fund Explorer", thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tech: ["Next.js", "Charts", "D3"], about: "Financial analytics with interactive charts and fund comparison.", flows: ["Data Pipeline", "API Layer", "Visualization", "Real-time Updates"], links: { github: "https://github.com/ArjunDivraniya/mutual-fund-explorer", demo: "https://mutual-fund-explorer-five.vercel.app/" } },
@@ -87,6 +134,31 @@ const getYouTubeThumbnail = (url) => {
   return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "";
 };
 
+const hackathonTechMeta = {
+  React: { icon: FaReact, iconClass: "text-cyan-300" },
+  Node: { icon: FaNodeJs, iconClass: "text-green-300" },
+  Python: { icon: SiPython, iconClass: "text-blue-300" },
+  PostgreSQL: { icon: SiPostgresql, iconClass: "text-sky-300" },
+  Odoo: { icon: SiOdoo, iconClass: "text-indigo-300" },
+  Reports: { icon: FaCode, iconClass: "text-amber-300" },
+  Inventory: { icon: FaCode, iconClass: "text-orange-300" },
+  Analytics: { icon: FaCode, iconClass: "text-violet-300" },
+  Kanban: { icon: FaCode, iconClass: "text-lime-300" },
+  Auth: { icon: FaCode, iconClass: "text-rose-300" },
+};
+
+const getHackathonTechMeta = (tech) => {
+  const meta = hackathonTechMeta[tech];
+  if (meta) return { ...meta, label: tech };
+
+  return { icon: FaCode, iconClass: "text-yellow-200", label: tech };
+};
+
+const isCoarsePointerDevice = () => {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(hover: none), (pointer: coarse)").matches;
+};
+
 // ===================== FILTER NAVIGATION WITH GSAP BLOB =====================
 const FilterNav = memo(({ active, onChange }) => {
   return (
@@ -127,7 +199,11 @@ const FilterNav = memo(({ active, onChange }) => {
 // ===================== FLAGSHIP CAROUSEL =====================
 const FlagshipCarousel = memo(() => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const videoRefs = useRef([]);
+  const videoRef = useRef(null);
+  const mediaRef = useRef(null);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -135,6 +211,82 @@ const FlagshipCarousel = memo(() => {
     }, 8000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+    const onChange = () => setIsMobileViewport(mediaQuery.matches);
+
+    onChange();
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", onChange);
+      return () => mediaQuery.removeEventListener("change", onChange);
+    }
+
+    mediaQuery.addListener(onChange);
+    return () => mediaQuery.removeListener(onChange);
+  }, []);
+
+  useEffect(() => {
+    setShouldLoadVideo(false);
+    setIsVideoVisible(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [currentIndex]);
+
+  const loadAndPlay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+    video
+      .play()
+      .then(() => setIsVideoVisible(true))
+      .catch(() => setIsVideoVisible(false));
+  }, []);
+
+  const stopVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.pause();
+    setIsVideoVisible(false);
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    if (isMobileViewport) return;
+    setShouldLoadVideo(true);
+  }, [isMobileViewport]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isMobileViewport) return;
+    stopVideo();
+  }, [isMobileViewport, stopVideo]);
+
+  useEffect(() => {
+    if (!shouldLoadVideo || isMobileViewport) return;
+    loadAndPlay();
+  }, [shouldLoadVideo, isMobileViewport, loadAndPlay]);
+
+  useEffect(() => {
+    if (!isMobileViewport || !mediaRef.current) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          requestAnimationFrame(() => loadAndPlay());
+        } else {
+          stopVideo();
+        }
+      },
+      { threshold: 0.65, rootMargin: "-18% 0px -18% 0px" }
+    );
+
+    observer.observe(mediaRef.current);
+    return () => observer.disconnect();
+  }, [isMobileViewport, loadAndPlay, stopVideo]);
 
   const project = projectData.flagship[currentIndex];
 
@@ -150,19 +302,35 @@ const FlagshipCarousel = memo(() => {
       >
         {/* Left: Video Background */}
         <motion.div
-          className="relative h-44 sm:h-72 md:h-96 w-[92%] md:w-full mx-auto md:mx-0 rounded-2xl sm:rounded-3xl overflow-hidden border border-yellow-500/40 bg-black group"
+          ref={mediaRef}
+          className="relative aspect-video w-[92%] md:w-full mx-auto md:mx-0 rounded-2xl sm:rounded-3xl overflow-hidden border border-yellow-500/40 bg-black group"
           whileHover={{ scale: 1.02 }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <iframe
-            ref={(el) => (videoRefs.current[currentIndex] = el)}
-            src={`${toPrivacyEmbedUrl(project.video)}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0`}
-            className="absolute inset-0 w-full h-full object-cover"
-            allow="autoplay; encrypted-media"
-            frameBorder="0"
-            title={project.title}
+          <img
+            src={getYouTubeThumbnail(project.video)}
+            alt={`${project.title} thumbnail`}
             loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+              isVideoVisible ? "opacity-0" : "opacity-100"
+            }`}
           />
+
+          <video
+            ref={videoRef}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+              isVideoVisible ? "opacity-100" : "opacity-0"
+            }`}
+            src={shouldLoadVideo ? portfolioLoopVideo : undefined}
+            preload="none"
+            loop
+            muted
+            playsInline
+            controls={false}
+            aria-label={`${project.title} project preview`}
+          />
+
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
 
           {/* Floating Tech Icons - Top Left */}
@@ -316,8 +484,97 @@ const FlagshipCarousel = memo(() => {
 
 // ===================== HACKATHON CARD COMPONENT =====================
 const HackathonCard = memo(({ project, isActive }) => {
+  const cardRef = useRef(null);
+  const videoRef = useRef(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+    const onChange = () => setIsMobileViewport(mediaQuery.matches);
+
+    onChange();
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", onChange);
+      return () => mediaQuery.removeEventListener("change", onChange);
+    }
+
+    mediaQuery.addListener(onChange);
+    return () => mediaQuery.removeListener(onChange);
+  }, []);
+
+  const loadAndPlay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+    video
+      .play()
+      .then(() => setShowVideo(true))
+      .catch(() => setShowVideo(false));
+  }, []);
+
+  const pauseVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.pause();
+    setShowVideo(false);
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!isActive || isMobileViewport) return;
+
+    // First hover lazily mounts the source; later hovers should replay immediately.
+    if (!shouldLoadVideo) {
+      setShouldLoadVideo(true);
+      return;
+    }
+
+    loadAndPlay();
+  }, [isActive, isMobileViewport, shouldLoadVideo, loadAndPlay]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isMobileViewport) return;
+    pauseVideo();
+  }, [isMobileViewport, pauseVideo]);
+
+  useEffect(() => {
+    if (!isActive && !isMobileViewport) {
+      pauseVideo();
+    }
+  }, [isActive, isMobileViewport, pauseVideo]);
+
+  useEffect(() => {
+    if (!shouldLoadVideo || !isActive || isMobileViewport) return;
+    loadAndPlay();
+  }, [shouldLoadVideo, isActive, isMobileViewport, loadAndPlay]);
+
+  useEffect(() => {
+    if (!isMobileViewport || !cardRef.current) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!isActive) return;
+
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          requestAnimationFrame(() => loadAndPlay());
+        } else {
+          pauseVideo();
+        }
+      },
+      { threshold: 0.7, rootMargin: "-22% 0px -22% 0px" }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [isMobileViewport, isActive, loadAndPlay, pauseVideo]);
+
   return (
       <motion.div
+      ref={cardRef}
       className="absolute inset-0 w-full max-w-full"
       initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
       animate={
@@ -339,27 +596,34 @@ const HackathonCard = memo(({ project, isActive }) => {
         transition={{ duration: 0.6 }}
       >
         {/* Video Section */}
-        <div className="grid grid-cols-1 md:grid-cols-5 h-full">
-          {/* Left Video - 60% width on desktop */}
-          <div className="md:col-span-3 relative bg-black overflow-hidden h-40 sm:h-52 md:h-auto min-h-[160px] md:min-h-0">
-            {isActive ? (
-              <iframe
-                src={`${toPrivacyEmbedUrl(project.video)}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0`}
-                className="w-full h-full min-h-[160px] md:min-h-0"
-                allow="autoplay; encrypted-media"
-                frameBorder="0"
-                title={project.title}
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-            ) : (
-              <img
-                src={getYouTubeThumbnail(project.video)}
-                alt={`${project.title} thumbnail`}
-                className="w-full h-full min-h-[160px] md:min-h-0 object-cover"
-                loading="lazy"
-              />
-            )}
+        <div className="grid grid-cols-1 md:grid-cols-12 h-full">
+          {/* Left Video */}
+          <div
+            className="md:col-span-7 relative bg-black overflow-hidden aspect-video md:aspect-auto h-44 sm:h-56 md:h-auto min-h-[170px] md:min-h-0"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img
+              src={getYouTubeThumbnail(project.video)}
+              alt={`${project.title} thumbnail`}
+              className={`w-full h-full min-h-[170px] md:min-h-0 object-cover transition-opacity duration-300 ${
+                showVideo ? "opacity-0" : "opacity-100"
+              }`}
+              loading="lazy"
+            />
+            <video
+              ref={videoRef}
+              src={shouldLoadVideo ? portfolioLoopVideo : undefined}
+              className={`absolute inset-0 w-full h-full min-h-[170px] md:min-h-0 object-cover transition-opacity duration-300 ${
+                showVideo ? "opacity-100" : "opacity-0"
+              }`}
+              preload="none"
+              loop
+              muted
+              playsInline
+              controls={false}
+              aria-label={`${project.title} hackathon preview`}
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/40" />
 
             {/* Badge */}
@@ -374,51 +638,75 @@ const HackathonCard = memo(({ project, isActive }) => {
             )}
           </div>
 
-          {/* Right Content - 40% width on desktop */}
-          <div className="md:col-span-2 p-4 sm:p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-black/80 to-purple-950/20 overflow-y-auto overflow-x-hidden w-full max-w-full">
+          {/* Right Content */}
+          <div className="md:col-span-5 p-4 sm:p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-black/80 to-purple-950/20 overflow-hidden w-full max-w-full gap-4">
             {/* Title Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-2 leading-tight">
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-black text-white mb-2 leading-tight">
                 {project.title}
               </h3>
-              <p className="text-yellow-400 font-bold text-sm sm:text-base md:text-lg mb-4 flex items-center gap-2">
+              <p className="text-yellow-400 font-bold text-sm sm:text-base md:text-base mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 bg-yellow-400 rounded-full" />
                 {project.subtitle}
               </p>
 
               {/* Description */}
               <motion.p
-                className="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed mb-6 break-words [overflow-wrap:anywhere]"
+                className="text-gray-200 text-sm sm:text-sm md:text-base leading-relaxed mb-4 break-words [overflow-wrap:anywhere]"
                 initial={{ opacity: 0 }}
                 animate={isActive ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
                 {project.about}
               </motion.p>
+
+              <motion.div
+                className="mb-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                transition={{ delay: 0.45, duration: 0.6 }}
+              >
+                <p className="text-yellow-300 text-xs sm:text-sm font-bold mb-2 uppercase tracking-wider">Key Features</p>
+                <ul className="space-y-1.5">
+                  {(project.highlights || []).map((item, i) => (
+                    <li key={`${project.id}-highlight-${i}`} className="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             </motion.div>
 
-            {/* Tech Stack */}
+            {/* Tech Icons */}
             <motion.div
-              className="mb-6"
+              className="mb-1"
               initial={{ opacity: 0, y: 10 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <p className="text-yellow-300 text-xs sm:text-sm font-bold mb-3 uppercase tracking-wider">Technologies</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-yellow-300 text-xs sm:text-sm font-bold mb-2 uppercase tracking-wider">Technologies</p>
+              <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                 {project.tech.map((tech, i) => (
                   <motion.span
                     key={i}
-                    className="px-2 sm:px-3 py-1 rounded-full bg-yellow-500/30 border border-yellow-400/60 text-yellow-200 text-xs font-semibold whitespace-nowrap"
-                    initial={{ scale: 0 }}
-                    animate={isActive ? { scale: 1 } : { scale: 0 }}
+                    className="inline-flex"
+                    initial={{ scale: 0.7, opacity: 0 }}
+                    animate={isActive ? { scale: 1, opacity: 1 } : { scale: 0.7, opacity: 0 }}
                     transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
+                    title={tech}
+                    aria-label={tech}
                   >
-                    {tech}
+                    {(() => {
+                      const { icon: TechIcon, iconClass } = getHackathonTechMeta(tech);
+                      return (
+                        <TechIcon className={`text-xl sm:text-2xl ${iconClass}`} />
+                      );
+                    })()}
                   </motion.span>
                 ))}
               </div>
@@ -426,7 +714,7 @@ const HackathonCard = memo(({ project, isActive }) => {
 
             {/* Action Buttons */}
             <motion.div
-              className="flex gap-3 flex-wrap mt-4"
+              className="flex gap-3 flex-wrap mt-1"
               initial={{ opacity: 0, y: 10 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ delay: 0.4, duration: 0.6 }}
@@ -509,7 +797,7 @@ const HackathonVerticalCinema = memo(() => {
       viewport={{ once: true }}
     >
       {/* Carousel Container */}
-      <div className="relative w-full max-w-full h-[20rem] sm:h-[23rem] md:h-96 rounded-2xl sm:rounded-3xl overflow-hidden bg-black">
+      <div className="relative w-full max-w-full h-[24rem] sm:h-[27rem] md:h-[33rem] rounded-2xl sm:rounded-3xl overflow-hidden bg-black">
         {projectData.hackathons.map((project, index) => (
           <HackathonCard
             key={project.id}
@@ -651,6 +939,7 @@ const BackendCard = memo(({ project }) => {
         src={project.thumbnail}
         alt={project.title}
         className="w-full h-40 object-cover rounded-xl mb-4 brightness-75 group-hover:brightness-100 transition-all"
+        loading="lazy"
       />
 
       <h3 className="text-xl font-black text-white mb-2">{project.title}</h3>
@@ -861,6 +1150,7 @@ const LearningLabRibbon = memo(() => {
               src={project.thumbnail}
               alt={project.title}
               className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-500"
+              loading="lazy"
             />
             
             {/* Overlay Gradient */}
@@ -939,6 +1229,7 @@ const UIUXCard = memo(({ project }) => {
         src={project.thumbnail}
         alt={project.title}
         className="responsive-media h-full group-hover:scale-110 transition-transform duration-300"
+        loading="lazy"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
         <h4 className="text-white font-black text-lg sm:text-xl mb-3 leading-tight">{project.title}</h4>
