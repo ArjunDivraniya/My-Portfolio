@@ -2,9 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
-import { FaGithub, FaLinkedin, FaCamera, FaAward } from "react-icons/fa";
-import { SiCplusplus, SiLeetcode } from "react-icons/si";
-import { FiUsers } from "react-icons/fi";
+import { FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaEnvelope } from "react-icons/fa";
 import { isMobile, getHoverProps } from "../utils/mobileOptimization";
 
 // **KEEP YOUR EXACT IMAGE IMPORTS**
@@ -12,6 +10,7 @@ import headshotImage from "../assets/Profile/Arjun.webp";
 import portfolioImageOne from "../assets/Profile/Arjun-Portfolio-1.webp";
 import photographyImageOne from "../assets/Profile/Arjun-Portfolio-2.webp";
 import photographyImageTwo from "../assets/Profile/Arjun-Portfolio-3.webp";
+import arrowPhotographer from "../assets/Hero-Arrow/Photographer-Arrow.png";
 
 // Staging all components exactly as in your original file
 const AnimatedNameChar = ({ char }) => {
@@ -41,6 +40,62 @@ const AnimatedNameChar = ({ char }) => {
   );
 };
 
+const renderAnimatedWord = (word, keyPrefix) =>
+  word.split("").map((char, index) => (
+    <AnimatedNameChar key={`${keyPrefix}-${index}`} char={char} />
+  ));
+
+const heroSocialLinks = [
+  { Icon: FaGithub, href: "https://github.com/ArjunDivraniya", label: "GitHub" },
+  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/divraniya-arjun", label: "LinkedIn" },
+  { Icon: FaInstagram, href: "https://www.instagram.com/arjun__divraniya__/", label: "Instagram" },
+  { Icon: FaTwitter, href: "https://x.com/DivraniyaArjun", label: "X / Twitter" },
+  { Icon: FaEnvelope, href: "mailto:arjundivraniya8@gmail.com", label: "Email" },
+];
+
+const floatingRoleNodes = [
+  {
+    id: "developer",
+    label: "developer",
+    labelClassName: "left-8 top-8 xl:left-[-8%] xl:top-[-8%]",
+    arrowSrc: arrowPhotographer,
+    arrowClassName: "left-[-3%] top-[2%] w-20 xl:w-28 rotate-[240deg] transform: scale-y-[-1] ",
+    delay: 0.25,
+  },
+  {
+    id: "designer",
+    label: "Designer",
+    labelClassName: "right-8 top-8 xl:right-[-17%] xl:top-[8%]",
+    arrowSrc: arrowPhotographer,
+    arrowClassName: "right-[3%] top-[15%] w-20 xl:w-28 rotate-[-28deg]",
+    delay: 0.35,
+  },
+  {
+    id: "architect",
+    label: "Architecture Designer",
+    labelClassName: "left-2 bottom-12 xl:left-[8%] xl:bottom-[-1%]",
+    arrowSrc: arrowPhotographer,
+    arrowClassName: "left-[-5%] bottom-[10%] w-26 xl:w-36 rotate-[80deg]",
+    delay: 0.45,
+  },
+  {
+    id: "photographer",
+    label: "Photographer",
+    labelClassName: "right-2 bottom-12 xl:right-[-30%] xl:bottom-[27%]",
+    arrowSrc: arrowPhotographer,
+    arrowClassName: "right-[3%] bottom-[35%] w-20 xl:w-28 rotate-[30deg] transform: scale-y-[-1]",
+    delay: 0.55,
+  },
+];
+
+const SignatureMark = () => (
+  <div className="inline-flex max-w-max items-center rounded-[18px_26px_18px_24px] border border-white/20 bg-black/60 px-4 py-3 backdrop-blur-md">
+    <div className="hero-signature text-[1.25rem] sm:text-[1.5rem] lg:text-[1.75rem] leading-none text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-purple-300">
+      Turning Ideas Into <span className="text-purple-300">Scalable Products</span>
+    </div>
+  </div>
+);
+
 // **1. UPDATED: Refactored Data Structure for Stack Logic**
 const heroGalleryImages = [
   { id: "1", src: headshotImage, alt: "Arjun Headshot" },
@@ -50,48 +105,8 @@ const heroGalleryImages = [
   { id: "5", src: portfolioImageOne, alt: "Portfolio Close Frame" },
 ];
 
-const AchievementCard = ({ title, subtitle, badge, icon: Icon, iconColor, link, delay, position }) => {
-  const mobile = isMobile();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], mobile ? [0, 0] : [10, -10]);
-  const rotateY = useTransform(x, [-100, 100], mobile ? [0, 0] : [-10, 10]);
-
-  return (
-    <motion.div
-      className="absolute"
-      style={{ ...position }}
-      initial={{ opacity: 0, scale: 0.5, y: 50 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ delay, duration: 0.6, type: "spring", stiffness: 100 }}
-      drag={!mobile}
-      onMouseMove={!mobile ? (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        x.set(e.clientX - (rect.left + rect.width / 2));
-        y.set(e.clientY - (rect.top + rect.height / 2));
-      } : undefined}
-      onMouseLeave={!mobile ? () => { x.set(0); y.set(0); } : undefined}
-    >
-      <motion.div
-        className="p-4 rounded-2xl bg-gradient-to-br from-black/70 via-black/60 to-purple-900/40 border border-yellow-500/30 backdrop-blur-2xl shadow-xl cursor-grab max-w-xs"
-        style={{ rotateX, rotateY, transformStyle: mobile ? "flat" : "preserve-3d" }}
-        animate={!mobile ? { y: [0, -25, 0] } : {}}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: delay * 0.5 }}
-      >
-        <div className="flex items-center gap-3">
-          {Icon && <div className={`h-14 w-14 rounded-xl bg-black/60 border border-yellow-400/30 flex items-center justify-center ${iconColor}`}><Icon size={26} /></div>}
-          <div className="space-y-1">
-            <p className="font-extrabold text-yellow-300 text-base leading-tight">{title}</p>
-            <p className="text-xs text-gray-300 leading-tight">{subtitle}</p>
-            {badge && <span className="inline-block text-[10px] bg-yellow-500/30 px-2.5 py-1 rounded-full">{badge}</span>}
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
 const MagneticButton = ({ children, onClick }) => {
+  const mobile = isMobile();
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -108,9 +123,16 @@ const MagneticButton = ({ children, onClick }) => {
         y.set((e.clientY - (rect.top + rect.height / 2)) * 0.3);
       }}
       onMouseLeave={() => { x.set(0); y.set(0); }}
-      style={{ x: springX, y: springY }}
       onClick={onClick}
-      className="relative inline-flex items-center gap-2 rounded-2xl px-8 py-4 text-black font-bold bg-gradient-to-r from-yellow-400 to-amber-500 shadow-lg"
+      className="relative inline-flex items-center gap-2 border-2 border-yellow-300/80 bg-gradient-to-r from-yellow-400 to-amber-500 px-8 py-4 font-bold text-black shadow-lg"
+      aria-label="Get in touch"
+      type="button"
+      {...(!mobile && { whileHover: { scale: 1.04 }, whileTap: { scale: 0.96 } })}
+      style={{
+        x: springX,
+        y: springY,
+        borderRadius: "16px 26px 14px 24px / 22px 14px 24px 16px",
+      }}
     >
       {children}
       <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>→</motion.span>
@@ -121,8 +143,6 @@ const MagneticButton = ({ children, onClick }) => {
 const Hero = () => {
   const navigate = useNavigate();
   const mobile = isMobile();
-  const [mounted, setMounted] = useState(false);
-  const [leetcodeData, setLeetcodeData] = useState(null);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
   const containerRef = useRef(null);
   const cursorX = useMotionValue(0);
@@ -133,8 +153,6 @@ const Hero = () => {
   const rotateX = useTransform(useSpring(cursorY, { stiffness: 100, damping: 25 }), [-300, 300], [15, -15]);
   const rotateY = useTransform(useSpring(cursorX, { stiffness: 100, damping: 25 }), [-300, 300], [-15, 15]);
 
-  useEffect(() => setMounted(true), []);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveGalleryIndex((prev) => (prev + 1) % heroGalleryImages.length);
@@ -142,173 +160,216 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // LeetCode fetching logic remains exact same
-  useEffect(() => {
-    const fetchLeetCodeData = async () => {
-      try {
-        const response = await fetch('https://alfa-leetcode-api.onrender.com/userProfile/Arjun_divraniya');
-        if (response.ok) {
-          const data = await response.json();
-          setLeetcodeData({
-            totalSolved: data.totalSolved || 0,
-            easySolved: data.easySolved || 0,
-            mediumSolved: data.mediumSolved || 0,
-            hardSolved: data.hardSolved || 0,
-            ranking: data.ranking || 'N/A',
-          });
-        }
-      } catch (error) { console.error('Failed to fetch LeetCode data:', error); }
-    };
-    fetchLeetCodeData();
-  }, []);
-
   // **2. UPDATED: Logic for identifying background cards (Stack logic)**
   const prevIndex = (activeGalleryIndex - 1 + heroGalleryImages.length) % heroGalleryImages.length;
   const nextIndex = (activeGalleryIndex + 1) % heroGalleryImages.length;
 
-  // Exact same cards and links as your file
-  const achievementCards = [
-    { title: "9.74 CGPA", subtitle: "Rai University", badge: "Academic Excellence", icon: FaAward, iconColor: "text-yellow-400", position: { top: "8%", left: "5%" } },
-    { title: leetcodeData ? `${leetcodeData.totalSolved}+ Problems` : "Loading...", subtitle: "DSA Mastery", icon: SiCplusplus, iconColor: "text-blue-500", link: "https://leetcode.com/u/Arjun_divraniya", position: { bottom: "30%", left: "3%" } },
-    { title: "68+ Repos", subtitle: "GitHub Portfolio", badge: "500+ Commits", icon: FaGithub, iconColor: "text-purple-400", link: "https://github.com/ArjunDivraniya", position: { top: "45%", right: "4%" } },
-    { title: leetcodeData ? `Rank #${Math.floor(leetcodeData.ranking / 1000)}K` : "Loading...", subtitle: "LeetCode Global", icon: SiLeetcode, iconColor: "text-orange-500", link: "https://leetcode.com/u/Arjun_divraniya", position: { bottom: "10%", right: "6%" } },
-    { title: "Open Source", subtitle: "Contributor", icon: FiUsers, iconColor: "text-cyan-400", link: "https://github.com/ArjunDivraniya", position: { bottom: "50%", left: "6%" } },
-  ];
-
   return (
-    <section id="home" className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-black pt-20 sm:pt-24">
-      {/* **UNTOUCHED: Background Auroras** */}
+    <section id="home" className="relative w-full min-h-screen overflow-hidden bg-[#080808] pt-24 sm:pt-28">
       <motion.div className="absolute inset-0 -z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-        <motion.div className="absolute inset-0 opacity-50" style={{ background: "radial-gradient(circle at 20% 20%, rgba(168,85,247,0.3), transparent 40%)" }} animate={{ scale: [1, 1.08, 1], x: [0, 20, 0] }} transition={{ duration: 12, repeat: Infinity }} />
-        <motion.div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(circle at 80% 40%, rgba(250,204,21,0.25), transparent 45%)" }} animate={{ scale: [1.05, 0.95, 1.05], x: [0, -20, 0] }} transition={{ duration: 14, repeat: Infinity }} />
+        <motion.div className="absolute inset-0 opacity-55" style={{ background: "radial-gradient(circle at 18% 18%, rgba(168,85,247,0.28), transparent 34%)" }} animate={{ scale: [1, 1.08, 1], x: [0, 18, 0] }} transition={{ duration: 12, repeat: Infinity }} />
+        <motion.div className="absolute inset-0 opacity-45" style={{ background: "radial-gradient(circle at 78% 34%, rgba(250,204,21,0.22), transparent 40%)" }} animate={{ scale: [1.04, 0.96, 1.04], x: [0, -18, 0] }} transition={{ duration: 14, repeat: Infinity }} />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] opacity-20" />
       </motion.div>
 
-      {/* **UNTOUCHED: Achievement Cards (Legacy CSS via `AchievementCard` props)** */}
-      {mounted && (
-        <div className="absolute inset-0 pointer-events-auto hidden lg:block">
-          {achievementCards.map((card, idx) => (
-            <AchievementCard key={idx} {...card} delay={idx * 0.15} />
-          ))}
-        </div>
-      )}
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr]">
+        <motion.div className="order-1 space-y-5 sm:space-y-6">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08 }} className="relative space-y-4 pt-14 sm:pt-16">
+            <div className="absolute left-0 top-0">
+              <SignatureMark />
+            </div>
 
-      <div className="relative z-20 w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16 grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 items-center mx-auto">
-        {/* **UNTOUCHED: Left Text Column (Staggered Entrance/TypeAnimation)** */}
-        <motion.div className="space-y-4 sm:space-y-6 lg:order-1 order-2">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="space-y-2">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter text-yellow-300 leading-tight whitespace-nowrap">
-              {"ARJUN DIVRANIYA".split("").map((c, i) => <AnimatedNameChar key={i} char={c === " " ? "\u00A0" : c} />)}
+            {/* Removed the small role badge per request */}
+
+            <h1 className="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[0.95]">
+              <span className="inline-block text-amber-300 drop-shadow-[0_0_20px_rgba(251,191,36,0.4)]">
+                {renderAnimatedWord("ARJUN", "arjun")}
+              </span>
+              <span className="inline-block text-white drop-shadow-[0_0_16px_rgba(255,255,255,0.25)]">
+                {renderAnimatedWord("DIVRANIYA", "divraniya")}
+              </span>
             </h1>
-            <motion.p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 font-medium max-w-2xl leading-relaxed" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-              Engineering Scalable Tech Solutions for Real-World Problems
+
+            <motion.p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 font-medium max-w-2xl leading-7 sm:leading-8 text-pretty" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}>
+              I build production-ready web systems and interfaces—full‑stack apps, workflow automation, and designer-quality UI—focused on speed, clarity, and scale.
+              I bring a photographer’s eye for visuals and a systems architect’s mindset for reliable, polished products.
             </motion.p>
           </motion.div>
-          <motion.div className="text-xl sm:text-2xl md:text-3xl font-bold h-16 sm:h-20" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.4 }}>
+
+          <motion.div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold h-14 sm:h-16" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.35 }}>
             <div className="bg-gradient-to-r from-yellow-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
-              <TypeAnimation sequence={["Full Stack Developer", 2200, "UI/UX Visionary", 2200, "Wildlife Photographer", 2200, "Competitive Coder", 2200]} speed={50} repeat={Infinity} cursor={true} />
+              <TypeAnimation sequence={[
+                "Developer",
+                1800,
+                "Designer",
+                1800,
+                "Photographer",
+                1800,
+                "System Architect",
+                1800,
+              ]} speed={50} repeat={Infinity} cursor={true} />
             </div>
           </motion.div>
-          <motion.div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }}>
+
+          <motion.div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.55 }}>
             <MagneticButton onClick={() => navigate("/contact")}>Get In Touch</MagneticButton>
-            <motion.a href="#projects" className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 sm:px-8 py-3 sm:py-4 border border-yellow-400/50 text-white font-semibold hover:border-yellow-300 hover:bg-yellow-500/10 transition-all" whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(250,204,21,0.3)" }} whileTap={{ scale: 0.95 }}>
-              View Portfolio <span>↓</span>
+            <motion.a
+              href="/ArjunDivraniya_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 border-2 border-white/45 px-6 py-3 text-white font-semibold hover:border-yellow-300 hover:bg-yellow-500/10 transition-all"
+              style={{ borderRadius: "20px 13px 22px 12px / 14px 22px 12px 20px" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(250,204,21,0.3)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Resume <span>↓</span>
             </motion.a>
           </motion.div>
-          {/* Social Icons untouched */}
-          <motion.div className="flex flex-wrap gap-2 sm:gap-3 pt-2 sm:pt-4" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.8 }}>
-            {[ { Icon: FaGithub, href: "https://github.com/ArjunDivraniya", label: "GitHub" }, { Icon: FaLinkedin, href: "https://linkedin.com", label: "LinkedIn" }, { Icon: FaCamera, href: "#projects", label: "Photography" } ].map((social, idx) => (
-              <motion.a key={idx} href={social.href} target="_blank" rel="noopener noreferrer" className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center rounded-xl border border-white/20 text-white hover:border-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 transition-all" {...getHoverProps({ scale: 1.2, y: -4 })} whileTap={{ scale: 0.9 }}>
-                <social.Icon size={20} />
+
+          <motion.div className="flex flex-wrap gap-2 sm:gap-3 pt-2 sm:pt-4" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.75 }}>
+            {heroSocialLinks.map(({ Icon, href, label }) => (
+              <motion.a
+                key={label}
+                href={href}
+                target={href.startsWith("mailto:") ? "_self" : "_blank"}
+                rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                aria-label={label}
+                className="h-11 w-11 sm:h-12 sm:w-12 flex items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] text-white hover:border-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 transition-all"
+                {...getHoverProps({ scale: 1.16, y: -4 })}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Icon size={18} />
               </motion.a>
             ))}
           </motion.div>
+
+          <div className="pt-2">
+            <motion.a
+              href="mailto:arjundivraniya8@gmail.com"
+              className="inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-500/10 px-4 py-2 text-sm font-semibold text-purple-100 hover:bg-purple-500/20 transition-colors"
+              whileHover={{ scale: 1.02 }}
+            >
+              <FaEnvelope className="text-yellow-300" />
+              arjundivraniya8@gmail.com
+            </motion.a>
+          </div>
         </motion.div>
 
-        {/* **3. UPDATED: Visual Column - Only the Image logic is refactored** */}
         <motion.div
           ref={containerRef}
-          className="relative w-full flex justify-center lg:order-2 order-1"
+          className="relative order-2 flex w-full items-center justify-center lg:min-h-[620px]"
           onMouseMove={!mobile ? (e) => {
-            const rect = containerRef.current.getBoundingClientRect();
+            const rect = containerRef.current?.getBoundingClientRect();
+            if (!rect) return;
             cursorX.set(e.clientX - (rect.left + rect.width / 2));
             cursorY.set(e.clientY - (rect.top + rect.height / 2));
           } : undefined}
           onMouseLeave={!mobile ? () => { cursorX.set(0); cursorY.set(0); } : undefined}
-          style={mobile ? {} : { perspective: "2000px" }}
-          initial={{ opacity: 0, scale: 0.8 }}
+          style={mobile ? {} : { perspective: "2200px" }}
+          initial={{ opacity: 0, scale: 0.82 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.18 }}
         >
-          {/* **UNTOUCHED: Interactive Aura Glow** */}
-          {!mobile && <motion.div className="absolute inset-0 rounded-full blur-3xl pointer-events-none" style={{ background: "radial-gradient(circle, rgba(250,204,21,0.3) 0%, rgba(168,85,247,0.2) 50%, transparent 70%)", x: auraX, y: auraY }} animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }} transition={{ duration: 8, repeat: Infinity }} />}
+          {floatingRoleNodes.map((node) => (
+            <motion.img
+              key={`${node.id}-arrow`}
+              src={node.arrowSrc}
+              alt={`${node.label} arrow`}
+              className={`pointer-events-none absolute z-20 hidden select-none lg:block ${node.arrowClassName}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.96 }}
+              transition={{ duration: 0.5, delay: node.delay }}
+              loading="lazy"
+            />
+          ))}
 
-          {/* **UNTOUCHED CSS: Image Animation Container** */}
-          <motion.div
-            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg h-[420px] sm:h-[520px] md:h-[620px]"
-            style={mobile ? {} : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-          >
-            {/* **UNTOUCHED CSS: Central Glow** */}
+          {floatingRoleNodes.map((node) => (
+            <motion.div
+              key={node.id}
+              className={`absolute z-30 hidden text-zinc-100 lg:block ${node.labelClassName}`}
+              initial={{ opacity: 0, y: node.id === "developer" || node.id === "designer" ? -10 : 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: node.delay }}
+            >
+              <span
+                className="text-[2rem] leading-none tracking-[0.01em] drop-shadow-[0_0_8px_rgba(255,255,255,0.15)]"
+                style={{ fontFamily: "'Architects Daughter', cursive" }}
+              >
+                {node.label}
+              </span>
+            </motion.div>
+          ))}
+
+          {!mobile && <motion.div className="absolute inset-0 rounded-full blur-3xl pointer-events-none" style={{ background: "radial-gradient(circle, rgba(250,204,21,0.28) 0%, rgba(168,85,247,0.22) 50%, transparent 72%)", x: auraX, y: auraY }} animate={{ scale: [1, 1.12, 1], opacity: [0.42, 0.6, 0.42] }} transition={{ duration: 8, repeat: Infinity }} />}
+
+          <motion.div className="relative h-[480px] w-full max-w-[620px] sm:h-[580px] lg:h-[640px]" style={mobile ? {} : { rotateX, rotateY, transformStyle: "preserve-3d" }}>
             <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div className="absolute h-52 w-52 rounded-full blur-3xl" style={{ backgroundColor: "rgba(59,130,246,0.10)" }} />
+              <motion.div className="absolute h-60 w-60 rounded-full blur-3xl" style={{ backgroundColor: "rgba(59,130,246,0.12)" }} />
             </div>
 
-            {/* Mobile uses a single smooth slide-scale card; desktop keeps stacked perspective cards. */}
-            <div className="absolute inset-0 flex items-center justify-center perspective-[1500px]">
-              {mobile ? (
-                <div className="relative h-[320px] w-[240px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.img
-                      key={heroGalleryImages[activeGalleryIndex].id}
-                      src={heroGalleryImages[activeGalleryIndex].src}
-                      alt={heroGalleryImages[activeGalleryIndex].alt}
-                      className="absolute inset-0 h-full w-full object-cover"
-                      initial={{ x: "100%", scale: 0.8, opacity: 0.9 }}
-                      animate={{ x: 0, scale: 1, opacity: 1 }}
-                      exit={{ x: "-100%", scale: 0.8, opacity: 0.9 }}
-                      transition={{ duration: 0.6, ease: [0.45, 0, 0.55, 1] }}
-                      loading={activeGalleryIndex === 0 ? "eager" : "lazy"}
-                      fetchPriority={activeGalleryIndex === 0 ? "high" : "auto"}
-                    />
+            <div className="absolute inset-0 flex items-center justify-center perspective-[1600px] overflow-visible">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute h-[74%] w-[72%] rounded-[2rem] border border-white/10 bg-white/[0.02] blur-[1px]" />
+                <div className="absolute h-[64%] w-[60%] rounded-[2rem] border border-yellow-400/10 bg-yellow-500/[0.02]" />
+              </div>
+
+              <div className="relative h-[360px] w-[280px] sm:h-[470px] sm:w-[360px] lg:h-[520px] lg:w-[400px]">
+                {mobile ? (
+                  <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/12 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]">
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.img
+                        key={heroGalleryImages[activeGalleryIndex].id}
+                        src={heroGalleryImages[activeGalleryIndex].src}
+                        alt={heroGalleryImages[activeGalleryIndex].alt}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        initial={{ x: "100%", scale: 0.82, opacity: 0.9 }}
+                        animate={{ x: 0, scale: 1, opacity: 1 }}
+                        exit={{ x: "-100%", scale: 0.82, opacity: 0.9 }}
+                        transition={{ duration: 0.6, ease: [0.45, 0, 0.55, 1] }}
+                        loading={activeGalleryIndex === 0 ? "eager" : "lazy"}
+                        fetchPriority={activeGalleryIndex === 0 ? "high" : "auto"}
+                      />
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <AnimatePresence mode="popLayout">
+                    {heroGalleryImages.map((img, i) => {
+                      const isCenter = i === activeGalleryIndex;
+                      const isLeft = i === prevIndex;
+                      const isRight = i === nextIndex;
+
+                      if (!isCenter && !isLeft && !isRight) return null;
+
+                      return (
+                        <motion.div
+                          key={img.id}
+                          initial={{ opacity: 0, scale: 0.8, x: isRight ? 100 : isLeft ? -100 : 0 }}
+                          animate={{
+                            opacity: isCenter ? 1 : 0.35,
+                            scale: isCenter ? 1 : 0.74,
+                            x: isCenter ? 0 : isLeft ? -150 : 150,
+                            rotateY: isCenter ? 0 : isLeft ? 24 : -24,
+                            zIndex: isCenter ? 30 : 10,
+                            filter: isCenter ? "blur(0px)" : "blur(2px)",
+                          }}
+                          exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.4 } }}
+                          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                          className="absolute w-[260px] h-[350px] sm:w-[300px] sm:h-[420px] lg:w-[340px] lg:h-[470px] rounded-[2rem] overflow-hidden border border-white/12 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] origin-bottom"
+                        >
+                          <img src={img.src} alt={img.alt} className="absolute inset-0 h-full w-full object-cover" />
+                          {!isCenter && <div className="absolute inset-0 bg-black/40" />}
+                        </motion.div>
+                      );
+                    })}
                   </AnimatePresence>
-                </div>
-              ) : (
-                <AnimatePresence mode="popLayout">
-                  {heroGalleryImages.map((img, i) => {
-                    const isCenter = i === activeGalleryIndex;
-                    const isLeft = i === prevIndex;
-                    const isRight = i === nextIndex;
-
-                    if (!isCenter && !isLeft && !isRight) return null;
-
-                    return (
-                      <motion.div
-                        key={img.id}
-                        initial={{ opacity: 0, scale: 0.8, x: isRight ? 100 : isLeft ? -100 : 0 }}
-                        animate={{
-                          opacity: isCenter ? 1 : 0.4,
-                          scale: isCenter ? 1 : 0.75,
-                          x: isCenter ? 0 : isLeft ? -140 : 140,
-                          rotateY: isCenter ? 0 : isLeft ? 25 : -25,
-                          zIndex: isCenter ? 30 : 10,
-                          filter: isCenter ? "blur(0px)" : "blur(2px)",
-                        }}
-                        exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.4 } }}
-                        transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                        className="absolute w-[240px] h-[320px] md:w-[320px] md:h-[450px] rounded-2xl sm:rounded-3xl object-cover overflow-hidden border-2 border-white/10 shadow-2xl origin-bottom"
-                      >
-                        <img src={img.src} alt={img.alt} className="absolute inset-0 h-full w-full object-cover" />
-                        {!isCenter && <div className="absolute inset-0 bg-black/40" />}
-                      </motion.div>
-                    );
-                  })}
-                </AnimatePresence>
-              )}
+                )}
+              </div>
             </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* **UNTOUCHED: Scroll Indicator** */}
+      {/* Scroll indicator */}
       <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-gray-400" initial={{ opacity: 0 }} animate={{ opacity: 1, y: [0, 12, 0] }} transition={{ duration: 2, repeat: Infinity }}>
         <div className="w-8 h-12 border-2 border-yellow-400/40 rounded-full mx-auto flex justify-center pt-2">
           <motion.span className="w-1.5 h-1.5 bg-yellow-400 rounded-full" animate={{ y: [0, 16, 0] }} transition={{ duration: 2, repeat: Infinity }} />

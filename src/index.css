@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Oswald:wght@600;700&family=Pacifico&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -61,6 +61,12 @@ html, body {
 .industrial-title {
   font-family: "Oswald", "Arial Narrow", sans-serif;
   letter-spacing: 0.04em;
+}
+
+.hero-signature {
+  font-family: "Pacifico", cursive;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 18px rgba(251, 191, 36, 0.12);
 }
 
 :root {

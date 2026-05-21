@@ -11,7 +11,7 @@ const skills = [
       { 
         name: "Next.js", 
         icon: SiNextdotjs, 
-        color: "#000000",
+        color: "#F3F4F6",
         description: "Architecting SEO-optimized, high-performance SSR and ISR applications."
       },
       { 
@@ -82,7 +82,7 @@ const skills = [
       { 
         name: "Socket.io", 
         icon: SiSocketdotio, 
-        color: "#010101",
+        color: "#F3F4F6",
         description: "Creating real-time bidirectional communication for interactive features."
       }
     ]

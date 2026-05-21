@@ -13,6 +13,9 @@ export const initGA = (measurementId) => {
 // Track page views
 export const trackPageView = (url, title) => {
   if (typeof window !== 'undefined' && window.gtag) {
+    if (import.meta.env.DEV) {
+      console.log(`[GA] Page View Tracked: ${title} (${url})`);
+    }
     window.gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID, {
       page_path: url,
       page_title: title,
@@ -23,6 +26,9 @@ export const trackPageView = (url, title) => {
 // Track custom events
 export const trackEvent = (action, category, label, value) => {
   if (typeof window !== 'undefined' && window.gtag) {
+    if (import.meta.env.DEV) {
+      console.log(`[GA] Event Tracked: ${action} - ${category} - ${label} ${value ? '- ' + value : ''}`);
+    }
     window.gtag('event', action, {
       event_category: category,
       event_label: label,

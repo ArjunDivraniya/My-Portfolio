@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaFigma, FaCode, FaGitAlt, FaGithub } from "react-icons/fa";
-import { SiMongodb, SiPostman, SiExpress, SiReact, SiTailwindcss, SiVercel, SiNextdotjs } from "react-icons/si";
+import { FaFigma, FaCode, FaGitAlt, FaGithub, FaNodeJs } from "react-icons/fa";
+import { SiMongodb, SiPostman, SiExpress, SiReact, SiTailwindcss, SiVercel, SiNextdotjs, SiSocketdotio } from "react-icons/si";
 import { isMobile } from "../utils/mobileOptimization";
 
 const tools = [
@@ -42,7 +42,7 @@ const tools = [
   },
   {
     name: "Node.js",
-    icon: SiReact,
+    icon: FaNodeJs,
     color: "#8CC84B",
     category: "Runtime",
     description: "JavaScript runtime for server-side execution and backend development."
@@ -57,9 +57,16 @@ const tools = [
   {
     name: "Next.js",
     icon: SiNextdotjs,
-    color: "#000000",
+    color: "#F3F4F6",
     category: "Framework",
     description: "React framework with SSR, ISR, and automatic optimization capabilities."
+  },
+  {
+    name: "Socket.io",
+    icon: SiSocketdotio,
+    color: "#F3F4F6",
+    category: "Realtime",
+    description: "Real-time bi-directional communication layer for live updates and instant sync."
   },
   {
     name: "Tailwind CSS",
@@ -85,7 +92,7 @@ const tools = [
   {
     name: "Vercel",
     icon: SiVercel,
-    color: "#000000",
+    color: "#F3F4F6",
     category: "Deployment",
     description: "Edge-optimized deployment platform with serverless functions."
   }

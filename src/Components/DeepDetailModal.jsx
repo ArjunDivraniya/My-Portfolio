@@ -1,7 +1,115 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  FaBook,
+  FaCheckCircle,
+  FaCode,
+  FaDatabase,
+  FaExternalLinkAlt,
+  FaGithub,
+  FaPause,
+  FaPlay,
+  FaProjectDiagram,
+  FaTimes,
+  FaVolumeMute,
+  FaVolumeUp,
+  FaExclamationTriangle,
+  FaServer,
+  FaUserAlt,
+  FaLayerGroup,
+  FaChartLine,
+} from 'react-icons/fa';
+import portfolioLoopVideo from '../assets/public/Signature 2.o.mp4';
 
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const techInsights = {
+  React: {
+    icon: FaCode,
+    text: 'Builds the interactive interface and keeps the UI responsive as state changes.',
+  },
+  Node: {
+    icon: FaServer,
+    text: 'Handles request orchestration and backend execution for the project flows.',
+  },
+  MongoDB: {
+    icon: FaDatabase,
+    text: 'Stores project data in a flexible schema for fast iteration and retrieval.',
+  },
+  PostgreSQL: {
+    icon: FaDatabase,
+    text: 'Keeps relational data consistent for approvals, records, and reporting.',
+  },
+  Python: {
+    icon: FaCode,
+    text: 'Runs automation, data logic, and backend helpers with readable service code.',
+  },
+  Odoo: {
+    icon: FaLayerGroup,
+    text: 'Coordinates modular business workflows and enterprise screens with reusable apps.',
+  },
+  Reports: {
+    icon: FaChartLine,
+    text: 'Turns raw records into decision-ready summaries and operational dashboards.',
+  },
+  Inventory: {
+    icon: FaDatabase,
+    text: 'Tracks stock movement and availability so the system can react before shortages happen.',
+  },
+  Analytics: {
+    icon: FaChartLine,
+    text: 'Surfaces trends and performance patterns for faster decisions and planning.',
+  },
+  Kanban: {
+    icon: FaProjectDiagram,
+    text: 'Visualizes work progress so the team can move tasks through a clear pipeline.',
+  },
+  Auth: {
+    icon: FaUserAlt,
+    text: 'Protects access with identity checks and role-aware routing.',
+  },
+  'Next.js': {
+    icon: FaCode,
+    text: 'Delivers the app shell and server-rendered entry points for fast page loads.',
+  },
+  Charts: {
+    icon: FaChartLine,
+    text: 'Transforms data into visual comparisons that are easy to scan and explain.',
+  },
+  Redis: {
+    icon: FaDatabase,
+    text: 'Caches hot data and speeds up repeated requests for smoother interactions.',
+  },
+  JWT: {
+    icon: FaUserAlt,
+    text: 'Secures sessions with lightweight token-based authentication.',
+  },
+  Testing: {
+    icon: FaCheckCircle,
+    text: 'Validates behavior and helps keep the codebase stable as features evolve.',
+  },
+};
+
+const defaultTechInsight = {
+  icon: FaCode,
+  text: 'Supports the project with a reusable implementation role inside the stack.',
+};
+
+const getTechItem = (tech) => {
+  if (typeof tech === 'string') {
+    return {
+      icon: techInsights[tech]?.icon || defaultTechInsight.icon,
+      label: tech,
+      text: techInsights[tech]?.text || defaultTechInsight.text,
+    };
+  }
+
+  return {
+    icon: tech?.icon || defaultTechInsight.icon,
+    label: tech?.label || 'Tech',
+    text: tech?.description || techInsights[tech?.label]?.text || defaultTechInsight.text,
+  };
+};
+
+const getTimeline = (project) => project?.workflow || project?.phases || ['User Input', 'Processing', 'Database', 'Output'];
 
 const DeepDetailModal = ({
   isOpen,
@@ -9,130 +117,389 @@ const DeepDetailModal = ({
   originRect,
   title,
   subtitle,
-  children,
+  project,
   actions,
 }) => {
-  const overlayRef = useRef(null);
-  const panelRef = useRef(null);
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     if (!isOpen) return;
+    setIsPlaying(true);
+    setIsMuted(true);
+  }, [isOpen, project?.id]);
 
-    const overlay = overlayRef.current;
-    const panel = panelRef.current;
-
-    if (!overlay || !panel) return;
-
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const finalWidth = clamp(viewportWidth * 0.9, 320, 1040);
-    const finalHeight = clamp(viewportHeight * 0.92, 420, 860);
-    const finalLeft = (viewportWidth - finalWidth) / 2;
-    const finalTop = (viewportHeight - finalHeight) / 2;
-
-    const start = originRect || {
-      top: finalTop,
-      left: finalLeft,
-      width: finalWidth,
-      height: finalHeight,
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev || '';
     };
+  }, [isOpen]);
+  useEffect(() => {
+    if (!isOpen || !videoRef.current) return;
 
-    gsap.set(overlay, { opacity: 0 });
-    gsap.set(panel, {
-      position: 'fixed',
-      top: start.top,
-      left: start.left,
-      width: start.width,
-      height: start.height,
-      borderRadius: 18,
-      transformOrigin: 'center',
-    });
+    const playPromise = videoRef.current.play();
+    if (playPromise?.catch) {
+      playPromise.catch(() => {
+        setIsPlaying(false);
+      });
+    }
+  }, [isOpen, project?.id]);
 
-    gsap.to(overlay, { opacity: 1, duration: 0.2, ease: 'power1.out' });
-    gsap.to(panel, {
-      top: finalTop,
-      left: finalLeft,
-      width: finalWidth,
-      height: finalHeight,
-      duration: 0.45,
-      ease: 'power3.out',
-    });
-  }, [isOpen, originRect]);
+  const footerActions = useMemo(() => {
+    if (actions?.length) return actions;
+
+    const links = project?.links || {};
+    return [
+      { label: 'GitHub Repo', href: links.github || '#', variant: 'ghost' },
+      { label: 'Live Production Link', href: links.demo || '#', variant: 'primary' },
+      { label: 'Technical Documentation', href: links.docs || links.github || '#', variant: 'ghost' },
+      { label: 'Architecture Diagram', href: links.architecture || links.docs || links.github || '#', variant: 'ghost' },
+    ];
+  }, [actions, project]);
+  // Prefer explicit media fields; fall back to known video links or the loop fallback
+  const rawMedia = project?.mediaVideo || project?.links?.video || project?.video || portfolioLoopVideo;
+  const isYouTube = typeof rawMedia === 'string' && /youtu(?:\.be|be\.com|be-nocookie)\/.+|youtube/.test(rawMedia);
+
+  const mediaSource = useMemo(() => {
+    if (!isYouTube || typeof rawMedia !== 'string') return rawMedia;
+
+    const embedUrl = rawMedia
+      .replace('watch?v=', 'embed/')
+      .replace('youtu.be/', 'www.youtube.com/embed/')
+      .replace('youtube.com/embed/', 'www.youtube.com/embed/');
+
+    const joiner = embedUrl.includes('?') ? '&' : '?';
+    return `${embedUrl}${joiner}autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`;
+  }, [isYouTube, rawMedia]);
+  const problemText = project?.problem || project?.about || 'This project was built to resolve a real user or workflow bottleneck.';
+  const solutionText = project?.solution || project?.about || 'The engineering approach focused on clarity, speed, and a friction-free user path.';
+  const techItems = (project?.tech || []).map(getTechItem);
+  const highlights = (project?.features || project?.highlights || []).slice(0, 4);
+  const timeline = getTimeline(project).slice(0, 5);
 
   const handleClose = () => {
-    const overlay = overlayRef.current;
-    const panel = panelRef.current;
+    onClose();
+  };
 
-    if (!overlay || !panel || !originRect) {
-      onClose();
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().catch(() => {});
+      setIsPlaying(true);
       return;
     }
 
-    gsap.to(overlay, { opacity: 0, duration: 0.2, ease: 'power1.in' });
-    gsap.to(panel, {
-      top: originRect.top,
-      left: originRect.left,
-      width: originRect.width,
-      height: originRect.height,
-      duration: 0.35,
-      ease: 'power3.in',
-      onComplete: onClose,
-    });
+    video.pause();
+    setIsPlaying(false);
+  };
+
+  const toggleMute = () => {
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    if (videoRef.current) {
+      videoRef.current.muted = nextMuted;
+    }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div
-        ref={overlayRef}
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-        onClick={handleClose}
-      />
-      <div
-        ref={panelRef}
-        className="relative z-10 flex h-full flex-col overflow-hidden border border-yellow-500/40 bg-black text-white shadow-[0_40px_120px_-30px_rgba(234,179,8,0.4)]"
+    <AnimatePresence mode="wait">
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b border-yellow-500/20 bg-gradient-to-r from-black via-purple-900/20 to-black px-8 py-5">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-yellow-400 font-bold">Deep Detail</p>
-            <h3 className="text-3xl font-extrabold text-yellow-400 mt-1">{title}</h3>
-            {subtitle ? <p className="text-sm text-purple-200 mt-1 font-medium">{subtitle}</p> : null}
-          </div>
+        <motion.div
+          className="absolute inset-0 bg-[#080808]/95 backdrop-blur-[20px]"
+          onClick={handleClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
+
+        <motion.div
+          className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col overflow-hidden rounded-2xl bg-[#080808] text-white shadow-[0_50px_160px_-30px_rgba(0,0,0,0.85)]"
+          initial={{ opacity: 0, y: 40, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 30, scale: 0.96 }}
+          transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+        >
           <button
             onClick={handleClose}
-            className="h-12 w-12 rounded-full border border-yellow-500/30 text-2xl text-yellow-400 transition hover:border-yellow-500 hover:text-yellow-300 font-bold"
+            className="absolute right-4 top-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/60 text-lg text-white backdrop-blur-md transition hover:border-yellow-400 hover:text-yellow-300"
             aria-label="Close modal"
           >
-            ×
+            <FaTimes />
           </button>
-        </div>
 
-        <div className="flex-1 overflow-y-auto px-8 py-6">
-          <div className="space-y-6 text-base text-gray-200 leading-relaxed">{children}</div>
-        </div>
-
-        {actions?.length ? (
-          <div className="flex flex-wrap gap-4 border-t border-yellow-500/20 bg-black px-8 py-5">
-            {actions.map((action) => (
-              <a
-                key={action.label}
-                href={action.href}
-                target="_blank"
-                rel="noreferrer"
-                className={
-                  action.variant === 'ghost'
-                    ? 'rounded-full border-2 border-purple-400/40 px-6 py-3 text-sm font-bold uppercase tracking-widest text-purple-200 transition hover:border-purple-400 hover:text-white'
-                    : 'rounded-full bg-yellow-500 px-6 py-3 text-sm font-extrabold uppercase tracking-widest text-black transition hover:bg-yellow-400 shadow-lg hover:shadow-xl'
-                }
+          {/* Hero Video */}
+          <div className="relative h-[40vh] md:h-1/2 min-h-[160px] max-h-[60vh] w-full border-b border-white/10 bg-black">
+            {isYouTube ? (
+              <iframe
+                title={`project-video-${project?.id || 'case'}`}
+                className="h-full w-full"
+                src={mediaSource}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                className="h-full w-full object-cover"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                poster={project?.images?.[0]}
               >
-                {action.label}
-              </a>
-            ))}
+                <source src={mediaSource} type="video/mp4" />
+              </video>
+            )}
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+
+            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-yellow-300 backdrop-blur-md">
+              Case Study
+            </div>
+
+            <div className="absolute bottom-4 left-4 max-w-3xl space-y-2">
+              <p className="text-xs uppercase tracking-[0.3em] text-yellow-300/80">{subtitle}</p>
+              <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
+                {title}
+              </h2>
+            </div>
+
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-black/45 p-2 backdrop-blur-md">
+              {isYouTube ? (
+                <a
+                  href={project?.links?.video || project?.video || mediaSource}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-yellow-400/60 hover:text-yellow-300"
+                  aria-label="Open video in new tab"
+                >
+                  <FaExternalLinkAlt />
+                </a>
+              ) : (
+                <>
+                  <button
+                    onClick={togglePlay}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-yellow-400/60 hover:text-yellow-300"
+                    aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                  >
+                    {isPlaying ? <FaPause /> : <FaPlay />}
+                  </button>
+                  <button
+                    onClick={toggleMute}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-yellow-400/60 hover:text-yellow-300"
+                    aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                  >
+                    {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-        ) : null}
-      </div>
-    </div>
+
+          {/* Scrollable Study Sections */}
+          <div className="flex-1 min-h-0 overflow-y-auto px-4 py-6 sm:px-6 lg:px-10">
+            <div className="mx-auto max-w-6xl space-y-10 pb-8">
+              <motion.section
+                className="grid gap-4 lg:grid-cols-2"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 18 }}
+              >
+                <motion.div
+                  className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-red-400/30 bg-red-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-red-300">
+                    <FaExclamationTriangle /> The Challenge
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-200 sm:text-base">{problemText}</p>
+                </motion.div>
+
+                <motion.div
+                  className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ delay: 0.08 }}
+                >
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
+                    <FaCheckCircle /> The Engineering Fix
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-200 sm:text-base">{solutionText}</p>
+                </motion.div>
+              </motion.section>
+
+              <motion.section
+                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 18 }}
+              >
+                <div className="mb-5 flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.6)]" />
+                  <h3 className="text-xl font-black text-white sm:text-2xl">Technical Workflow</h3>
+                </div>
+
+                <div className="space-y-4">
+                  {timeline.map((step, index) => (
+                    <motion.div
+                      key={`${step}-${index}`}
+                      className="flex gap-4"
+                      initial={{ opacity: 0, x: -14 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ delay: index * 0.08 }}
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/30 bg-yellow-500/10 text-sm font-black text-yellow-300">
+                          {index + 1}
+                        </div>
+                        {index < timeline.length - 1 ? <div className="h-full w-px bg-gradient-to-b from-yellow-400/50 to-transparent" /> : null}
+                      </div>
+                      <div className="flex-1 rounded-2xl border border-white/10 bg-black/25 px-4 py-3">
+                        <p className="text-sm font-semibold text-white sm:text-base">{step}</p>
+                        <p className="mt-1 text-sm text-gray-400">
+                          {index === 0
+                            ? 'The journey starts when the user enters data or triggers an action.'
+                            : index === timeline.length - 1
+                              ? 'The final output is stored, displayed, or delivered back to the user.'
+                              : 'Data is transformed, validated, and moved to the next system layer.'}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.section>
+
+              <motion.section
+                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 18 }}
+              >
+                <div className="mb-5 flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+                  <h3 className="text-xl font-black text-white sm:text-2xl">Tech Stack Work</h3>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {techItems.map((item, index) => {
+                    const TechIcon = item.icon;
+
+                    return (
+                      <motion.div
+                        key={`${item.label}-${index}`}
+                        className="rounded-2xl border border-white/10 bg-black/30 p-4"
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ delay: index * 0.05 }}
+                        whileHover={{ y: -4 }}
+                      >
+                        <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-yellow-300">
+                          <TechIcon />
+                        </div>
+                        <h4 className="text-sm font-bold text-white">{item.label}</h4>
+                        <p className="mt-2 text-sm leading-relaxed text-gray-400">{item.text}</p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.section>
+
+              <motion.section
+                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 18 }}
+              >
+                <div className="mb-5 flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-fuchsia-400 shadow-[0_0_10px_rgba(232,121,249,0.5)]" />
+                  <h3 className="text-xl font-black text-white sm:text-2xl">Key Highlights</h3>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  {highlights.map((item, index) => (
+                    <motion.div
+                      key={`${item}-${index}`}
+                      className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-5"
+                      initial={{ opacity: 0, scale: 0.96, y: 16 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ delay: index * 0.08 }}
+                      whileHover={{ y: -5, scale: 1.01 }}
+                    >
+                      <p className="text-xs font-bold uppercase tracking-[0.24em] text-yellow-300">High Performance</p>
+                      <p className="mt-3 text-lg font-semibold leading-relaxed text-white">{item}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.section>
+            </div>
+          </div>
+
+          {/* Footer (sits at modal bottom) */}
+          <div className="flex-none z-20 border-t border-white/10 bg-black/80 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-10">
+            <div className="mx-auto flex max-w-6xl flex-wrap gap-2 sm:gap-3">
+              {footerActions.map((action) => {
+                const isDisabled = !action?.href || action.href === '#';
+                const baseClasses =
+                  'inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold transition';
+                const variantClasses =
+                  action.variant === 'primary'
+                    ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-500/20 hover:bg-yellow-300'
+                    : 'border border-white/15 bg-white/[0.04] text-white hover:border-white/30 hover:bg-white/[0.08]';
+
+                if (isDisabled) {
+                  return (
+                    <div key={action.label} className={`${baseClasses} cursor-not-allowed opacity-50 ${variantClasses}`}>
+                      {action.label}
+                    </div>
+                  );
+                }
+
+                return (
+                  <a
+                    key={action.label}
+                    href={action.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${baseClasses} ${variantClasses}`}
+                  >
+                    {action.label === 'GitHub Repo' ? <FaGithub /> : null}
+                    {action.label === 'Live Production Link' ? <FaExternalLinkAlt /> : null}
+                    {action.label === 'Technical Documentation' ? <FaBook /> : null}
+                    {action.label === 'Architecture Diagram' ? <FaProjectDiagram /> : null}
+                    <span>{action.label}</span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
