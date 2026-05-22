@@ -34,9 +34,11 @@ const hackathonData = [
     links: {
       live: 'https://expense-managment-eight.vercel.app/',
       github: 'https://github.com/ArjunDivraniya/ODOOxIITG-Virtual-Round-',
-      video: 'https://www.youtube.com/embed/RrZAaDPay9g',
+      video: 'https://www.youtube.com/watch?v=RrZAaDPay9g',
+      embedLink: 'https://www.youtube.com/embed/RrZAaDPay9g',
       certificate: 'https://www.linkedin.com/in/arjun-divraniya/details/certifications/',
     },
+    embedLink: 'https://www.youtube.com/embed/RrZAaDPay9g',
     badge: 'Selected for Offline Round',
   },
   {
@@ -57,9 +59,11 @@ const hackathonData = [
     links: {
       live: '#',
       github: 'https://github.com/ArjunDivraniya/ODOOxNMIT',
-      video: 'https://www.youtube.com/embed/lj_SfjZODq0',
+      video: 'https://www.youtube.com/watch?v=lj_SfjZODq0',
+      embedLink: 'https://www.youtube.com/embed/lj_SfjZODq0',
       certificate: 'https://www.linkedin.com/in/arjun-divraniya/details/certifications/',
     },
+    embedLink: 'https://www.youtube.com/embed/lj_SfjZODq0',
   },
   {
     id: 'odoo-spit',
@@ -79,9 +83,11 @@ const hackathonData = [
     links: {
       live: 'https://odoo-management-system-ad.vercel.app/login',
       github: 'https://github.com/ArjunDivraniya/Odoo-X-SPIT',
-      video: 'https://www.youtube.com/embed/dRXl1a0PcGA',
+      video: 'https://www.youtube.com/watch?v=dRXl1a0PcGA',
+      embedLink: 'https://www.youtube.com/embed/dRXl1a0PcGA',
       certificate: 'https://www.linkedin.com/in/arjun-divraniya/details/certifications/',
     },
+    embedLink: 'https://www.youtube.com/embed/dRXl1a0PcGA',
   },
   {
     id: 'rai-university',
@@ -99,11 +105,13 @@ const hackathonData = [
       'Developed secure auth-backed dashboards that map data updates directly into a streamlined client view.',
     stack: ['Odoo', 'PostgreSQL', 'Authentication Hooks', 'Analytics Engine', 'Operations'],
     links: {
-      live: 'https://www.youtube.com/embed/43DaRK0WBLg',
+      live: 'https://www.youtube.com/watch?v=43DaRK0WBLg',
       github: 'https://github.com/mayank-dudhatra/ODOOxGCET',
-      video: 'https://www.youtube.com/embed/43DaRK0WBLg',
+      video: 'https://www.youtube.com/watch?v=43DaRK0WBLg',
+      embedLink: 'https://www.youtube.com/embed/43DaRK0WBLg',
       certificate: 'https://www.linkedin.com/in/arjun-divraniya/details/certifications/',
     },
+    embedLink: 'https://www.youtube.com/embed/43DaRK0WBLg',
   },
   {
     id: 'hackathon-marathon',
@@ -126,6 +134,7 @@ const hackathonData = [
       video: '#',
       certificate: 'https://www.linkedin.com/in/arjun-divraniya/details/certifications/',
     },
+    embedLink: null,
   },
   {
     id: 'college-codefest',
@@ -145,9 +154,11 @@ const hackathonData = [
     links: {
       live: '#',
       github: 'https://github.com/mayank-dudhatra/ODOOxIITGxHRMS',
-      video: 'https://www.youtube.com/embed/mFVR0ihWdTo',
+      video: 'https://www.youtube.com/watch?v=mFVR0ihWdTo',
+      embedLink: 'https://www.youtube.com/embed/mFVR0ihWdTo',
       certificate: 'https://www.linkedin.com/in/arjun-divraniya/details/certifications/',
     },
+    embedLink: 'https://www.youtube.com/embed/mFVR0ihWdTo',
   },
 ];
 
@@ -232,6 +243,7 @@ const Hackathons = () => {
         originRect={originRect}
         title={activeHackathon?.project}
         subtitle={activeHackathon ? activeHackathon.event : ''}
+        project={activeHackathon}
         actions={
           activeHackathon
             ? [

@@ -111,6 +111,48 @@ const getTechItem = (tech) => {
 
 const getTimeline = (project) => project?.workflow || project?.phases || ['User Input', 'Processing', 'Database', 'Output'];
 
+const isValidMediaUrl = (value) => {
+  if (typeof value !== 'string') return false;
+
+  const trimmed = value.trim();
+  if (!trimmed || trimmed === '#') return false;
+
+  return /^(https?:)?\/\//.test(trimmed) || trimmed.startsWith('blob:') || trimmed.startsWith('data:') || trimmed.endsWith('.mp4') || trimmed.endsWith('.webm');
+};
+
+const getYouTubeVideoId = (url) => {
+  if (typeof url !== 'string') return null;
+
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+
+  const patterns = [
+    /(?:youtu\.be\/)([\w-]{11})/i,
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/i,
+    /(?:youtube-nocookie\.com\/embed\/)([\w-]{11})/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = trimmed.match(pattern);
+    if (match?.[1]) return match[1];
+  }
+
+  try {
+    const parsed = new URL(trimmed, 'https://www.youtube.com');
+    const v = parsed.searchParams.get('v');
+    if (v) return v;
+  } catch {
+    return null;
+  }
+
+  return null;
+};
+
+const toYouTubeEmbedUrl = (url) => {
+  const videoId = getYouTubeVideoId(url);
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+};
+
 const DeepDetailModal = ({
   isOpen,
   onClose,
@@ -162,16 +204,14 @@ const DeepDetailModal = ({
     ];
   }, [actions, project]);
   // Prefer explicit media fields; fall back to known video links or the loop fallback
-  const rawMedia = project?.mediaVideo || project?.links?.video || project?.video || portfolioLoopVideo;
+  const candidateMedia = project?.mediaVideo || project?.embedLink || project?.links?.embedLink || project?.links?.video || project?.video;
+  const rawMedia = isValidMediaUrl(candidateMedia) ? candidateMedia : portfolioLoopVideo;
   const isYouTube = typeof rawMedia === 'string' && /youtu(?:\.be|be\.com|be-nocookie)\/.+|youtube/.test(rawMedia);
 
   const mediaSource = useMemo(() => {
     if (!isYouTube || typeof rawMedia !== 'string') return rawMedia;
 
-    const embedUrl = rawMedia
-      .replace('watch?v=', 'embed/')
-      .replace('youtu.be/', 'www.youtube.com/embed/')
-      .replace('youtube.com/embed/', 'www.youtube.com/embed/');
+    const embedUrl = toYouTubeEmbedUrl(rawMedia);
 
     const joiner = embedUrl.includes('?') ? '&' : '?';
     return `${embedUrl}${joiner}autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`;
@@ -251,6 +291,7 @@ const DeepDetailModal = ({
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
               />
             ) : (
               <video

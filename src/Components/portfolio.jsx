@@ -40,7 +40,8 @@ export const projectData = {
       id: 1,
       title: "AzureAI Code Suggest",
       subtitle: "VS Code Extension Engine",
-      video: "https://www.youtube.com/embed/LcuhP_FaquY", 
+      video: "https://www.youtube.com/watch?v=LcuhP_FaquY", 
+      embedLink: "https://www.youtube.com/embed/LcuhP_FaquY",
       badge: "🏆 1st Rank Winner",
       images: getProjectThumbSet(1),
       tech: [
@@ -51,7 +52,8 @@ export const projectData = {
       links: {
         github: "https://github.com/ArjunDivraniya/Azure-AI-Extension",
         demo: "https://ai-mirror-chat-bot-js5c.vercel.app/",
-        video: "https://www.youtube.com/embed/LcuhP_FaquY",
+        video: "https://www.youtube.com/watch?v=LcuhP_FaquY",
+        embedLink: "https://www.youtube.com/embed/LcuhP_FaquY",
         docs: "#",
       },
       status: "Winner",
@@ -66,7 +68,8 @@ export const projectData = {
       id: 2,
       title: "SmartSplit",
       subtitle: "Full-Stack Fintech Platform",
-      video: "https://www.youtube.com/embed/LcuhP_FaquY",
+      video: "https://www.youtube.com/watch?v=LcuhP_FaquY",
+      embedLink: "https://www.youtube.com/embed/LcuhP_FaquY",
       images: getProjectThumbSet(2),
       tech: [
         { icon: FaReact, label: "React Native" },
@@ -77,7 +80,8 @@ export const projectData = {
       links: {
         github: "https://github.com/ArjunDivraniya/Trip-Splitter-Next",
         demo: "https://trip-splitter-ashy.vercel.app/",
-        video: "https://www.youtube.com/embed/LcuhP_FaquY",
+        video: "https://www.youtube.com/watch?v=LcuhP_FaquY",
+        embedLink: "https://www.youtube.com/embed/LcuhP_FaquY",
       },
       status: "Live",
       about: "Cross-platform debt settlement ecosystem with a unified backend and real-time MongoDB analytics.",
@@ -91,7 +95,8 @@ export const projectData = {
       id: 3,
       title: "Photographer Booking",
       subtitle: "MERN Marketplace",
-      video: "https://www.youtube.com/embed/esvS8qtjuo0",
+      video: "https://www.youtube.com/watch?v=esvS8qtjuo0",
+      embedLink: "https://www.youtube.com/embed/esvS8qtjuo0",
       images: getProjectThumbSet(3),
       tech: [
         { icon: FaReact, label: "React" },
@@ -102,7 +107,8 @@ export const projectData = {
       links: {
         github: "https://github.com/ArjunDivraniya/shutter_sphere",
         demo: "#",
-        video: "https://www.youtube.com/embed/esvS8qtjuo0",
+        video: "https://www.youtube.com/watch?v=esvS8qtjuo0",
+        embedLink: "https://www.youtube.com/embed/esvS8qtjuo0",
       },
       status: "Live",
       about: "Dual-sided marketplace with RBAC security and real-time chat for professional photography workflows.",
@@ -117,6 +123,7 @@ export const projectData = {
       title: "LeetCode Tracker",
       subtitle: "Chrome Extension Engine",
       video: "#",
+      embedLink: "#",
       images: getProjectThumbSet(4),
       tech: [
         { icon: FaCode, label: "TypeScript" },
@@ -143,7 +150,8 @@ export const projectData = {
       id: 101,
       title: "Expense Management",
       subtitle: "Odoo X IITGN (Online)",
-      video: "https://www.youtube.com/embed/RrZAaDPay9g",
+      video: "https://www.youtube.com/watch?v=RrZAaDPay9g",
+      embedLink: "https://www.youtube.com/embed/RrZAaDPay9g",
       badge: "🎖️ Finalist Selection",
       images: getProjectThumbSet(0),
       tech: ["Odoo", "Python", "OCR Logic"],
@@ -153,13 +161,14 @@ export const projectData = {
       workflow: ["Receipt Upload", "OCR Text Mining", "Policy Cross-Check", "Approval Route"],
       features: ["OCR-based receipt parsing", "Duplicate validation checks", "Finance dashboard reporting"],
       highlights: ["Selected for final round at IIT Gandhinagar", "Rule-driven workflow validation"],
-      links: { github: "https://github.com/ArjunDivraniya/ODOOxIITG-Virtual-Round-", demo: "https://expense-managment-eight.vercel.app/", video: "https://www.youtube.com/embed/RrZAaDPay9g" }
+      links: { github: "https://github.com/ArjunDivraniya/ODOOxIITG-Virtual-Round-", demo: "https://expense-managment-eight.vercel.app/", video: "https://www.youtube.com/watch?v=RrZAaDPay9g", embedLink: "https://www.youtube.com/embed/RrZAaDPay9g" }
     },
     {
       id: 102,
       title: "HRMS Enterprise",
       subtitle: "Odoo X IITGN (Offline)",
-      video: "https://www.youtube.com/embed/mFVR0ihWdTo",
+      video: "https://www.youtube.com/watch?v=mFVR0ihWdTo",
+      embedLink: "https://www.youtube.com/embed/mFVR0ihWdTo",
       badge: "🏆 Offline Round Selection",
       images: getProjectThumbSet(1),
       tech: ["Odoo", "PostgreSQL", "Python"],
@@ -169,13 +178,14 @@ export const projectData = {
       workflow: ["Employee Creation", "Role Authorization Allocation", "Policy Engine Processing", "Payroll Reconciliation"],
       features: ["Role-based employee routing", "Audit-trailed approval pipelines", "Policy-aware data structure"],
       highlights: ["Achieved elite offline selection round at IITGN", "Enterprise schema enforcement"],
-      links: { github: "https://github.com/mayank-dudhatra/ODOOxIITGxHRMS", demo: "#", video: "https://www.youtube.com/embed/mFVR0ihWdTo" }
+      links: { github: "https://github.com/mayank-dudhatra/ODOOxIITGxHRMS", demo: "#", video: "https://www.youtube.com/watch?v=mFVR0ihWdTo", embedLink: "https://www.youtube.com/embed/mFVR0ihWdTo" }
     },
     {
       id: 103,
       title: "StockMaster Ops",
       subtitle: "Odoo X SPIT",
-      video: "https://www.youtube.com/embed/dRXl1a0PcGA",
+      video: "https://www.youtube.com/watch?v=dRXl1a0PcGA",
+      embedLink: "https://www.youtube.com/embed/dRXl1a0PcGA",
       badge: "🔥 Inventory Intelligence",
       images: getProjectThumbSet(2),
       tech: ["Odoo", "Inventory Analytics", "Python"],
@@ -185,13 +195,14 @@ export const projectData = {
       workflow: ["Inventory Reorder Trigger", "Multi-Warehouse Check", "Sequence Delta Commits", "Stock Sync Update"],
       features: ["Multi-warehouse sync nodes", "Real-time automated adjustments", "Early alert data markers"],
       highlights: ["Optimized inventory execution pipelines", "Designed for extreme low-latency tracking"],
-      links: { github: "https://github.com/ArjunDivraniya/Odoo-X-SPIT", demo: "https://odoo-management-system-ad.vercel.app/login", video: "https://www.youtube.com/embed/dRXl1a0PcGA" }
+      links: { github: "https://github.com/ArjunDivraniya/Odoo-X-SPIT", demo: "https://odoo-management-system-ad.vercel.app/login", video: "https://www.youtube.com/watch?v=dRXl1a0PcGA", embedLink: "https://www.youtube.com/embed/dRXl1a0PcGA" }
     },
     {
       id: 104,
       title: "Project Collab",
       subtitle: "Odoo X NMIT",
-      video: "https://www.youtube.com/embed/lj_SfjZODq0",
+      video: "https://www.youtube.com/watch?v=lj_SfjZODq0",
+      embedLink: "https://www.youtube.com/embed/lj_SfjZODq0",
       badge: "👥 Agile Workspace",
       images: getProjectThumbSet(3),
       tech: ["React", "Node.js", "Kanban Engine"],
@@ -201,13 +212,14 @@ export const projectData = {
       workflow: ["Sprint Backlog Creation", "Task Multi-Assignment", "State Machine Transition", "Velocity Plotting"],
       features: ["State-controlled Kanban Board", "Task assignment tracking", "Real-time timeline rendering"],
       highlights: ["High user experience score during evaluation", "Modular code separation structure"],
-      links: { github: "https://github.com/ArjunDivraniya/ODOOxNMIT", demo: "#", video: "https://www.youtube.com/embed/lj_SfjZODq0" }
+      links: { github: "https://github.com/ArjunDivraniya/ODOOxNMIT", demo: "#", video: "https://www.youtube.com/watch?v=lj_SfjZODq0", embedLink: "https://www.youtube.com/embed/lj_SfjZODq0" }
     },
     {
       id: 105,
       title: "Bus Safety Alert",
       subtitle: "Craftathon (Gandhinagar University)",
       video: "#",
+      embedLink: "#",
       badge: "🛡️ Secure Transport Ecosystem",
       images: getProjectThumbSet(4),
       tech: ["React.js", "State Machinery", "Synchronized Alerts"],
@@ -223,7 +235,8 @@ export const projectData = {
       id: 106,
       title: "Dayflow",
       subtitle: "Odoo X GCET",
-      video: "https://www.youtube.com/embed/43DaRK0WBLg",
+      video: "https://www.youtube.com/watch?v=43DaRK0WBLg",
+      embedLink: "https://www.youtube.com/embed/43DaRK0WBLg",
       badge: "⚡ Operations Dashboard",
       images: getProjectThumbSet(0),
       tech: ["Odoo", "Authentication Hooks", "Analytics Engine"],
@@ -233,7 +246,7 @@ export const projectData = {
       workflow: ["User Check-In Log", "Identity Token Verification", "Metrics Update Compilation", "Visualization Display"],
       features: ["Automated leave calculation fields", "Role-secured administrative access", "Dynamic engagement data rows"],
       highlights: ["Features complex internal relational schemas", "100% test coverage passed"],
-      links: { github: "https://github.com/mayank-dudhatra/ODOOxGCET", demo: "#", video: "https://www.youtube.com/embed/43DaRK0WBLg" }
+      links: { github: "https://github.com/mayank-dudhatra/ODOOxGCET", demo: "#", video: "https://www.youtube.com/watch?v=43DaRK0WBLg", embedLink: "https://www.youtube.com/embed/43DaRK0WBLg" }
     }
   ],
   backend: [

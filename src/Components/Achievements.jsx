@@ -398,7 +398,8 @@ const Achievements = () => {
       featured: true,
       techStack: ["Odoo", "Python", "OCR Logic", "Finance Workflow", "Policy Checks"],
       problem: "Manual expense entries for hackathon and travel claims are slow, error-prone, and difficult to verify.",
-      video: "https://www.youtube.com/embed/RrZAaDPay9g",
+      video: "https://www.youtube.com/watch?v=RrZAaDPay9g",
+      embedLink: "https://www.youtube.com/embed/RrZAaDPay9g",
       gradient: "from-yellow-500/30 to-orange-600/30"
     },
     {
@@ -408,7 +409,8 @@ const Achievements = () => {
       featured: false,
       techStack: ["React", "Node.js", "Kanban Engine", "Sprint Planning", "Task Tracking"],
       problem: "Fragmented tools spread project updates across chat logs and code repos, making team coordination harder.",
-      video: "https://www.youtube.com/embed/lj_SfjZODq0",
+      video: "https://www.youtube.com/watch?v=lj_SfjZODq0",
+      embedLink: "https://www.youtube.com/embed/lj_SfjZODq0",
       gradient: "from-purple-500/20 to-pink-600/20"
     },
     {
@@ -418,7 +420,8 @@ const Achievements = () => {
       featured: false,
       techStack: ["Odoo", "Docker", "Python", "Inventory Analytics", "Realtime Sync"],
       problem: "Asynchronous inventory writes can cause stock drift and break live warehouse operations under load.",
-      video: "https://www.youtube.com/embed/dRXl1a0PcGA",
+      video: "https://www.youtube.com/watch?v=dRXl1a0PcGA",
+      embedLink: "https://www.youtube.com/embed/dRXl1a0PcGA",
       gradient: "from-indigo-500/20 to-purple-600/20"
     },
     {
@@ -428,7 +431,8 @@ const Achievements = () => {
       featured: false,
       techStack: ["Odoo", "PostgreSQL", "Authentication Hooks", "Analytics Engine", "Operations"],
       problem: "Manual attendance and operational reporting leave managers without timely visibility into daily activity.",
-      video: "https://www.youtube.com/embed/43DaRK0WBLg",
+      video: "https://www.youtube.com/watch?v=43DaRK0WBLg",
+      embedLink: "https://www.youtube.com/embed/43DaRK0WBLg",
       gradient: "from-teal-500/20 to-green-600/20"
     },
     {
@@ -439,6 +443,7 @@ const Achievements = () => {
       techStack: ["React", "State Machinery", "Synchronized Alerts", "Real-time Validation"],
       problem: "Public transit systems lack reliable validation layers to trigger alerts for unauthorized route changes.",
       video: null,
+      embedLink: null,
       gradient: "from-orange-500/20 to-red-600/20"
     },
     {
@@ -448,7 +453,8 @@ const Achievements = () => {
       featured: false,
       techStack: ["Odoo", "PostgreSQL", "Python", "Role Authorization", "Payroll Reconciliation"],
       problem: "Paper-heavy onboarding and leave workflows create audit gaps and slow down enterprise HR operations.",
-      video: "https://www.youtube.com/embed/mFVR0ihWdTo",
+      video: "https://www.youtube.com/watch?v=mFVR0ihWdTo",
+      embedLink: "https://www.youtube.com/embed/mFVR0ihWdTo",
       gradient: "from-cyan-500/20 to-blue-600/20"
     }
   ];
