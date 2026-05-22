@@ -1576,7 +1576,7 @@ const Portfolio = memo(() => {
   };
 
   return (
-    <section id="projects" className="min-h-screen bg-black pt-28 pb-24 overflow-x-hidden">
+    <section className="min-h-screen bg-black pt-28 pb-24 overflow-x-hidden">
       <div className="section-container max-w-7xl mx-auto px-6">
         <motion.div className="mb-16 text-center">
           <p className="text-yellow-500 uppercase font-bold tracking-widest mb-3 text-sm">Creative Engineering Hub</p>

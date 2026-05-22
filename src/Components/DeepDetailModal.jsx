@@ -259,7 +259,7 @@ const DeepDetailModal = ({
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="absolute inset-0 bg-[#080808]/95 backdrop-blur-[20px]"
+          className="absolute inset-0 bg-[#080808]/92"
           onClick={handleClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -267,7 +267,7 @@ const DeepDetailModal = ({
         />
 
         <motion.div
-          className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col overflow-hidden rounded-2xl bg-[#080808] text-white shadow-[0_50px_160px_-30px_rgba(0,0,0,0.85)]"
+          className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col overflow-hidden rounded-2xl bg-[#080808] text-white shadow-[0_35px_100px_-40px_rgba(0,0,0,0.7)] will-change-transform transform-gpu isolate"
           initial={{ opacity: 0, y: 40, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 30, scale: 0.96 }}
@@ -292,6 +292,7 @@ const DeepDetailModal = ({
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 referrerPolicy="strict-origin-when-cross-origin"
+                loading="eager"
               />
             ) : (
               <video
@@ -309,7 +310,7 @@ const DeepDetailModal = ({
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-yellow-300 backdrop-blur-md">
+            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/10 bg-black/55 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-yellow-300">
               Case Study
             </div>
 
@@ -320,7 +321,7 @@ const DeepDetailModal = ({
               </h2>
             </div>
 
-            <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-black/45 p-2 backdrop-blur-md">
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-black/60 p-2">
               {isYouTube ? (
                 <a
                   href={project?.links?.video || project?.video || mediaSource}
@@ -353,7 +354,7 @@ const DeepDetailModal = ({
           </div>
 
           {/* Scrollable Study Sections */}
-          <div className="flex-1 min-h-0 overflow-y-auto px-4 py-6 sm:px-6 lg:px-10">
+          <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-6 sm:px-6 lg:px-10" style={{ WebkitOverflowScrolling: 'touch', contain: 'content' }}>
             <div className="mx-auto max-w-6xl space-y-10 pb-8">
               <motion.section
                 className="grid gap-4 lg:grid-cols-2"
@@ -501,7 +502,7 @@ const DeepDetailModal = ({
           </div>
 
           {/* Footer (sits at modal bottom) */}
-          <div className="flex-none z-20 border-t border-white/10 bg-black/80 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-10">
+          <div className="flex-none z-20 border-t border-white/10 bg-black/90 px-4 py-4 sm:px-6 lg:px-10">
             <div className="mx-auto flex max-w-6xl flex-wrap gap-2 sm:gap-3">
               {footerActions.map((action) => {
                 const isDisabled = !action?.href || action.href === '#';

@@ -31,7 +31,7 @@ const HomePage = () => {
         <Hero />
       </TrackedSection>
       
-      <TrackedSection sectionName="Portfolio Section" id="portfolio">
+      <TrackedSection sectionName="Portfolio Section" id="project">
         <Portfolio />
       </TrackedSection>
       

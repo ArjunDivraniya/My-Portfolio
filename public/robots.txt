@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://arjundivraniya.in/sitemap.xml
+Disallow: /node_modules/
+Disallow: /.next/
+Disallow: /dist/
+
+Sitemap: https://www.arjundivraniya.in/sitemap.xml

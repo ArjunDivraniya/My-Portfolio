@@ -16,6 +16,7 @@ import Achievements from "./Components/Achievements";
 import EducationRoadmap from "./Components/EducationRoadmap";
 import LeetCodeProfile from "./Components/LeetCodeProfile";
 import Experience from "./Components/Experience";
+import ProjectsPage from "./Components/ProjectsPage";
 import ScrollToTop from "./Components/ScrollToTop";
 import SEO from "./Components/SEO";
 import "./index.css"; 
@@ -89,6 +90,13 @@ function App() {
                 <>
                   <SEO title="Experience" description="A professional overview of Arjun Divraniya's work experience and projects." />
                   <Bg /><Header /><Experience /><Footer />
+                </>
+              } />
+
+              <Route path="/projects" element={
+                <>
+                  <SEO title="Projects" description="Immersive stacked project deck showcasing Arjun Divraniya's hackathon and product work." />
+                  <ProjectsPage />
                 </>
               } />
               
