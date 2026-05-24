@@ -140,6 +140,9 @@ const Header = () => {
   const navLinkClass = 'relative inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold tracking-wide text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/80';
 
   const resumeButtonClasses = 'rounded-[20px_12px_18px_15px/15px_22px_12px_20px] bg-yellow-400 px-5 py-2.5 font-bold text-black transition duration-300 hover:bg-yellow-300 hover:shadow-[0_0_20px_rgba(250,204,21,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300/80';
+  const menuToggleClasses = isMenuOpen
+    ? 'inline-flex h-11 w-11 items-center justify-center rounded-full bg-yellow-400 text-black transition hover:bg-yellow-300'
+    : 'inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/5 text-white transition hover:bg-white/10 hover:text-yellow-300';
 
   return (
     <>
@@ -162,10 +165,10 @@ const Header = () => {
               className="flex w-fit items-center gap-3 justify-self-start rounded-full px-1 py-1 text-white transition hover:text-yellow-300"
               aria-label="Go to home"
             >
-              <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-[0_0_18px_rgba(250,204,21,0.08)]">
-                <img src={logoImage} alt="Arjun Divraniya logo" className="h-full w-full object-cover" />
+              <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 p-[2px] shadow-[0_0_18px_rgba(250,204,21,0.08)] sm:h-11 sm:w-11 sm:p-0.5">
+                <img src={logoImage} alt="Arjun Divraniya logo" className="h-full w-full object-contain scale-[0.84] sm:scale-100" />
               </span>
-              <span className="font-['Syne'] text-xl font-black tracking-[0.18em] text-white sm:text-2xl">
+              <span className="font-['Syne'] text-base font-black tracking-[0.14em] text-white sm:text-2xl">
                 ARJUN.
               </span>
             </button>
@@ -223,10 +226,10 @@ const Header = () => {
               className="flex items-center gap-3 rounded-full px-1 py-1 text-white transition hover:text-yellow-300"
               aria-label="Go to home"
             >
-              <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-[0_0_18px_rgba(250,204,21,0.08)]">
-                <img src={logoImage} alt="Arjun Divraniya logo" className="h-full w-full object-cover" />
+              <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 p-[2px] shadow-[0_0_18px_rgba(250,204,21,0.08)] sm:h-11 sm:w-11 sm:p-0.5">
+                <img src={logoImage} alt="Arjun Divraniya logo" className="h-full w-full object-contain scale-[0.92] sm:scale-100" />
               </span>
-              <span className="font-['Syne'] text-xl font-black tracking-[0.18em] text-white sm:text-2xl">
+              <span className="font-['Syne'] text-base font-black tracking-[0.14em] text-white sm:text-2xl">
                 ARJUN.
               </span>
             </button>
@@ -235,22 +238,11 @@ const Header = () => {
               <button
                 type="button"
                 onClick={() => setIsMenuOpen((value) => !value)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/5 text-white transition hover:bg-white/10 hover:text-yellow-300"
+                className={menuToggleClasses}
                 aria-label="Toggle navigation menu"
               >
                 {isMenuOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
               </button>
-
-              <div className="relative inline-block">
-                <SketchBorder className="opacity-100" />
-                <button
-                  type="button"
-                  onClick={() => setShowResume(true)}
-                  className={`${resumeButtonClasses} relative z-10 px-4 py-2 text-sm border-0 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_12px_28px_-18px_rgba(250,204,21,0.35)]`}
-                >
-                  Resume
-                </button>
-              </div>
             </div>
           </nav>
         </motion.nav>
@@ -277,6 +269,18 @@ const Header = () => {
                     <span className="h-1.5 w-1.5 rounded-full bg-yellow-400/80" />
                   </a>
                 ))}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setShowResume(true);
+                  }}
+                  className="mt-2 inline-flex min-h-[44px] items-center justify-between rounded-2xl border border-yellow-400/30 bg-yellow-400 px-4 py-3 text-sm font-bold text-black transition hover:bg-yellow-300"
+                >
+                  <span>Resume</span>
+                  <span className="text-black/70">↗</span>
+                </button>
               </div>
             </motion.div>
           )}

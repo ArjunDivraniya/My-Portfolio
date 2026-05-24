@@ -173,7 +173,7 @@ const Hero = () => {
       </motion.div>
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr]">
-        <motion.div className="order-1 space-y-5 sm:space-y-6">
+        <motion.div className="order-2 space-y-5 sm:space-y-6 lg:order-1">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08 }} className="relative space-y-4 pt-14 sm:pt-16">
             <div className="absolute left-0 top-0">
               <SignatureMark />
@@ -257,7 +257,7 @@ const Hero = () => {
 
         <motion.div
           ref={containerRef}
-          className="relative order-2 flex w-full items-center justify-center lg:min-h-[620px]"
+          className="relative order-1 flex w-full items-center justify-center lg:order-2 lg:min-h-[620px]"
           onMouseMove={!mobile ? (e) => {
             const rect = containerRef.current?.getBoundingClientRect();
             if (!rect) return;
@@ -315,7 +315,8 @@ const Hero = () => {
 
               <div className="relative h-[360px] w-[280px] sm:h-[470px] sm:w-[360px] lg:h-[520px] lg:w-[400px]">
                 {mobile ? (
-                  <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/12 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]">
+                  <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-yellow-400/20 shadow-[0_35px_90px_-35px_rgba(0,0,0,0.95)]">
+                    <div className="absolute inset-0 z-10 rounded-[2rem] border border-white/10 pointer-events-none" />
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.img
                         key={heroGalleryImages[activeGalleryIndex].id}

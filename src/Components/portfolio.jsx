@@ -1186,8 +1186,11 @@ const LearningLabRibbon = memo(() => {
   const ribbonRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
   const timelineRef = useRef(null);
+  const mobile = isMobile();
 
   useEffect(() => {
+    if (mobile) return undefined;
+
     if (!ribbonRef.current) return;
 
     // Kill any existing animation
@@ -1210,7 +1213,7 @@ const LearningLabRibbon = memo(() => {
     return () => {
       if (timelineRef.current) timelineRef.current.kill();
     };
-  }, []);
+  }, [mobile]);
 
   const handleMouseEnter = () => {
     setIsPaused(true);
@@ -1223,10 +1226,10 @@ const LearningLabRibbon = memo(() => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden py-12 bg-black">
+    <div className="relative w-full overflow-x-auto py-8 bg-black md:overflow-hidden md:py-12 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       <motion.div
         ref={ribbonRef}
-        className="flex gap-8 w-max"
+        className="flex gap-4 md:gap-8 w-max px-4 md:px-0"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -1234,8 +1237,8 @@ const LearningLabRibbon = memo(() => {
         {[...projectData.lab, ...projectData.lab, ...projectData.lab].map((project, idx) => (
           <motion.div
             key={idx}
-            className="relative flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden border border-yellow-500/30 group cursor-pointer"
-            whileHover={{ scale: 1.08, borderColor: "rgba(234, 179, 8, 0.8)" }}
+            className="relative flex-shrink-0 w-64 h-44 rounded-2xl overflow-hidden border border-yellow-500/30 group cursor-pointer sm:w-72 sm:h-48 md:w-80 md:h-56"
+            whileHover={mobile ? undefined : { scale: 1.08, borderColor: "rgba(234, 179, 8, 0.8)" }}
             transition={{ duration: 0.3 }}
           >
             {/* Image Background */}
@@ -1251,9 +1254,9 @@ const LearningLabRibbon = memo(() => {
 
             {/* Title & Info */}
             <div className="absolute inset-0 flex flex-col items-end justify-end p-6">
-              <h4 className="text-white font-black text-base sm:text-lg text-right leading-tight break-words">{project.title}</h4>
+              <h4 className="text-white font-black text-sm sm:text-lg text-right leading-tight break-words">{project.title}</h4>
               <motion.div
-                className="mt-3 px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-yellow-300 text-xs font-bold"
+                className="mt-3 px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-400/60 text-[10px] sm:text-xs font-bold text-yellow-300"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
               >
@@ -1266,7 +1269,7 @@ const LearningLabRibbon = memo(() => {
               href={project.links?.github || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute top-4 right-4 p-2 rounded-lg bg-black/60 border border-yellow-400/40 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-3 right-3 p-2 rounded-lg bg-black/60 border border-yellow-400/40 text-yellow-400 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
               whileHover={{ scale: 1.15 }}
             >
               <FaGithub size={18} />
