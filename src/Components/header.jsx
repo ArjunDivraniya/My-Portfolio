@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FaBars, FaTerminal, FaTimes } from 'react-icons/fa';
+import logoImage from '../assets/Profile/Arjun.webp';
 import '../index.css';
 
 const navItems = [
@@ -65,7 +66,7 @@ const SketchBorder = ({ className = '', strokeWidth = 1.2 }) => (
       rx="26"
       ry="18"
       fill="none"
-      stroke="rgba(255,255,255,0.34)"
+      
       strokeWidth={strokeWidth}
       strokeDasharray="14 6 3 7 2 8"
       strokeLinecap="round"
@@ -80,7 +81,7 @@ const SketchBorder = ({ className = '', strokeWidth = 1.2 }) => (
       rx="23"
       ry="16"
       fill="none"
-      stroke="rgba(250,204,21,0.18)"
+      
       strokeWidth="0.9"
       strokeDasharray="8 10 4 12"
       strokeLinecap="round"
@@ -136,7 +137,7 @@ const Header = () => {
     scrollToRouteSection(item);
   };
 
-  const navLinkClass = 'relative inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/80';
+  const navLinkClass = 'relative inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold tracking-wide text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/80';
 
   const resumeButtonClasses = 'rounded-[20px_12px_18px_15px/15px_22px_12px_20px] bg-yellow-400 px-5 py-2.5 font-bold text-black transition duration-300 hover:bg-yellow-300 hover:shadow-[0_0_20px_rgba(250,204,21,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300/80';
 
@@ -146,11 +147,11 @@ const Header = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="fixed left-1/2 top-4 z-50 w-[min(98vw,92rem)] -translate-x-1/2 px-0"
+        className="fixed inset-x-0 top-3 z-50 px-3 sm:px-4"
       >
         <motion.nav
-          className="relative mx-auto overflow-hidden rounded-[20px_12px_18px_15px/15px_22px_12px_20px] bg-black/35 px-5 py-3.5 shadow-[0_28px_80px_-32px_rgba(0,0,0,0.85)] backdrop-blur-xl sm:px-6"
-          style={{ boxShadow: '0 28px 80px -32px rgba(0,0,0,0.85)' }}
+          className="relative mx-auto w-full max-w-[96vw] overflow-hidden rounded-[24px_14px_22px_16px/18px_26px_14px_22px] border border-white/10 bg-transparent px-4 py-3.5 shadow-[0_22px_60px_-36px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:px-6 md:max-w-7xl"
+          style={{ boxShadow: '0 22px 60px -36px rgba(0,0,0,0.5)' }}
         >
           <SketchBorder className="opacity-100" />
 
@@ -158,19 +159,19 @@ const Header = () => {
             <button
               type="button"
               onClick={() => navigate('/')}
-              className="flex w-fit items-center gap-2.5 justify-self-start rounded-full px-1 py-1 text-white transition hover:text-yellow-300"
+              className="flex w-fit items-center gap-3 justify-self-start rounded-full px-1 py-1 text-white transition hover:text-yellow-300"
               aria-label="Go to home"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-yellow-300 shadow-[0_0_18px_rgba(250,204,21,0.08)]">
-                <FaTerminal size={16} />
+              <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-[0_0_18px_rgba(250,204,21,0.08)]">
+                <img src={logoImage} alt="Arjun Divraniya logo" className="h-full w-full object-cover" />
               </span>
-              <span className="font-['Syne'] text-lg font-black tracking-[0.18em] text-white sm:text-xl">
+              <span className="font-['Syne'] text-xl font-black tracking-[0.18em] text-white sm:text-2xl">
                 ARJUN.
               </span>
             </button>
 
             <div className="justify-self-center">
-              <ul className="relative flex items-center gap-1 rounded-full bg-white/[0.03] px-2 py-2">
+              <ul className="relative flex items-center gap-1 rounded-full border border-white/5 bg-transparent px-2 py-2">
                 {navItems.map((item, index) => (
                   <li key={item.name} className="relative">
                     <a
@@ -187,7 +188,7 @@ const Header = () => {
                         {hoveredIndex === index && (
                           <motion.span
                             layoutId="navHover"
-                            className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-md"
+                            className="absolute inset-0 rounded-full bg-white/[0.08] backdrop-blur-md"
                             initial={{ opacity: 0, scale: 0.96 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.96 }}
@@ -219,13 +220,13 @@ const Header = () => {
             <button
               type="button"
               onClick={() => navigate('/')}
-              className="flex items-center gap-2.5 rounded-full px-1 py-1 text-white transition hover:text-yellow-300"
+              className="flex items-center gap-3 rounded-full px-1 py-1 text-white transition hover:text-yellow-300"
               aria-label="Go to home"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-yellow-300 shadow-[0_0_18px_rgba(250,204,21,0.08)]">
-                <FaTerminal size={16} />
+              <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-[0_0_18px_rgba(250,204,21,0.08)]">
+                <img src={logoImage} alt="Arjun Divraniya logo" className="h-full w-full object-cover" />
               </span>
-              <span className="font-['Syne'] text-lg font-black tracking-[0.18em] text-white sm:text-xl">
+              <span className="font-['Syne'] text-xl font-black tracking-[0.18em] text-white sm:text-2xl">
                 ARJUN.
               </span>
             </button>
@@ -257,7 +258,7 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="mx-auto mt-3 w-full rounded-[20px_12px_18px_15px/15px_22px_12px_20px] bg-black/85 p-4 shadow-[0_24px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl md:hidden"
+              className="mx-auto mt-3 w-full rounded-[20px_12px_18px_15px/15px_22px_12px_20px] border border-white/10 bg-black/85 p-4 shadow-[0_24px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl md:hidden"
               initial={{ opacity: 0, y: -12, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}

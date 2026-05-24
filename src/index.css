@@ -70,7 +70,7 @@ html, body {
 }
 
 :root {
-  --navbar-offset: 92px;
+  --navbar-offset: 112px;
 }
 
 html {
@@ -84,7 +84,7 @@ div[id] {
 
 @media (max-width: 767px) {
   :root {
-    --navbar-offset: 84px;
+    --navbar-offset: 104px;
   }
 }
 
@@ -415,8 +415,8 @@ a {
   
   /* Header Styling */
 header {
-  background: linear-gradient(135deg, #000000, #1a1a1a);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    background: transparent;
+    box-shadow: none;
 }
 
 /* Mobile Icon */
