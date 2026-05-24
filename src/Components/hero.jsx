@@ -173,15 +173,30 @@ const Hero = () => {
       </motion.div>
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr]">
-        <motion.div className="order-2 space-y-5 sm:space-y-6 lg:order-1">
+        <motion.div className="order-3 space-y-5 sm:space-y-6 lg:order-1">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08 }} className="relative space-y-4 pt-14 sm:pt-16">
-            <div className="absolute left-0 top-0">
+            <div className="space-y-4 lg:hidden">
               <SignatureMark />
+
+              <h1 className="flex flex-wrap items-baseline gap-x-3 gap-y-2 text-[2.35rem] font-black leading-[0.92] tracking-tight sm:text-5xl">
+                <span className="inline-block text-amber-300 drop-shadow-[0_0_20px_rgba(251,191,36,0.4)]">
+                  Arjun
+                </span>
+                <span className="inline-block text-white drop-shadow-[0_0_16px_rgba(255,255,255,0.25)]">
+                  Divraniya
+                </span>
+              </h1>
+            </div>
+
+            <div className="absolute left-0 top-0">
+              <div className="hidden lg:block">
+                <SignatureMark />
+              </div>
             </div>
 
             {/* Removed the small role badge per request */}
 
-            <h1 className="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[0.95]">
+            <h1 className="hidden flex-wrap items-baseline gap-x-4 gap-y-2 text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:flex lg:text-7xl xl:text-8xl">
               <span className="inline-block text-amber-300 drop-shadow-[0_0_20px_rgba(251,191,36,0.4)]">
                 {renderAnimatedWord("ARJUN", "arjun")}
               </span>
@@ -257,7 +272,7 @@ const Hero = () => {
 
         <motion.div
           ref={containerRef}
-          className="relative order-1 flex w-full items-center justify-center lg:order-2 lg:min-h-[620px]"
+          className="relative order-2 flex w-full items-center justify-center lg:order-2 lg:min-h-[620px]"
           onMouseMove={!mobile ? (e) => {
             const rect = containerRef.current?.getBoundingClientRect();
             if (!rect) return;
@@ -367,6 +382,13 @@ const Hero = () => {
               </div>
             </div>
           </motion.div>
+        </motion.div>
+
+        <motion.div className="order-3 space-y-5 lg:hidden">
+          <motion.p className="text-sm sm:text-base text-gray-300 font-medium leading-7 text-pretty" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
+            I build production-ready web systems and interfaces—full-stack apps, workflow automation, and designer-quality UI—focused on speed, clarity, and scale.
+            I bring a photographer’s eye for visuals and a systems architect’s mindset for reliable, polished products.
+          </motion.p>
         </motion.div>
       </div>
 
