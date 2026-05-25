@@ -226,7 +226,7 @@ const SkillCard = ({ skill, index }) => {
     >
       {/* Main Card */}
       <motion.div
-        className="flex flex-col items-center p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border-2 bg-gradient-to-br from-black/80 to-purple-950/20 backdrop-blur cursor-pointer relative overflow-hidden min-h-[120px] sm:min-h-[140px]"
+        className="border-pencil flex flex-col items-center p-3 sm:p-4 md:p-6 bg-gradient-to-br from-black/80 to-purple-950/20 backdrop-blur cursor-pointer relative overflow-hidden min-h-[120px] sm:min-h-[140px]"
         animate={{
           borderColor: showDetails ? "rgba(234, 179, 8, 0.8)" : "rgba(168, 139, 250, 0.6)",
           boxShadow: showDetails
@@ -273,7 +273,7 @@ const SkillCard = ({ skill, index }) => {
       <AnimatePresence>
         {showDetails && (
           <motion.div
-            className={mobile ? "mt-3 w-full p-3 rounded-xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border border-yellow-500/60 backdrop-blur-xl shadow-2xl z-20" : "absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 sm:w-72 md:w-80 p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border-2 border-yellow-500/60 backdrop-blur-xl shadow-2xl z-20"}
+            className={mobile ? "border-pencil mt-3 w-full p-3 bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 backdrop-blur-xl shadow-2xl z-20 overflow-hidden" : "border-pencil absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 sm:w-72 md:w-80 p-4 sm:p-5 bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 backdrop-blur-xl shadow-2xl z-20 overflow-hidden"}
             initial={{ opacity: 0, y: mobile ? 8 : 20, scale: 0.9 }}
             animate={{ opacity: 1, y: mobile ? 0 : -120, scale: 1 }}
             exit={{ opacity: 0, y: mobile ? 8 : 20, scale: 0.9 }}
@@ -282,7 +282,7 @@ const SkillCard = ({ skill, index }) => {
             {/* Icon in Detail Card */}
             <div className="flex items-center justify-center mb-2 sm:mb-3">
               <motion.div
-                className="p-2 sm:p-3 rounded-lg bg-yellow-500/20 border border-yellow-400/50"
+                className="border-pencil-button p-2 sm:p-3 bg-yellow-500/20 overflow-hidden"
                 animate={mobile ? {} : { scale: [1, 1.05, 1] }}
                 transition={{ duration: mobile ? 0 : 2, repeat: mobile ? 0 : Infinity }}
               >
@@ -316,7 +316,7 @@ const SkillCard = ({ skill, index }) => {
 // ===================== MAIN SKILLS SECTION =====================
 const Skills = () => {
   return (
-    <section id="skills" className="pt-28 sm:pt-32 pb-12 sm:pb-16 md:pb-20 text-center text-white w-full bg-black relative">
+    <section id="skills" className="border-pencil-purple pt-28 sm:pt-32 pb-12 sm:pb-16 md:pb-20 text-center text-white w-full bg-black relative">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black pointer-events-none" />
 
@@ -339,7 +339,7 @@ const Skills = () => {
 
         {/* Trust Badge */}
         <motion.div
-          className="mb-8 sm:mb-10 md:mb-12 inline-flex flex-wrap items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-yellow-500/20 to-purple-500/20 border border-yellow-400/50 mx-auto"
+          className="border-pencil-button mb-8 sm:mb-10 md:mb-12 inline-flex flex-wrap items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-yellow-500/20 to-purple-500/20 mx-auto overflow-hidden"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}

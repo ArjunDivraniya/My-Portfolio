@@ -267,7 +267,7 @@ const DeepDetailModal = ({
         />
 
         <motion.div
-          className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col overflow-hidden rounded-2xl bg-[#080808] text-white shadow-[0_35px_100px_-40px_rgba(0,0,0,0.7)] will-change-transform transform-gpu isolate"
+          className="border-pencil-amber relative z-10 w-full max-w-5xl h-[85vh] flex flex-col overflow-hidden border-pencil bg-[#080808] text-white shadow-[0_35px_100px_-40px_rgba(0,0,0,0.7)] will-change-transform transform-gpu isolate"
           initial={{ opacity: 0, y: 40, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 30, scale: 0.96 }}
@@ -275,14 +275,14 @@ const DeepDetailModal = ({
         >
           <button
             onClick={handleClose}
-            className="absolute right-4 top-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/60 text-lg text-white backdrop-blur-md transition hover:border-yellow-400 hover:text-yellow-300"
+            className="border-pencil-button absolute right-4 top-4 z-50 flex h-11 w-11 items-center justify-center overflow-hidden bg-black/60 text-lg text-white backdrop-blur-md transition hover:bg-yellow-400 hover:text-black"
             aria-label="Close modal"
           >
             <FaTimes />
           </button>
 
           {/* Hero Video */}
-          <div className="relative h-[40vh] md:h-1/2 min-h-[160px] max-h-[60vh] w-full border-b border-white/10 bg-black">
+          <div className="relative h-[40vh] md:h-1/2 min-h-[160px] max-h-[60vh] w-full border-b border-white/10 bg-black overflow-hidden">
             {isYouTube ? (
               <iframe
                 title={`project-video-${project?.id || 'case'}`}
@@ -310,7 +310,7 @@ const DeepDetailModal = ({
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/10 bg-black/55 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-yellow-300">
+            <div className="border-pencil-button absolute left-4 top-4 flex items-center gap-2 overflow-hidden bg-black/55 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-yellow-300">
               Case Study
             </div>
 
@@ -321,13 +321,13 @@ const DeepDetailModal = ({
               </h2>
             </div>
 
-            <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-black/60 p-2">
+            <div className="border-pencil-button absolute bottom-4 right-4 flex items-center gap-2 overflow-hidden bg-black/60 p-2">
               {isYouTube ? (
                 <a
                   href={project?.links?.video || project?.video || mediaSource}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-yellow-400/60 hover:text-yellow-300"
+                  className="border-pencil-button inline-flex h-11 w-11 items-center justify-center overflow-hidden bg-white/5 text-white transition hover:bg-yellow-400 hover:text-black"
                   aria-label="Open video in new tab"
                 >
                   <FaExternalLinkAlt />
@@ -336,14 +336,14 @@ const DeepDetailModal = ({
                 <>
                   <button
                     onClick={togglePlay}
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-yellow-400/60 hover:text-yellow-300"
+                    className="border-pencil-button flex h-11 w-11 items-center justify-center overflow-hidden bg-white/5 text-white transition hover:bg-yellow-400 hover:text-black"
                     aria-label={isPlaying ? 'Pause video' : 'Play video'}
                   >
                     {isPlaying ? <FaPause /> : <FaPlay />}
                   </button>
                   <button
                     onClick={toggleMute}
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-yellow-400/60 hover:text-yellow-300"
+                    className="border-pencil-button flex h-11 w-11 items-center justify-center overflow-hidden bg-white/5 text-white transition hover:bg-yellow-400 hover:text-black"
                     aria-label={isMuted ? 'Unmute video' : 'Mute video'}
                   >
                     {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
@@ -364,25 +364,25 @@ const DeepDetailModal = ({
                 transition={{ type: 'spring', stiffness: 90, damping: 18 }}
               >
                 <motion.div
-                  className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                    className="border-pencil overflow-hidden bg-white/[0.04] p-5 sm:p-6"
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-red-400/30 bg-red-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-red-300">
+                    <div className="border-pencil-button mb-3 inline-flex items-center gap-2 overflow-hidden bg-red-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-red-300">
                     <FaExclamationTriangle /> The Challenge
                   </div>
                   <p className="text-sm leading-relaxed text-gray-200 sm:text-base">{problemText}</p>
                 </motion.div>
 
                 <motion.div
-                  className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                  className="border-pencil overflow-hidden bg-white/[0.04] p-5 sm:p-6"
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ delay: 0.08 }}
                 >
-                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
+                  <div className="border-pencil-button mb-3 inline-flex items-center gap-2 overflow-hidden bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
                     <FaCheckCircle /> The Engineering Fix
                   </div>
                   <p className="text-sm leading-relaxed text-gray-200 sm:text-base">{solutionText}</p>
@@ -390,7 +390,7 @@ const DeepDetailModal = ({
               </motion.section>
 
               <motion.section
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                className="border-pencil overflow-hidden bg-white/[0.04] p-5 sm:p-6"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
@@ -412,12 +412,12 @@ const DeepDetailModal = ({
                       transition={{ delay: index * 0.08 }}
                     >
                       <div className="flex flex-col items-center">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/30 bg-yellow-500/10 text-sm font-black text-yellow-300">
+                        <div className="border-pencil-button flex h-10 w-10 items-center justify-center overflow-hidden bg-yellow-500/10 text-sm font-black text-yellow-300">
                           {index + 1}
                         </div>
                         {index < timeline.length - 1 ? <div className="h-full w-px bg-gradient-to-b from-yellow-400/50 to-transparent" /> : null}
                       </div>
-                      <div className="flex-1 rounded-2xl border border-white/10 bg-black/25 px-4 py-3">
+                      <div className="border-pencil flex-1 overflow-hidden bg-black/25 px-4 py-3">
                         <p className="text-sm font-semibold text-white sm:text-base">{step}</p>
                         <p className="mt-1 text-sm text-gray-400">
                           {index === 0
@@ -433,7 +433,7 @@ const DeepDetailModal = ({
               </motion.section>
 
               <motion.section
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                className="border-pencil overflow-hidden bg-white/[0.04] p-5 sm:p-6"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
@@ -451,14 +451,14 @@ const DeepDetailModal = ({
                     return (
                       <motion.div
                         key={`${item.label}-${index}`}
-                        className="rounded-2xl border border-white/10 bg-black/30 p-4"
+                        className="border-pencil overflow-hidden bg-black/30 p-4"
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ delay: index * 0.05 }}
                         whileHover={{ y: -4 }}
                       >
-                        <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-yellow-300">
+                        <div className="border-pencil-button mb-3 flex h-11 w-11 items-center justify-center overflow-hidden bg-white/[0.05] text-yellow-300">
                           <TechIcon />
                         </div>
                         <h4 className="text-sm font-bold text-white">{item.label}</h4>
@@ -470,7 +470,7 @@ const DeepDetailModal = ({
               </motion.section>
 
               <motion.section
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+                className="border-pencil overflow-hidden bg-white/[0.04] p-5 sm:p-6"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
@@ -485,7 +485,7 @@ const DeepDetailModal = ({
                   {highlights.map((item, index) => (
                     <motion.div
                       key={`${item}-${index}`}
-                      className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-5"
+                      className="border-pencil overflow-hidden bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-5"
                       initial={{ opacity: 0, scale: 0.96, y: 16 }}
                       whileInView={{ opacity: 1, scale: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
@@ -502,16 +502,16 @@ const DeepDetailModal = ({
           </div>
 
           {/* Footer (sits at modal bottom) */}
-          <div className="flex-none z-20 border-t border-white/10 bg-black/90 px-4 py-4 sm:px-6 lg:px-10">
+          <div className="flex-none z-20 border-t border-white/10 bg-black/90 px-4 py-4 sm:px-6 lg:px-10 overflow-hidden">
             <div className="mx-auto flex max-w-6xl flex-wrap gap-2 sm:gap-3">
               {footerActions.map((action) => {
                 const isDisabled = !action?.href || action.href === '#';
                 const baseClasses =
-                  'inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold transition';
+                  'border-pencil-button inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 overflow-hidden px-4 py-3 text-sm font-bold transition';
                 const variantClasses =
                   action.variant === 'primary'
-                    ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-500/20 hover:bg-yellow-300'
-                    : 'border border-white/15 bg-white/[0.04] text-white hover:border-white/30 hover:bg-white/[0.08]';
+                    ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-500/20 hover:bg-yellow-300 hover:text-black'
+                    : 'bg-white/[0.04] text-white hover:bg-white/[0.08]';
 
                 if (isDisabled) {
                   return (

@@ -225,9 +225,8 @@ const LearningPhaseCard = ({ data, index }) => {
     >
       {/* Card Container */}
       <motion.div
-        className={`w-full lg:w-5/12 p-6 rounded-xl backdrop-blur-md 
-                   bg-black/40 border border-purple-500/50 shadow-2xl 
-                   hover:border-purple-400 hover:shadow-purple-500/20 
+        className={`border-pencil-purple border-pencil w-full lg:w-5/12 p-6 backdrop-blur-md 
+                   bg-black/40 shadow-2xl overflow-hidden 
                    transition-all duration-300`}
         whileHover={{
           borderColor: "#c770f0",
@@ -366,7 +365,7 @@ const EducationRoadmap = () => {
           
           {/* University Info Card */}
           <motion.div
-            className="mt-8 max-w-3xl mx-auto p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black border-2 border-yellow-500 shadow-2xl"
+            className="border-pencil mt-8 max-w-3xl mx-auto p-6 bg-gradient-to-br from-purple-900/40 to-black shadow-2xl overflow-hidden"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -384,7 +383,7 @@ const EducationRoadmap = () => {
               <FaMapMarkerAlt className="text-yellow-400" />
               <p className="text-gray-400">2024 - Present</p>
             </div>
-            <div className="mt-4 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
+            <div className="border-pencil-button mt-4 p-3 bg-yellow-500/10 overflow-hidden">
               <p className="text-yellow-400 font-bold text-xl">CGPA: 9.74</p>
               <p className="text-gray-300 text-sm mt-1">
                 Specialization: Full Stack Development & Real-time Systems

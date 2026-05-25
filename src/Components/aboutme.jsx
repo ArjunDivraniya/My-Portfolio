@@ -146,7 +146,7 @@ const StatCard = ({ data, delay }) => {
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
       transition={{ duration: 0.6, delay }}
-      className={`relative p-6 rounded-2xl bg-gradient-to-br ${data.color} shadow-2xl border border-gray-700 overflow-hidden`}
+      className={`border-pencil relative p-6 bg-gradient-to-br ${data.color} shadow-2xl overflow-hidden`}
       whileHover={{ 
         scale: 1.05, 
         boxShadow: "0 0 40px rgba(234, 179, 8, 0.4)",
@@ -298,9 +298,8 @@ const JourneyPhaseCard = ({ data, index }) => {
       style={{ perspective: '1000px' }}
     >
       <motion.div
-        className={`w-full lg:w-5/12 p-6 rounded-xl backdrop-blur-md 
-                   bg-black/40 border border-yellow-500/30 shadow-2xl 
-                   hover:border-yellow-400 hover:shadow-yellow-500/20 
+        className={`border-pencil w-full lg:w-5/12 p-6 backdrop-blur-md 
+                   bg-black/40 shadow-2xl overflow-hidden 
                    transition-all duration-300`}
         style={{ transformStyle: 'preserve-3d' }}
         whileHover={{

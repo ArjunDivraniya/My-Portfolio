@@ -124,15 +124,11 @@ const MagneticButton = ({ children, onClick }) => {
       }}
       onMouseLeave={() => { x.set(0); y.set(0); }}
       onClick={onClick}
-      className="relative inline-flex items-center gap-2 border-2 border-yellow-300/80 bg-gradient-to-r from-yellow-400 to-amber-500 px-8 py-4 font-bold text-black shadow-lg"
+      className="border-pencil-button relative inline-flex items-center gap-2 overflow-hidden bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 px-8 py-4 font-bold text-black shadow-[0_18px_40px_-18px_rgba(250,204,21,0.55)]"
       aria-label="Get in touch"
       type="button"
       {...(!mobile && { whileHover: { scale: 1.04 }, whileTap: { scale: 0.96 } })}
-      style={{
-        x: springX,
-        y: springY,
-        borderRadius: "16px 26px 14px 24px / 22px 14px 24px 16px",
-      }}
+      style={{ x: springX, y: springY }}
     >
       {children}
       <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>→</motion.span>
@@ -165,7 +161,7 @@ const Hero = () => {
   const nextIndex = (activeGalleryIndex + 1) % heroGalleryImages.length;
 
   return (
-    <section id="home" className="relative w-full min-h-screen overflow-hidden bg-[#080808] pt-24 sm:pt-28">
+    <section id="home" className="border-pencil-amber relative w-full min-h-screen overflow-hidden bg-[#080808] pt-24 sm:pt-28">
       <motion.div className="absolute inset-0 -z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
         <motion.div className="absolute inset-0 opacity-55" style={{ background: "radial-gradient(circle at 18% 18%, rgba(168,85,247,0.28), transparent 34%)" }} animate={{ scale: [1, 1.08, 1], x: [0, 18, 0] }} transition={{ duration: 12, repeat: Infinity }} />
         <motion.div className="absolute inset-0 opacity-45" style={{ background: "radial-gradient(circle at 78% 34%, rgba(250,204,21,0.22), transparent 40%)" }} animate={{ scale: [1.04, 0.96, 1.04], x: [0, -18, 0] }} transition={{ duration: 14, repeat: Infinity }} />
@@ -232,8 +228,7 @@ const Hero = () => {
               href="/ArjunDivraniya_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 border-2 border-white/45 px-6 py-3 text-white font-semibold hover:border-yellow-300 hover:bg-yellow-500/10 transition-all"
-              style={{ borderRadius: "20px 13px 22px 12px / 14px 22px 12px 20px" }}
+              className="border-pencil-button inline-flex items-center justify-center gap-2 overflow-hidden border border-white/85 px-6 py-3 text-white font-semibold transition-all hover:bg-white/10 hover:text-white"
               whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(250,204,21,0.3)" }}
               whileTap={{ scale: 0.95 }}
             >
@@ -249,7 +244,7 @@ const Hero = () => {
                 target={href.startsWith("mailto:") ? "_self" : "_blank"}
                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                 aria-label={label}
-                className="h-11 w-11 sm:h-12 sm:w-12 flex items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] text-white hover:border-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 transition-all"
+                className="border-pencil-button h-11 w-11 sm:h-12 sm:w-12 flex items-center justify-center overflow-hidden bg-white/[0.03] text-white hover:bg-yellow-500/10 hover:text-yellow-300 transition-all"
                 {...getHoverProps({ scale: 1.16, y: -4 })}
                 whileTap={{ scale: 0.9 }}
               >

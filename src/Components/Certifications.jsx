@@ -362,7 +362,7 @@ const Certifications = () => {
       >
         {activeCert ? (
           <div className="space-y-6">
-            <div className="rounded-2xl border border-yellow-500/20 bg-gradient-to-br from-black via-black to-purple-900/30 p-5">
+            <div className="border-pencil bg-gradient-to-br from-black via-black to-purple-900/30 p-5 overflow-hidden">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Verification ID</p>
@@ -379,7 +379,7 @@ const Certifications = () => {
 
             {activeCert.iframeLink ? (
               <div className="space-y-3">
-                <div className="overflow-hidden rounded-2xl border border-yellow-500/20 bg-black">
+                <div className="border-pencil overflow-hidden bg-black">
                   <iframe
                     title={`${activeCert.name} certificate`}
                     src={activeCert.iframeLink}
@@ -394,7 +394,7 @@ const Certifications = () => {
                 </p>
               </div>
             ) : getCertPreviewImage(activeCert) ? (
-              <div className="overflow-hidden rounded-2xl border border-yellow-500/20 bg-black">
+              <div className="border-pencil overflow-hidden bg-black">
                 <img
                   src={getCertPreviewImage(activeCert)}
                   alt={`${activeCert.name} certificate`}

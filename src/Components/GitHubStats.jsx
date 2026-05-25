@@ -188,7 +188,7 @@ const GitHubStats = ({ username = "ArjunDivraniya" }) => {
       >
         <motion.div
           variants={cardHoverVariants}
-          className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-blue-500/20 rounded-2xl p-6 backdrop-blur-sm"
+          className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-6 backdrop-blur-sm overflow-hidden"
         >
           <div className="flex flex-col md:flex-row items-center gap-6">
             {/* Avatar */}
@@ -254,7 +254,7 @@ const GitHubStats = ({ username = "ArjunDivraniya" }) => {
         {/* Total Stars */}
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 border border-yellow-500/30 rounded-lg p-4 text-center"
+          className="border-pencil-button bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 p-4 text-center overflow-hidden"
         >
           <p className="text-yellow-400 text-xs font-semibold mb-2">Total Stars</p>
           <div className="flex items-center justify-center gap-1">
@@ -278,7 +278,7 @@ const GitHubStats = ({ username = "ArjunDivraniya" }) => {
         {/* Followers */}
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/30 rounded-lg p-4 text-center"
+          className="border-pencil-button bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-4 text-center overflow-hidden"
         >
           <p className="text-purple-400 text-xs font-semibold mb-2">Followers</p>
           <p className="text-2xl font-bold text-white">{githubData.followers}</p>
@@ -309,7 +309,7 @@ const GitHubStats = ({ username = "ArjunDivraniya" }) => {
       {/* Additional Info */}
       <motion.div
         variants={itemVariants}
-        className="bg-slate-800/30 border border-gray-700/30 rounded-lg p-4 space-y-2 text-sm"
+        className="border-pencil bg-slate-800/30 p-4 space-y-2 text-sm overflow-hidden"
       >
         {githubData.location && (
           <p className="text-gray-400">

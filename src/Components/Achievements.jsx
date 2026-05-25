@@ -126,7 +126,7 @@ const DetailModal = ({ isOpen, onClose, data }) => {
       onClick={onClose}
     >
       <motion.div
-        className="relative max-w-4xl w-full mx-4 bg-gradient-to-br from-gray-900 to-black border border-purple-400/30 rounded-2xl p-8 shadow-2xl"
+        className="border-pencil relative max-w-4xl w-full mx-4 bg-gradient-to-br from-gray-900 to-black p-8 shadow-2xl overflow-hidden"
         initial={{ scale: 0.8, rotateX: -15 }}
         animate={{ scale: 1, rotateX: 0 }}
         exit={{ scale: 0.8, rotateX: 15 }}
@@ -460,7 +460,7 @@ const Achievements = () => {
   ];
 
   return (
-    <div id="achivment" className="min-h-screen bg-black text-white pt-28 sm:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
+    <div id="achivment" className="border-pencil-purple min-h-screen bg-black text-white pt-28 sm:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
       {/* Hero Title with GSAP Animation */}
       <div ref={titleRef} className="text-center mb-12 sm:mb-16 md:mb-20 px-4">
         <motion.div
@@ -499,7 +499,7 @@ const Achievements = () => {
             {/* LeetCode Card */}
             <TiltCard className="achievement-card h-full">
               <motion.div
-                className="relative h-full bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-500/30 rounded-2xl p-6 hover:border-yellow-500 transition-all duration-300 overflow-hidden"
+                className="border-pencil relative h-full bg-gradient-to-br from-gray-900 to-black p-6 transition-all duration-300 overflow-hidden"
                 whileHover={{ y: -6, boxShadow: '0 0 40px rgba(234, 179, 8, 0.3)' }}
               >
                 {/* Glowing effect */}
@@ -572,7 +572,7 @@ const Achievements = () => {
             {/* GitHub Card */}
             <TiltCard className="achievement-card h-full">
               <motion.div
-                className="relative h-full bg-gradient-to-br from-gray-900 to-black border-2 border-purple-400/30 rounded-2xl p-6 hover:border-purple-400 transition-all duration-300 overflow-hidden"
+                className="border-pencil relative h-full bg-gradient-to-br from-gray-900 to-black p-6 transition-all duration-300 overflow-hidden"
                 whileHover={{ y: -6, boxShadow: '0 0 40px rgba(167, 139, 250, 0.3)' }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
@@ -654,7 +654,7 @@ const Achievements = () => {
             {/* LinkedIn Profile Card */}
             <TiltCard className="achievement-card h-full">
               <motion.div
-                className="relative h-full bg-gradient-to-br from-gray-900 to-black border-2 border-blue-400/30 rounded-2xl p-6 hover:border-blue-400 transition-all duration-300 overflow-hidden"
+                className="border-pencil relative h-full bg-gradient-to-br from-gray-900 to-black p-6 transition-all duration-300 overflow-hidden"
                 whileHover={{ y: -6, boxShadow: '0 0 40px rgba(59, 130, 246, 0.3)' }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>

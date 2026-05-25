@@ -71,7 +71,7 @@ const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/divraniya-arju
     >
       <motion.div
         variants={cardHoverVariants}
-        className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-blue-500/20 rounded-2xl p-6 backdrop-blur-sm relative overflow-hidden"
+        className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-6 backdrop-blur-sm relative overflow-hidden"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -107,7 +107,7 @@ const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/divraniya-arju
 
         {/* Headline */}
         <div className="relative z-10 mb-6">
-          <div className="mb-4 h-20 w-20 overflow-hidden rounded-full border-2 border-blue-400/40 bg-slate-800/60">
+          <div className="border-pencil-button mb-4 h-20 w-20 overflow-hidden rounded-full bg-slate-800/60">
             <img
               src={linkedInData.profileImage}
               alt="Arjun Divraniya profile"
@@ -154,7 +154,7 @@ const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/divraniya-arju
                 initial={{ opacity: 0, x: -20 }}
                 animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="flex items-start gap-3 p-3 bg-slate-800/30 rounded-lg border border-gray-700/30"
+                className="border-pencil flex items-start gap-3 p-3 bg-slate-800/30 overflow-hidden"
               >
                 <span className="text-2xl">{exp.icon}</span>
                 <div className="flex-1">
@@ -181,7 +181,7 @@ const LinkedInCard = ({ profileUrl = "https://www.linkedin.com/in/divraniya-arju
                 animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                 transition={{ delay: 0.4 + index * 0.05 }}
                 whileHover={{ scale: 1.1 }}
-                className="px-3 py-1 bg-gradient-to-r from-blue-500/30 to-blue-600/30 border border-blue-500/50 rounded-full text-blue-300 text-xs font-medium hover:border-blue-400 transition-all"
+                className="border-pencil-button px-3 py-1 bg-gradient-to-r from-blue-500/30 to-blue-600/30 rounded-full text-blue-300 text-xs font-medium transition-all overflow-hidden"
               >
                 {skill}
               </motion.span>

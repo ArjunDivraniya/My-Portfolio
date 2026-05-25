@@ -346,14 +346,14 @@ const FilterNav = memo(({ active, onChange }) => {
           className="relative flex md:flex-wrap md:justify-center gap-2 px-1 sm:px-2 py-1.5 rounded-none bg-transparent max-w-full w-full sm:w-auto overflow-x-auto md:overflow-visible whitespace-nowrap snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {/* Filter Buttons */}
-          {categories.map((cat) => (
+                {categories.map((cat, index) => (
             <button
               key={cat}
               onClick={() => onChange(cat)}
-              className={`relative snap-start shrink-0 min-h-[44px] min-w-[98px] sm:min-w-0 px-4 sm:px-5 py-2.5 rounded-xl md:rounded-full font-bold text-xs sm:text-sm transition-all whitespace-nowrap z-10 border ${active === cat
-                  ? "text-black bg-gradient-to-r from-yellow-400 to-amber-500 border-yellow-300 shadow-[0_6px_20px_rgba(250,204,21,0.45)]"
-                  : "text-gray-300 border-white/10 bg-white/[0.03] hover:text-white hover:bg-white/10"
-                }`}
+                    className={`relative snap-start shrink-0 min-h-[44px] min-w-[98px] sm:min-w-0 px-4 sm:px-5 py-2.5 border-pencil-button overflow-hidden font-bold text-xs sm:text-sm transition-all whitespace-nowrap z-10 ${active === cat
+                        ? "text-black bg-gradient-to-r from-yellow-400 to-amber-500 border-yellow-300 shadow-[0_6px_20px_rgba(250,204,21,0.45)]"
+                        : "text-gray-300 bg-white/[0.03] hover:text-white hover:bg-white/10"
+                      }`}
             >
               {cat}
             </button>
@@ -415,7 +415,7 @@ const FlagshipCarousel = memo(({ onOpenModal }) => {
       >
         {/* Cinema Frame Card: 60% Media / 40% Details */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0 rounded-2xl lg:rounded-3xl overflow-hidden border border-white/10 bg-black"
+          className="border-pencil-amber grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0 border-pencil overflow-hidden bg-black"
           whileHover={{ boxShadow: "0 0 40px rgba(234,179,8,0.3)" }}
           transition={{ duration: 0.4 }}
         >
@@ -493,7 +493,7 @@ const FlagshipCarousel = memo(({ onOpenModal }) => {
 
           {/* RIGHT: 40% DETAILS SECTION */}
           <motion.div
-            className="relative p-6 lg:p-8 flex flex-col justify-between bg-[#0a0a0a] backdrop-blur-xl"
+            className="relative p-6 lg:p-8 flex flex-col justify-between border-pencil overflow-hidden bg-[#0a0a0a] backdrop-blur-xl"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
@@ -1012,7 +1012,7 @@ const BackendCard = memo(({ project }) => {
 
   return (
     <motion.div
-      className="relative p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-black/80 via-purple-900/20 to-black border border-yellow-500/30 overflow-hidden group cursor-pointer w-full max-w-full"
+      className="border-pencil relative p-4 sm:p-6 overflow-hidden bg-gradient-to-br from-black/80 via-purple-900/20 to-black group cursor-pointer w-full max-w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ scale: 1.02 }}
@@ -1024,7 +1024,7 @@ const BackendCard = memo(({ project }) => {
       <img
         src={project.thumbnail}
         alt={project.title}
-        className="w-full h-40 object-cover rounded-xl mb-4 brightness-75 group-hover:brightness-100 transition-all"
+        className="w-full h-40 object-cover mb-4 brightness-75 group-hover:brightness-100 transition-all"
         loading="lazy"
       />
 
@@ -1061,7 +1061,7 @@ const BackendCard = memo(({ project }) => {
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-2.5 sm:px-3 py-2 rounded-lg bg-yellow-500/20 border border-yellow-400/40 text-yellow-300 text-xs font-bold hover:bg-yellow-500/30 whitespace-nowrap"
+            className="border-pencil-button overflow-hidden px-2.5 sm:px-3 py-2 bg-yellow-500/20 text-yellow-300 text-xs font-bold hover:bg-yellow-500/30 whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
           >
             <FaGithub size={14} className="inline mr-1" /> Code
@@ -1101,7 +1101,7 @@ const OSSCard = memo(({ project }) => {
 
   return (
     <motion.div
-      className="relative p-4 sm:p-6 rounded-2xl bg-black border border-yellow-500/30 group cursor-pointer w-full max-w-full"
+      className="border-pencil relative p-4 sm:p-6 overflow-hidden bg-black group cursor-pointer w-full max-w-full"
       onMouseEnter={() => setIsRevealed(true)}
       onMouseLeave={() => setIsRevealed(false)}
       whileHover={{ scale: 1.02 }}
@@ -1112,7 +1112,7 @@ const OSSCard = memo(({ project }) => {
       <img
         src={project.thumbnail}
         alt={project.title}
-        className="w-full h-40 object-cover rounded-xl mb-4 brightness-75 group-hover:brightness-100 transition-all"
+        className="w-full h-40 object-cover mb-4 brightness-75 group-hover:brightness-100 transition-all"
         loading="lazy"
       />
 
@@ -1159,7 +1159,7 @@ const OSSCard = memo(({ project }) => {
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-2.5 sm:px-3 py-2 rounded-lg bg-green-500/20 border border-green-400/40 text-green-300 text-xs font-bold hover:bg-green-500/30 whitespace-nowrap"
+            className="border-pencil-button overflow-hidden px-2.5 sm:px-3 py-2 bg-green-500/20 text-green-300 text-xs font-bold hover:bg-green-500/30 whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
           >
             <FaGithub size={14} className="inline mr-1" /> Repo
@@ -1237,7 +1237,7 @@ const LearningLabRibbon = memo(() => {
         {[...projectData.lab, ...projectData.lab, ...projectData.lab].map((project, idx) => (
           <motion.div
             key={idx}
-            className="relative flex-shrink-0 w-64 h-44 rounded-2xl overflow-hidden border border-yellow-500/30 group cursor-pointer sm:w-72 sm:h-48 md:w-80 md:h-56"
+            className="border-pencil relative flex-shrink-0 w-64 h-44 overflow-hidden group cursor-pointer sm:w-72 sm:h-48 md:w-80 md:h-56"
             whileHover={mobile ? undefined : { scale: 1.08, borderColor: "rgba(234, 179, 8, 0.8)" }}
             transition={{ duration: 0.3 }}
           >
@@ -1313,7 +1313,7 @@ const UIUXCard = memo(({ project }) => {
   return (
     <motion.div
       ref={cardRef}
-      className="relative w-full max-w-full h-80 rounded-2xl overflow-hidden border border-yellow-500/30 group cursor-pointer"
+      className="border-pencil relative w-full max-w-full h-80 overflow-hidden group cursor-pointer"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
@@ -1334,7 +1334,7 @@ const UIUXCard = memo(({ project }) => {
             href={project.links.figma}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-xs sm:text-sm w-fit flex items-center gap-2"
+            className="border-pencil-button overflow-hidden px-3 sm:px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-xs sm:text-sm w-fit flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

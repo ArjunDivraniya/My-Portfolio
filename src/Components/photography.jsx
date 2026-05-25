@@ -198,7 +198,7 @@ const ParallaxPhotoCard = ({ photo, index }) => {
     <>
       <motion.div
         ref={cardRef}
-        className={`group relative overflow-hidden rounded-2xl cursor-pointer border-2 border-yellow-500/30 hover:border-yellow-500/60 transition-all duration-500 ${
+        className={`border-pencil group relative overflow-hidden cursor-pointer transition-all duration-500 ${
           photo.size === "large" ? "md:col-span-2 md:row-span-2" : ""
         }`}
         onMouseEnter={() => setIsHovered(true)}
@@ -213,7 +213,7 @@ const ParallaxPhotoCard = ({ photo, index }) => {
         transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
         whileHover={{ scale: 1.03 }}
       >
-        <div className="relative h-full min-h-[280px] md:min-h-[320px] bg-black overflow-hidden rounded-2xl">
+        <div className="border-pencil relative h-full min-h-[280px] md:min-h-[320px] bg-black overflow-hidden">
           <motion.img
             src={photo.src}
             alt={photo.title}
@@ -231,7 +231,7 @@ const ParallaxPhotoCard = ({ photo, index }) => {
           </AnimatePresence>
 
           <motion.div
-            className="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-yellow-500/30 rounded-lg p-2 md:p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="border-pencil-button absolute top-3 right-3 bg-black/70 backdrop-blur-md p-2 md:p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-hidden"
             initial={{ x: 10, opacity: 0 }}
             whileHover={{ x: 0, opacity: 1 }}
           >
@@ -275,14 +275,14 @@ const VideoMontageCard = () => {
   return (
     <>
       <motion.div
-        className="md:col-span-2 lg:col-span-3 relative group overflow-hidden rounded-2xl cursor-pointer border-2 border-yellow-500/30 hover:border-yellow-500/60 transition-all duration-500"
+        className="border-pencil md:col-span-2 lg:col-span-3 relative group overflow-hidden cursor-pointer transition-all duration-500"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         whileHover={{ scale: 1.01 }}
       >
-        <div className="relative h-[350px] md:h-[450px] bg-black rounded-2xl overflow-hidden">
+        <div className="border-pencil relative h-[350px] md:h-[450px] bg-black overflow-hidden">
           <video
             autoPlay
             loop
@@ -297,7 +297,7 @@ const VideoMontageCard = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
           <motion.div
-            className="absolute top-4 right-4 bg-black/50 backdrop-blur-xl border border-purple-400/40 rounded-xl p-3 md:p-4"
+            className="border-pencil-button absolute top-4 right-4 bg-black/50 backdrop-blur-xl p-3 md:p-4 overflow-hidden"
             initial={{ x: 10, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -356,7 +356,7 @@ const VideoMontageCard = () => {
           onClick={() => setShowVideoModal(false)}
         >
           <motion.div
-            className="relative w-full max-w-6xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
+            className="border-pencil relative w-full max-w-6xl aspect-video bg-black overflow-hidden shadow-2xl"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -445,7 +445,7 @@ const Photography = () => {
               <span className="text-sm">4+ Years Visual Storytelling</span>
             </div>
             <motion.div
-              className="absolute -top-1.5 -right-1.5 bg-black text-yellow-400 p-1.5 rounded-full border-2 border-yellow-500"
+              className="border-pencil-button absolute -top-1.5 -right-1.5 bg-black text-yellow-400 p-1.5 overflow-hidden"
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -477,7 +477,7 @@ const Photography = () => {
           href="https://unsplash.com/@arjun_01"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 text-white w-fit mx-auto mb-10 px-5 py-2.5 rounded-full border-2 border-yellow-500 bg-black/80 backdrop-blur-xl hover:bg-yellow-500 hover:text-black hover:shadow-[0_0_30px_rgba(234,179,8,0.5)] transition-all duration-300"
+          className="border-pencil-button flex items-center justify-center gap-2 text-white w-fit mx-auto mb-10 px-5 py-2.5 bg-black/80 backdrop-blur-xl hover:bg-yellow-500 hover:text-black hover:shadow-[0_0_30px_rgba(234,179,8,0.5)] transition-all duration-300 overflow-hidden"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}

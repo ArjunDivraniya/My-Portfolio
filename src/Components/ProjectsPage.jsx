@@ -102,7 +102,7 @@ const ProjectDeckCard = React.forwardRef(({ project, offset, total, active, onOp
     <motion.div
       ref={ref}
       key={project.id}
-      className="absolute left-1/2 top-1/2 h-[360px] w-[260px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0c0c0c] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] md:h-[450px] md:w-[320px] lg:h-[580px] lg:w-[420px]"
+      className="border-pencil-amber border-pencil absolute left-1/2 top-1/2 h-[360px] w-[260px] -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-[#0c0c0c] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] md:h-[450px] md:w-[320px] lg:h-[580px] lg:w-[420px]"
       style={{
         transformStyle: 'preserve-3d',
         transformPerspective: 1800,
@@ -130,12 +130,12 @@ const ProjectDeckCard = React.forwardRef(({ project, offset, total, active, onOp
             <span className="h-3 w-3 rounded-full bg-yellow-400/90" />
             <span className="h-3 w-3 rounded-full bg-emerald-400/90" />
           </div>
-          <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-white/70">
+          <div className="border-pencil-button rounded-full bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-white/70 overflow-hidden">
             {offset === 0 ? 'Active Node' : `Layer 0${offset + 1}`}
           </div>
         </div>
 
-        <div className="relative mx-5 mt-4 aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
+        <div className="border-pencil relative mx-5 mt-4 aspect-video overflow-hidden bg-black">
           {isLiveEmbed ? (
             <iframe
               title={`${project.displayTitle}-preview`}
@@ -156,13 +156,13 @@ const ProjectDeckCard = React.forwardRef(({ project, offset, total, active, onOp
           )}
 
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
-          <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-yellow-300">
+          <div className="border-pencil-button absolute left-4 top-4 rounded-full bg-black/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-yellow-300 overflow-hidden">
             {project.displaySubtitle}
           </div>
           {offset === 0 ? (
             <button
               type="button"
-              className="absolute bottom-4 right-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-white transition hover:border-yellow-400 hover:text-yellow-300"
+              className="border-pencil-button absolute bottom-4 right-4 inline-flex h-12 w-12 items-center justify-center bg-white/10 text-white transition hover:text-yellow-300 overflow-hidden"
               onClick={(event) => {
                 event.stopPropagation();
                 onOpen(project);
@@ -303,11 +303,11 @@ const ProjectsPage = () => {
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 transition hover:border-yellow-400/50 hover:text-yellow-300"
+            className="border-pencil-button inline-flex items-center gap-2 overflow-hidden bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 transition hover:bg-yellow-400 hover:text-black"
           >
             <FaArrowLeft /> Back Home
           </button>
-          <div className="hidden rounded-full border border-white/10 bg-black/45 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.35em] text-white/60 lg:block">
+          <div className="border-pencil-button hidden overflow-hidden bg-black/45 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.35em] text-white/60 lg:block">
             Wheel, swipe, or arrow keys to cycle the deck
           </div>
         </div>
@@ -320,7 +320,7 @@ const ProjectsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...springTransition, stiffness: 180 }}
           >
-            <div className="max-w-xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.85)] backdrop-blur-xl sm:p-6 lg:p-8">
+            <div className="border-pencil max-w-xl overflow-hidden bg-white/[0.04] p-5 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.85)] backdrop-blur-xl sm:p-6 lg:p-8">
               <div className="flex items-center gap-3 font-mono text-sm tracking-[0.4em] text-yellow-300/80">
                 <span>[ {String(activeProjectIndex + 1).padStart(2, '0')} / {String(visibleProjects.length).padStart(2, '0')} ]</span>
                 <span className="h-px w-16 bg-gradient-to-r from-yellow-400/80 to-transparent" />
@@ -330,7 +330,7 @@ const ProjectsPage = () => {
                 <span className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${activeProject?.categoryAccent || 'from-white to-white'} px-3 py-1 text-[10px] font-black uppercase tracking-[0.3em] text-black`}>
                   <FaLayerGroup /> {activeProject?.categoryLabel || 'Projects'}
                 </span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/65">
+                <span className="border-pencil-button overflow-hidden bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/65">
                   Infinite 3D Deck
                 </span>
               </div>
@@ -373,7 +373,7 @@ const ProjectsPage = () => {
                     key={filter.key}
                     type="button"
                     onClick={() => setActiveFilter(filter.key)}
-                    className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${activeFilter === filter.key ? 'border-yellow-400/50 bg-yellow-400 text-black shadow-[0_14px_30px_-18px_rgba(250,204,21,0.75)]' : 'border-white/10 bg-white/5 text-white/75 hover:border-white/25 hover:bg-white/10'}`}
+                    className={`border-pencil-button overflow-hidden px-4 py-2 text-xs font-semibold transition ${activeFilter === filter.key ? 'bg-yellow-400 text-black shadow-[0_14px_30px_-18px_rgba(250,204,21,0.75)]' : 'bg-white/5 text-white/75 hover:bg-white/10'}`}
                   >
                     {filter.label} <span className="opacity-70">({filter.count})</span>
                   </button>
@@ -390,7 +390,7 @@ const ProjectsPage = () => {
                   href={activeProject?.liveUrl || '#'}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-2xl bg-yellow-400 px-5 py-3 text-sm font-bold text-black shadow-[0_18px_40px_-18px_rgba(250,204,21,0.65)] transition hover:bg-yellow-300"
+                  className="border-pencil-button inline-flex min-h-[44px] items-center gap-2 overflow-hidden bg-yellow-400 px-5 py-3 text-sm font-bold text-black shadow-[0_18px_40px_-18px_rgba(250,204,21,0.65)] transition hover:bg-yellow-300 hover:text-black"
                 >
                   <FaExternalLinkAlt /> Live Demo
                 </a>
@@ -398,29 +398,29 @@ const ProjectsPage = () => {
                   href={activeProject?.githubUrl || '#'}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-white transition hover:border-white/25 hover:bg-white/10"
+                  className="border-pencil-button inline-flex min-h-[44px] items-center gap-2 overflow-hidden bg-white/5 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
                 >
                   <FaGithub /> GitHub Repo
                 </a>
                 <button
                   type="button"
                   onClick={() => openAnalysis(activeProject)}
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-white transition hover:border-yellow-400/50 hover:text-yellow-300 hover:bg-white/10"
+                  className="border-pencil-button inline-flex min-h-[44px] items-center gap-2 overflow-hidden bg-white/5 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10 hover:text-yellow-300"
                 >
                   <FaRegWindowMaximize /> Deep Analysis
                 </button>
               </motion.div>
 
               <div className="mt-8 grid grid-cols-2 gap-3 text-xs text-white/65 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-black/25 px-4 py-3">
+                <div className="border-pencil overflow-hidden bg-black/25 px-4 py-3">
                   <p className="uppercase tracking-[0.28em] text-white/40">Collection</p>
                   <p className="mt-2 font-semibold text-white">{activeProject?.categoryLabel}</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-black/25 px-4 py-3">
+                <div className="border-pencil overflow-hidden bg-black/25 px-4 py-3">
                   <p className="uppercase tracking-[0.28em] text-white/40">Media</p>
                   <p className="mt-2 font-semibold text-white">{activeProject?.embedUrl !== '#' ? 'Video Preview' : 'Image Preview'}</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 col-span-2 sm:col-span-1">
+                <div className="border-pencil overflow-hidden bg-black/25 px-4 py-3 col-span-2 sm:col-span-1">
                   <p className="uppercase tracking-[0.28em] text-white/40">Coverage</p>
                   <p className="mt-2 font-semibold text-white">All home-page projects included</p>
                 </div>
@@ -433,7 +433,7 @@ const ProjectsPage = () => {
                 transition={{ ...springTransition, delay: 0.2 }}
               >
                 {(activeProject?.techList || []).slice(0, 8).map((tech) => (
-                  <span key={typeof tech === 'string' ? tech : tech?.label} className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] font-semibold text-white/85 backdrop-blur-md">
+                  <span key={typeof tech === 'string' ? tech : tech?.label} className="border-pencil-button overflow-hidden bg-white/[0.05] px-3 py-1.5 text-[11px] font-semibold text-white/85 backdrop-blur-md">
                     {typeof tech === 'string' ? tech : tech?.label}
                   </span>
                 ))}
@@ -506,19 +506,19 @@ const ProjectsPage = () => {
       >
         {selectedProject ? (
           <div className="space-y-4">
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+            <div className="border-pencil bg-white/[0.04] p-5 overflow-hidden">
               <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Problem</p>
               <p className="mt-2 text-sm leading-relaxed text-gray-100">{selectedProject.problem || selectedProject.summary}</p>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+            <div className="border-pencil bg-white/[0.04] p-5 overflow-hidden">
               <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Solution</p>
               <p className="mt-2 text-sm leading-relaxed text-gray-100">{selectedProject.solution || selectedProject.summary}</p>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+            <div className="border-pencil bg-white/[0.04] p-5 overflow-hidden">
               <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Tech Stack</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {(selectedProject.techList || []).map((tech) => (
-                  <span key={typeof tech === 'string' ? tech : tech?.label} className="rounded-full border border-white/10 bg-black/25 px-3 py-1 text-xs font-semibold text-white/85">
+                  <span key={typeof tech === 'string' ? tech : tech?.label} className="border-pencil-button rounded-full bg-black/25 px-3 py-1 text-xs font-semibold text-white/85 overflow-hidden">
                     {typeof tech === 'string' ? tech : tech?.label}
                   </span>
                 ))}

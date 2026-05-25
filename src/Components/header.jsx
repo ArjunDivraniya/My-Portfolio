@@ -139,7 +139,7 @@ const Header = () => {
 
   const navLinkClass = 'relative inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold tracking-wide text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/80';
 
-  const resumeButtonClasses = 'rounded-[20px_12px_18px_15px/15px_22px_12px_20px] bg-yellow-400 px-5 py-2.5 font-bold text-black transition duration-300 hover:bg-yellow-300 hover:shadow-[0_0_20px_rgba(250,204,21,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300/80';
+  const resumeButtonClasses = 'border-pencil-button overflow-hidden bg-yellow-400 px-5 py-2.5 font-bold text-black transition duration-300 hover:bg-yellow-300 hover:text-black hover:shadow-[0_0_20px_rgba(250,204,21,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300/80';
   const menuToggleClasses = isMenuOpen
     ? 'inline-flex h-11 w-11 items-center justify-center rounded-full bg-yellow-400 text-black transition hover:bg-yellow-300'
     : 'inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/5 text-white transition hover:bg-white/10 hover:text-yellow-300';
@@ -153,7 +153,7 @@ const Header = () => {
         className="fixed inset-x-0 top-3 z-50 px-3 sm:px-4"
       >
         <motion.nav
-          className="relative mx-auto w-full max-w-[96vw] overflow-hidden rounded-[24px_14px_22px_16px/18px_26px_14px_22px] border border-white/10 bg-transparent px-4 py-3.5 shadow-[0_22px_60px_-36px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:px-6 md:max-w-7xl"
+          className="border-pencil-amber relative mx-auto w-full max-w-[96vw] overflow-hidden border-pencil bg-black/40 px-4 py-3.5 shadow-[0_22px_60px_-36px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:px-6 md:max-w-7xl"
           style={{ boxShadow: '0 22px 60px -36px rgba(0,0,0,0.5)' }}
         >
           <SketchBorder className="opacity-100" />
@@ -206,12 +206,12 @@ const Header = () => {
             </div>
 
             <div className="justify-self-end">
-              <div className="relative inline-block">
+              <div className="relative inline-block overflow-hidden">
                 <SketchBorder className="opacity-100" />
                 <button
                   type="button"
                   onClick={() => setShowResume(true)}
-                  className={`${resumeButtonClasses} relative z-10 border-0 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_12px_28px_-18px_rgba(250,204,21,0.35)]`}
+                  className={`${resumeButtonClasses} relative z-10 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_12px_28px_-18px_rgba(250,204,21,0.35)]`}
                 >
                   Resume
                 </button>
@@ -250,7 +250,7 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="mx-auto mt-3 w-full rounded-[20px_12px_18px_15px/15px_22px_12px_20px] border border-white/10 bg-black/85 p-4 shadow-[0_24px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl md:hidden"
+              className="mx-auto mt-3 w-full overflow-hidden border-pencil bg-black/85 p-4 shadow-[0_24px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl md:hidden"
               initial={{ opacity: 0, y: -12, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
@@ -263,7 +263,7 @@ const Header = () => {
                     href={item.href}
                     aria-label={item.ariaLabel}
                     onClick={(event) => handleNavClick(event, item)}
-                    className="flex items-center justify-between rounded-2xl bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white/85 transition hover:bg-white/[0.06] hover:text-white"
+                      className="flex items-center justify-between border-pencil overflow-hidden bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white/85 transition hover:bg-white/[0.06] hover:text-white"
                   >
                     <span>{item.name}</span>
                     <span className="h-1.5 w-1.5 rounded-full bg-yellow-400/80" />
@@ -276,7 +276,7 @@ const Header = () => {
                     setIsMenuOpen(false);
                     setShowResume(true);
                   }}
-                  className="mt-2 inline-flex min-h-[44px] items-center justify-between rounded-2xl border border-yellow-400/30 bg-yellow-400 px-4 py-3 text-sm font-bold text-black transition hover:bg-yellow-300"
+                  className="border-pencil-button mt-2 inline-flex min-h-[44px] items-center justify-between overflow-hidden bg-yellow-400 px-4 py-3 text-sm font-bold text-black transition hover:bg-yellow-300 hover:text-black"
                 >
                   <span>Resume</span>
                   <span className="text-black/70">↗</span>
@@ -295,7 +295,7 @@ const Header = () => {
           exit={{ opacity: 0 }}
           onClick={() => setShowResume(false)}
         >
-          <div className="relative flex h-[85vh] w-full max-w-4xl flex-col rounded-2xl bg-gray-900 p-2 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative flex h-[85vh] w-full max-w-4xl flex-col overflow-hidden border-pencil bg-gray-900 p-2 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="mb-2 flex items-center justify-between border-b border-gray-700 p-4">
               <h3 className="text-xl font-bold text-white">My Resume</h3>
               <div className="flex gap-3">

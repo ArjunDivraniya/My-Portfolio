@@ -124,7 +124,7 @@ const ToolCard = ({ tool, index }) => {
     >
       {/* Main Card */}
       <motion.div
-        className="flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border-2 bg-gradient-to-br from-black/70 to-purple-950/30 backdrop-blur-lg cursor-pointer relative overflow-hidden group h-28 sm:h-32 md:h-36 lg:h-40"
+        className="border-pencil flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 bg-gradient-to-br from-black/70 to-purple-950/30 backdrop-blur-lg cursor-pointer relative overflow-hidden group h-28 sm:h-32 md:h-36 lg:h-40"
         animate={{
           borderColor: showDetails ? "rgba(234, 179, 8, 0.8)" : "rgba(168, 139, 250, 0.5)",
           boxShadow: showDetails
@@ -142,7 +142,7 @@ const ToolCard = ({ tool, index }) => {
 
         {/* Category Badge */}
         <motion.div
-          className="absolute top-1.5 sm:top-2 md:top-3 right-1.5 sm:right-2 md:right-3 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-yellow-500/20 border border-yellow-400/50 text-yellow-300 text-[9px] sm:text-xs font-bold opacity-0 group-hover:opacity-100"
+          className="border-pencil-button absolute top-1.5 sm:top-2 md:top-3 right-1.5 sm:right-2 md:right-3 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-yellow-500/20 text-yellow-300 text-[9px] sm:text-xs font-bold opacity-0 group-hover:opacity-100 overflow-hidden"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: showDetails ? 1 : 0, scale: showDetails ? 1 : 0.8 }}
           transition={{ duration: 0.3 }}
@@ -193,7 +193,7 @@ const ToolCard = ({ tool, index }) => {
       <AnimatePresence>
         {showDetails && (
           <motion.div
-            className={mobile ? "mt-3 w-full p-3 rounded-lg bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border border-yellow-500/60 backdrop-blur-xl shadow-2xl z-50" : "absolute -bottom-20 sm:-bottom-24 left-1/2 transform -translate-x-1/2 w-48 sm:w-56 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 border border-yellow-500/60 backdrop-blur-xl shadow-2xl z-50"}
+            className={mobile ? "border-pencil mt-3 w-full p-3 bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 backdrop-blur-xl shadow-2xl z-50 overflow-hidden" : "border-pencil absolute -bottom-20 sm:-bottom-24 left-1/2 transform -translate-x-1/2 w-48 sm:w-56 p-3 sm:p-4 bg-gradient-to-br from-black/95 via-purple-950/80 to-black/95 backdrop-blur-xl shadow-2xl z-50 overflow-hidden"}
             initial={{ opacity: 0, y: mobile ? 8 : -10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: mobile ? 8 : -10, scale: 0.9 }}

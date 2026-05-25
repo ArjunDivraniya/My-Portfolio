@@ -116,7 +116,7 @@ const ContactMe = () => {
   };
 
   return (
-    <section id="contect" className="min-h-screen relative overflow-hidden pt-28 sm:pt-32 pb-20 px-4 sm:px-8">
+    <section id="contect" className="border-pencil-blue min-h-screen relative overflow-hidden pt-28 sm:pt-32 pb-20 px-4 sm:px-8">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-black">
         <div className="absolute inset-0 opacity-10">
@@ -169,14 +169,14 @@ const ContactMe = () => {
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
-                  className="p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-purple-500 transition-all duration-300"
+                  className="border-pencil p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black transition-all duration-300 overflow-hidden"
                   initial={{ opacity: 0, x: -50 }}
                   animate={infoInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168, 85, 247, 0.2)" }}
                 >
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <div className={`p-3 sm:p-4 rounded-xl bg-gradient-to-br from-purple-900 to-black border border-purple-500 flex-shrink-0`}>
+                    <div className={`border-pencil-button p-3 sm:p-4 bg-gradient-to-br from-purple-900 to-black flex-shrink-0 overflow-hidden`}>
                       <info.icon className={`text-xl sm:text-2xl ${info.color}`} />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -201,7 +201,7 @@ const ContactMe = () => {
 
             {/* Social Media Links */}
             <motion.div
-              className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-purple-900/30 to-black border border-purple-500/50"
+              className="border-pencil p-6 sm:p-8 bg-gradient-to-br from-purple-900/30 to-black overflow-hidden"
               initial={{ opacity: 0, y: 50 }}
               animate={infoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ delay: 0.4 }}
@@ -216,7 +216,7 @@ const ContactMe = () => {
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-6 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center ${hoverColor} hover:shadow-2xl transition-all duration-300`}
+                    className={`border-pencil-button p-6 bg-gradient-to-br ${color} flex items-center justify-center ${hoverColor} hover:shadow-2xl transition-all duration-300 overflow-hidden`}
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, scale: 0 }}
@@ -234,7 +234,7 @@ const ContactMe = () => {
               href={`https://wa.me/${phoneNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="block p-6 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 transition-all duration-300"
+              className="border-pencil-button block p-6 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 transition-all duration-300 overflow-hidden"
               whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(34, 197, 94, 0.4)" }}
               whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0 }}
@@ -259,7 +259,7 @@ const ContactMe = () => {
             transition={{ duration: 0.8 }}
           >
             <motion.form
-              className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-gray-900 to-black border-2 border-purple-500/50 shadow-2xl"
+              className="border-pencil p-6 sm:p-8 bg-gradient-to-br from-gray-900 to-black shadow-2xl overflow-hidden"
               onSubmit={handleSubmit}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}

@@ -344,7 +344,7 @@ export default function AboutJourney() {
                   style={{ perspective: '1000px' }}
                 >
                   {/* Glassmorphism Card */}
-                  <div className="group relative p-6 md:p-8 bg-gradient-to-br from-black/80 via-black/70 to-purple-900/10 backdrop-blur-lg border border-yellow-500/20 rounded-2xl hover:border-yellow-500/50 transition-all duration-500 overflow-hidden shadow-2xl">
+                  <div className="border-pencil-purple border-pencil group relative p-6 md:p-8 bg-gradient-to-br from-black/80 via-black/70 to-purple-900/10 backdrop-blur-lg transition-all duration-500 overflow-hidden shadow-2xl">
                     {/* Glow Background - Disabled on Mobile */}
                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-yellow-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block"></div>
 

@@ -272,7 +272,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
         >
           <motion.div
             variants={cardHoverVariants}
-            className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-purple-500/20 rounded-2xl p-8 backdrop-blur-sm"
+            className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-8 backdrop-blur-sm overflow-hidden"
           >
             <div className="flex flex-col md:flex-row items-center gap-8">
               {/* Avatar */}
@@ -318,7 +318,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
               <div className="grid grid-cols-2 gap-4">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-slate-800/50 border border-yellow-500/30 rounded-lg p-4 text-center"
+                  className="border-pencil-button bg-slate-800/50 p-4 text-center overflow-hidden"
                 >
                   <p className="text-yellow-400 text-sm font-semibold mb-1">
                     Total Solved
@@ -329,7 +329,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
                 </motion.div>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-slate-800/50 border border-cyan-500/30 rounded-lg p-4 text-center"
+                  className="border-pencil-button bg-slate-800/50 p-4 text-center overflow-hidden"
                 >
                   <p className="text-cyan-400 text-sm font-semibold mb-1">
                     Contests
@@ -351,7 +351,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
             <motion.div
               whileHover="hover"
               variants={cardHoverVariants}
-              className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-emerald-500/20 rounded-xl p-6 backdrop-blur-sm"
+              className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-6 backdrop-blur-sm overflow-hidden"
             >
               <div className="flex flex-col items-center">
                 <div className="relative w-24 h-24 mb-4">
@@ -396,7 +396,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
             <motion.div
               whileHover="hover"
               variants={cardHoverVariants}
-              className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-yellow-500/20 rounded-xl p-6 backdrop-blur-sm"
+              className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-6 backdrop-blur-sm overflow-hidden"
             >
               <div className="flex flex-col items-center">
                 <div className="relative w-24 h-24 mb-4">
@@ -441,7 +441,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
             <motion.div
               whileHover="hover"
               variants={cardHoverVariants}
-              className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-red-500/20 rounded-xl p-6 backdrop-blur-sm"
+              className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-6 backdrop-blur-sm overflow-hidden"
             >
               <div className="flex flex-col items-center">
                 <div className="relative w-24 h-24 mb-4">
@@ -504,7 +504,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
                     whileHover={{ y: -10 }}
                     className="animate-float"
                   >
-                    <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-purple-500/30 rounded-xl p-6 flex flex-col items-center justify-center min-w-fit backdrop-blur-sm hover:border-purple-500/60 transition-all">
+                    <div className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-6 flex flex-col items-center justify-center min-w-fit backdrop-blur-sm overflow-hidden transition-all">
                       <div className="text-4xl mb-3">🏆</div>
                       <p className="text-white font-semibold text-sm text-center">
                         {badge.name}
@@ -531,7 +531,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
             <motion.div
               whileHover="hover"
               variants={cardHoverVariants}
-              className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-purple-500/20 rounded-xl p-8 backdrop-blur-sm"
+              className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-8 backdrop-blur-sm overflow-hidden"
             >
               <div className="flex items-center gap-4">
                 <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-4">
@@ -549,7 +549,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
             <motion.div
               whileHover="hover"
               variants={cardHoverVariants}
-              className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-cyan-500/20 rounded-xl p-8 backdrop-blur-sm"
+              className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-8 backdrop-blur-sm overflow-hidden"
             >
               <div className="flex items-center gap-4">
                 <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg p-4">
@@ -572,7 +572,7 @@ const LeetCodeProfile = ({ username = "Arjun_divraniya" }) => {
             Data Structures & Algorithms Expertise
           </h3>
           <motion.div
-            className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-purple-500/20 rounded-2xl p-8 backdrop-blur-sm"
+            className="border-pencil bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-8 backdrop-blur-sm overflow-hidden"
             whileHover="hover"
             variants={cardHoverVariants}
           >

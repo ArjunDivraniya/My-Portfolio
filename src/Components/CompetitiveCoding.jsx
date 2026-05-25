@@ -99,7 +99,7 @@ const HackathonCard = ({ item, index }) => {
     >
       <motion.div
         style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
-        className="group relative h-full p-6 rounded-2xl bg-gradient-to-br from-black/90 via-black/80 to-purple-900/20 border border-yellow-500/30 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)] overflow-hidden"
+        className="border-pencil group relative h-full p-6 bg-gradient-to-br from-black/90 via-black/80 to-purple-900/20 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)] overflow-hidden"
         whileHover={{ scale: 1.03, borderColor: "rgba(234,179,8,0.6)", boxShadow: "0 30px 80px -20px rgba(234,179,8,0.4)" }}
       >
         {/* Badge */}
@@ -119,7 +119,7 @@ const HackathonCard = ({ item, index }) => {
             <span className="text-xs text-gray-400">{item.date}</span>
           </div>
           <motion.div
-            className="h-12 w-12 rounded-xl border border-yellow-500/40 bg-black/60 flex items-center justify-center text-yellow-300"
+            className="border-pencil-button h-12 w-12 bg-black/60 flex items-center justify-center text-yellow-300 overflow-hidden"
             whileHover={{ rotate: 360, scale: 1.1 }}
             transition={{ duration: 0.6 }}
           >
@@ -137,7 +137,7 @@ const HackathonCard = ({ item, index }) => {
           {item.tech.map((tech, i) => (
             <motion.span
               key={i}
-              className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-200 text-xs"
+              className="border-pencil-button px-2.5 py-1 bg-white/5 text-gray-200 text-xs overflow-hidden"
               whileHover={{ scale: 1.08, backgroundColor: "rgba(234,179,8,0.12)", borderColor: "rgba(234,179,8,0.4)" }}
             >
               {tech}
@@ -150,7 +150,7 @@ const HackathonCard = ({ item, index }) => {
           href="https://www.linkedin.com/in/arjun-divraniya-/details/certifications/"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold text-sm shadow-[0_10px_30px_-8px_rgba(234,179,8,0.5)]"
+          className="border-pencil-button mt-6 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold text-sm shadow-[0_10px_30px_-8px_rgba(234,179,8,0.5)] overflow-hidden"
           style={{ transform: "translateZ(16px)" }}
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.96 }}

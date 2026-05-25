@@ -296,7 +296,7 @@ const HackathonCard = ({ hackathon, onOpen }) => {
       variants={cardVariants}
       whileHover={{ y: -8 }}
       style={{ transformStyle: 'preserve-3d', transformPerspective: 1200 }}
-      className="group relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 text-left shadow-[0_20px_60px_-30px_rgba(15,23,42,0.6)] backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_30px_80px_-35px_rgba(15,23,42,0.8)] sm:h-[560px]"
+      className="border-pencil group relative h-[520px] overflow-hidden bg-white/5 text-left shadow-[0_20px_60px_-30px_rgba(15,23,42,0.6)] backdrop-blur-xl transition-all duration-300 hover:shadow-[0_30px_80px_-35px_rgba(15,23,42,0.8)] sm:h-[560px]"
     >
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -306,7 +306,7 @@ const HackathonCard = ({ hackathon, onOpen }) => {
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/30" />
 
       {hackathon.badge ? (
-        <div className="absolute right-4 top-4 z-20 rounded-full border border-amber-300/60 bg-amber-300/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-amber-200">
+        <div className="border-pencil-button absolute right-4 top-4 z-20 rounded-full bg-amber-300/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-amber-200 overflow-hidden">
           {hackathon.badge}
         </div>
       ) : null}
@@ -320,9 +320,9 @@ const HackathonCard = ({ hackathon, onOpen }) => {
           <h3 className="text-3xl font-extrabold text-white leading-tight sm:text-4xl">{hackathon.project}</h3>
 
           <div className="flex flex-wrap gap-3 text-sm text-slate-200">
-            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">{hackathon.location}</span>
-            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">{hackathon.date}</span>
-            <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-amber-200">
+            <span className="border-pencil-button rounded-full bg-white/5 px-3 py-1 overflow-hidden">{hackathon.location}</span>
+            <span className="border-pencil-button rounded-full bg-white/5 px-3 py-1 overflow-hidden">{hackathon.date}</span>
+            <span className="border-pencil-button rounded-full bg-amber-300/10 px-3 py-1 text-amber-200 overflow-hidden">
               {hackathon.position}
             </span>
           </div>
@@ -335,7 +335,7 @@ const HackathonCard = ({ hackathon, onOpen }) => {
             {tags.map((tag) => (
               <span
                 key={`${hackathon.id}-${tag}`}
-                className="rounded-full border border-slate-400/30 bg-slate-900/40 px-3 py-1 text-xs font-semibold text-slate-200 transition-transform duration-300 group-hover:-translate-y-1"
+                className="border-pencil-button rounded-full bg-slate-900/40 px-3 py-1 text-xs font-semibold text-slate-200 transition-transform duration-300 group-hover:-translate-y-1 overflow-hidden"
               >
                 {tag}
               </span>
@@ -348,7 +348,7 @@ const HackathonCard = ({ hackathon, onOpen }) => {
             {TechIcons.map((Icon, index) => (
               <span
                 key={`${hackathon.id}-tech-${index}`}
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-xl"
+                className="border-pencil-button flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-xl overflow-hidden"
               >
                 <Icon />
               </span>

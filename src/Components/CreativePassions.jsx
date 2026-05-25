@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 const AdventureCard = ({ icon: Icon, title, description, index }) => {
   return (
     <motion.div
-      className="relative overflow-hidden rounded-xl bg-black/40 border border-yellow-500/20 hover:border-yellow-500/60 p-6 transition-all duration-500"
+      className="border-pencil relative overflow-hidden bg-black/40 p-6 transition-all duration-500"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -66,7 +66,7 @@ export default function CreativePassions() {
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            className="inline-block mb-4 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30"
+            className="border-pencil-button inline-block mb-4 px-4 py-2 bg-purple-500/10 overflow-hidden"
             animate={{
               borderColor: ["rgba(168,139,250,0.3)", "rgba(168,139,250,0.6)", "rgba(168,139,250,0.3)"],
             }}
@@ -113,7 +113,7 @@ export default function CreativePassions() {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <div className="p-6 rounded-xl bg-yellow-500/5 border border-yellow-500/20">
+          <div className="border-pencil-button p-6 bg-yellow-500/5 overflow-hidden">
             <p className="text-gray-300 text-sm md:text-base leading-relaxed">
               As a <span className="text-yellow-400 font-bold">Technical Creative</span>, I merge{" "}
               <span className="text-purple-400 font-bold">technical excellence</span> with{" "}

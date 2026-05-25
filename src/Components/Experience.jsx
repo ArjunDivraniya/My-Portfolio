@@ -32,7 +32,7 @@ const SystemFlowAnimation = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex justify-around items-center w-full h-40 bg-gradient-to-r from-black via-purple-900/10 to-black rounded-xl border border-yellow-500/20 p-6 my-6">
+    <div ref={containerRef} className="border-pencil flex justify-around items-center w-full h-40 bg-gradient-to-r from-black via-purple-900/10 to-black p-6 my-6 overflow-hidden">
       <div className="text-center">
         <div className="flow-admin opacity-60 text-4xl mb-2">⚙️</div>
         <p className="text-xs text-yellow-400 font-bold">Admin Panel</p>
@@ -87,7 +87,7 @@ const DeviceToggle3D = ({ isHovering }) => {
   return (
     <div className="flex justify-center gap-8 my-6">
       <div ref={mobileRef} style={{ perspective: '1000px' }} className="flex flex-col items-center">
-        <div className="w-16 h-32 bg-gradient-to-b from-gray-800 to-black border-4 border-yellow-500/50 rounded-2xl flex items-center justify-center mb-2">
+        <div className="border-pencil-button w-16 h-32 bg-gradient-to-b from-gray-800 to-black flex items-center justify-center mb-2 overflow-hidden">
           <FaMobile className="text-yellow-500 text-2xl" />
         </div>
         <p className="text-xs text-yellow-400 font-bold">Mobile</p>
@@ -147,7 +147,7 @@ const TechOrbit = ({ techs }) => {
               backfaceVisibility: 'hidden',
             }}
           >
-            <div className="p-2 bg-yellow-500/10 rounded-full border border-yellow-500/30 hover:border-yellow-500 transition-colors text-lg">
+            <div className="border-pencil-button p-2 bg-yellow-500/10 overflow-hidden hover:border-yellow-500 transition-colors text-lg">
               {tech.icon}
             </div>
           </div>
@@ -276,7 +276,7 @@ const TechnicalCaseStudyModal = ({ onClose }) => {
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-black border border-yellow-500/40 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto"
+        className="border-pencil bg-black max-w-2xl w-full max-h-[85vh] overflow-y-auto overflow-hidden"
       >
         <div className="sticky top-0 bg-gradient-to-r from-black via-purple-900/20 to-black border-b border-yellow-500/20 p-6 flex justify-between items-center">
           <h2 className="text-2xl font-black text-yellow-500">Technical Case Study</h2>
@@ -362,7 +362,7 @@ const ExperienceCard = ({ experience, index }) => {
         className="group cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
-        <div className="relative w-full max-w-full p-4 sm:p-6 md:p-8 bg-gradient-to-br from-black via-purple-900/10 to-black border border-yellow-500/30 rounded-2xl hover:border-yellow-500/60 transition-all duration-300 overflow-hidden">
+        <div className="border-pencil relative w-full max-w-full p-4 sm:p-6 md:p-8 bg-gradient-to-br from-black via-purple-900/10 to-black transition-all duration-300 overflow-hidden">
           {/* Animated Background Glow */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r from-yellow-500 via-purple-500 to-black blur-2xl pointer-events-none"></div>
 
@@ -382,12 +382,12 @@ const ExperienceCard = ({ experience, index }) => {
             <p className="text-gray-300 mb-6 leading-relaxed text-sm sm:text-base [overflow-wrap:anywhere]">{experience.description}</p>
 
             <div className="space-y-5 mb-6">
-              <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4 sm:p-5">
+              <div className="border-pencil bg-yellow-500/5 p-4 sm:p-5 overflow-hidden">
                 <h4 className="text-yellow-400 font-bold text-sm uppercase tracking-wider mb-2">Challenge</h4>
                 <p className="text-gray-300 text-sm sm:text-base leading-relaxed [overflow-wrap:anywhere]">{experience.challenge}</p>
               </div>
 
-              <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4 sm:p-5">
+              <div className="border-pencil bg-purple-500/5 p-4 sm:p-5 overflow-hidden">
                 <h4 className="text-purple-300 font-bold text-sm uppercase tracking-wider mb-2">Solution</h4>
                 <ul className="space-y-2">
                   {experience.solution.map((point) => (
@@ -398,7 +398,7 @@ const ExperienceCard = ({ experience, index }) => {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-4 sm:p-5">
+              <div className="border-pencil bg-green-500/5 p-4 sm:p-5 overflow-hidden">
                 <h4 className="text-green-300 font-bold text-sm uppercase tracking-wider mb-2">Outcome</h4>
                 <p className="text-gray-300 text-sm sm:text-base leading-relaxed [overflow-wrap:anywhere]">{experience.outcome}</p>
               </div>
