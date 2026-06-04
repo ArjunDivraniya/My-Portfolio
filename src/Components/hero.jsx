@@ -47,9 +47,9 @@ const renderAnimatedWord = (word, keyPrefix) =>
 
 const heroSocialLinks = [
   { Icon: FaGithub, href: "https://github.com/ArjunDivraniya", label: "GitHub" },
-  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/divraniya-arjun", label: "LinkedIn" },
+  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/arjun-divraniya-/", label: "LinkedIn" },
   { Icon: FaInstagram, href: "https://www.instagram.com/arjun__divraniya__/", label: "Instagram" },
-  { Icon: FaTwitter, href: "https://x.com/DivraniyaArjun", label: "X / Twitter" },
+  { Icon: FaTwitter, href: "https://x.com/arjun_divraniya", label: "X / Twitter" },
   { Icon: FaEnvelope, href: "mailto:arjundivraniya8@gmail.com", label: "Email" },
 ];
 
@@ -225,7 +225,7 @@ const Hero = () => {
           <motion.div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.55 }}>
             <MagneticButton onClick={() => navigate("/contact")}>Get In Touch</MagneticButton>
             <motion.a
-              href="/ArjunDivraniya_Resume.pdf"
+              href="https://drive.google.com/file/d/1AKFq7YrGTmmMuJyg-rJdAW_SNmkA8dD-/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="border-pencil-button inline-flex items-center justify-center gap-2 overflow-hidden border border-white/85 px-6 py-3 text-white font-semibold transition-all hover:bg-white/10 hover:text-white"
